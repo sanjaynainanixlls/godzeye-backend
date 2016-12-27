@@ -1,7 +1,7 @@
 <?php
-if(!isset($_SESSION))
-    session_start();
-include 'includeSession.php';
+//if(!isset($_SESSION))
+//    session_start();
+//include 'includeSession.php';
 ?>
 
 <!DOCTYPE html>
@@ -68,42 +68,42 @@ include 'includeSession.php';
                         </div>
                     <?php } unset($_SESSION['message']);?>
                     <div class="row">
-                        <a href="roomAllocation.php"><div class="col-lg-6 col-md-6">
+                        <a href="registerInstitution.php"><div class="col-lg-6 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         <div class="row">
-                                            <h1>Allot A New Room</h1>
+                                            <h1>Register Institution</h1>
                                         </div>
                                     </div>
                                 </div>
                             </div></a>
-                        <a href="checkout.php"><div class="col-lg-6 col-md-6">
+                        <a href="registerTeacher.php"><div class="col-lg-6 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         <div class="row">
-                                            <h1>Checkout</h1>
+                                            <h1>Register Teacher</h1>
                                         </div>
                                     </div>
                                 </div>
                             </div></a>
-                        <a href="completeStatus.php"><div class="col-lg-6 col-md-6">
+                        <a href="registerStudent.php"><div class="col-lg-6 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         <div class="row">
-                                            <h1>Complete Status</h1>
+                                            <h1>Register Students</h1>
                                         </div>
                                     </div>
                                 </div>
                             </div></a>
-                        <a href="roomStatus.php"><div class="col-lg-6 col-md-6">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading text-center">
-                                        <div class="row">
-                                            <h1>Room Status</h1>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div></a>
+                        <!--                        <a href="roomStatus.php"><div class="col-lg-6 col-md-6">
+                                                        <div class="panel panel-primary">
+                                                            <div class="panel-heading text-center">
+                                                                <div class="row">
+                                                                    <h1>Room Status</h1>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div></a>-->
 
                     </div>
                     <!-- /.row -->
