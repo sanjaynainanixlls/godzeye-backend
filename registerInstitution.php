@@ -21,7 +21,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Room Allocation</title>
+        <title>Register Institution</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -71,55 +71,58 @@
                         <div class="col-lg-6">
 
                             <form role="form" action="action/action.php" method="post">
-<!--                                <input type="hidden" name="action" value='roomAllocation'>
-                                <?php if (!isset($data)) { ?>
-                                    <input type="hidden" name="status" value="newInstitute">
-                                <?php } ?>
-                                <input type="hidden" name="id" value="<?php if (isset($data['id']))
-                                    echo $data['id'];
-                                else
-                                    echo '';
-                                ?>">-->
+                                <input type="hidden" name="action" value='registerInstitution'>
+                                <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
+                                    <div class="alert alert-success fade in">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong style="font-size:16px"><?php echo $_SESSION['message']; ?></strong>
+                                    </div>
+                                <?php } unset($_SESSION['message']); ?>
                                 <div class="form-group">
                                     <label>Institution Name</label>
                                     <input type="text"  class="form-control" name="institute" value="<?php if (isset($data['institute'])) echo $data['institute']; ?>" required="required">
                                 </div>
 
-                            <div class="form-group">
-                                <label>Founder Name</label>
-                                <input type="text"  class="form-control" name="founder" value="<?php if(isset($data['founder']))echo $data['founder'];else echo '';?>" required="required">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Contact</label>
-                                <input type="tel"  class="form-control" name="contact" value="<?php if(isset($data['contact']))echo $data['contact']; else echo '';?>" required="required">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Subjects</label>
-                                <input type="text" class="form-control" id="numberOfPeople" name="subjects" value="<?php if(isset($data['subjects']))echo $data['subjects']; echo '';?>" required="required">
-                            </div>
- 							
-                            <div class="form-group">
-                                <label>Image</label>
-                                <!--<input id="comingDate" type="date" class="form-control" name="comingDate" value="<?php if(isset($data['dateOfArrival']))echo $data['dateOfArrival'];else echo '';?>" required="required">-->
-                            </div>
- 							                           
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" id="status" name="status">
-                                    <option value="1" selected>Active</option>
-                                    <option value="" >Discontinued</option>
-                                </select>
-                            </div>
-                            							
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
+                                <div class="form-group">
+                                    <label>Founder Name</label>
+                                    <input type="text"  class="form-control" name="founder" value="<?php if (isset($data['founder'])) echo $data['founder'];
+                                else echo ''; ?>" required="required">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Contact</label>
+                                    <input type="tel"  class="form-control" name="contact" value="<?php if (isset($data['contact'])) echo $data['contact'];
+                                else echo ''; ?>" required="required">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Subjects</label>
+                                    <input type="text" class="form-control" id="subjects" name="subjects" value="<?php if (isset($data['subjects'])) echo $data['subjects'];
+                                echo ''; ?>" required="required">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Image</label>
+                                    <input type="file" class="form-control" id="image" name="image">
+                                    <!--<input id="comingDate" type="date" class="form-control" name="comingDate" value="<?php if (isset($data['dateOfArrival'])) echo $data['dateOfArrival'];
+                                else echo ''; ?>" required="required">-->
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="1" selected>Active</option>
+                                        <option value="" >Discontinued</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-warning">Reset</button>
                             </form>
 
                         </div>
 
-                        
+
                     </div>
                     <!-- /.row -->
 

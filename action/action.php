@@ -30,14 +30,12 @@ class Action {
                 $_SESSION['error'] = "Invalid Username or Password!";
                 header("location: ../index.php");
             }
-        }  else if ($this->postParams['action'] == 'roomAllocation') {
+        }  else if ($this->postParams['action'] == 'registerInstitution') {
             $userDataHandlerObj = new userDataHandler();
-            $result = $userDataHandlerObj->allocateRoom($this->postParams);
+            $result = $userDataHandlerObj->registerInstitution($this->postParams);
             if (!empty($result)) {
-                if ($_SESSION['role'] == 'ADMIN') {
-                    $_SESSION['message'] = "Room Number: ".$result[0]['roomNumberAllotted'].' has been Alloted to Bhagat id :'.$result[0]['id'];
-                    header("location: ../home.php");
-                }
+                    $_SESSION['message'] = "Institute Added Successfully...";
+                    header("location: ../registerInstitution.php");
             }
         } else if ($this->postParams['action'] == 'checkOutUser') {
             $userDataHandlerObj = new userDataHandler();
