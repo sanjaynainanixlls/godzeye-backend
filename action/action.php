@@ -13,16 +13,8 @@ class Action {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->authenticateUser($this->postParams['username'], $this->postParams['pwd']);
             if (!empty($result)) {
-                $_SESSION["user"] = $result[0]['username'];
-                $_SESSION["role"] = $result[0]['role'];
-                $_SESSION["userId"] = $result[0]['id'];
-                if (isset($_SESSION['role']) && $_SESSION['role'] == 'ADMIN')
-                    header("location: ../home.php");
-                else if (isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION') {
-                    header("location: ../dataEntry.php");
-                } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'INVENTORY') {
-                    header("location: ../inventoryById.php");
-                }
+                $_SESSION["user"] = $result[0]['user_name'];
+                header("location: ../home.php");
             } else {
                 $_SESSION['error'] = "Invalid Username or Password!";
                 header("location: ../index.php");

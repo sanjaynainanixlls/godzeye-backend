@@ -3,7 +3,7 @@
 class userDataHandler {
 
     public static function authenticateUser($user, $pwd) {
-        $query = "SELECT username, role, id FROM user WHERE username = '" . $user . "' AND password = '" . ($pwd) . "'";
+        $query = "SELECT user_name FROM user WHERE user_name = '" . $user . "' AND password = '" . ($pwd) . "'";
         $result = queryRunner::doSelect($query);
         return $result;
     }
