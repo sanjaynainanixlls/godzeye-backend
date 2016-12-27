@@ -1,7 +1,7 @@
 <?php
-//if(!isset($_SESSION))
-//    session_start();
-//include 'includeSession.php';
+if(!isset($_SESSION))
+    session_start();
+include 'includeSession.php';
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +48,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Shri Anandpur 
+                                Admin Panel
                             </h1>
 
                             <ol class="breadcrumb">
@@ -95,16 +95,7 @@
                                     </div>
                                 </div>
                             </div></a>
-                        <!--                        <a href="roomStatus.php"><div class="col-lg-6 col-md-6">
-                                                        <div class="panel panel-primary">
-                                                            <div class="panel-heading text-center">
-                                                                <div class="row">
-                                                                    <h1>Room Status</h1>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div></a>-->
-
+                        
                     </div>
                     <!-- /.row -->
 

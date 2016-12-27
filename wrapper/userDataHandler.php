@@ -21,49 +21,53 @@ class userDataHandler {
         }
     }
 
-    //allocate room  to the bhagats
-    public static function allocateRoom($data) {
-        $data['userId'] = $_SESSION['userId'];
+    //register New Institution
+    public static function registerInstitution($data) {
+//        debug($data);exit;
+//        $data['userId'] = $_SESSION['userId'];
         $city ='';
-        if (isset($data['status'])) {
-            $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,roomNumberAllotted,isCheckout,createdBy,createdTime)'. 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data['roomNumberAlloted'] . '","0","' . $data["userId"] . '",now())';
+        if (isset($data['institute']) && isset($data['subjects'])) {
+            echo $query = 'INSERT INTO institutions (institute,subjects,founder,contact,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $data["image"] . '","' . $data["status"] . '")';
             $result = queryRunner::doInsert($query);
-            $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
-            $cityData = queryRunner::doSelect($sql1);
-            if (isset($cityData)) {
-                for ($i = 0; $i < count($cityData); $i++) {
-                    $city .= $cityData[$i]['city'] . ",";
-                }
-                $city = rtrim($city, ",");
-                $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
-                $res = queryRunner::doUpdate($qry);
-            }
-        } else {
-            $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' WHERE id ='" . $data['id'] . "'";
-            $result = queryRunner::doUpdate($query);
-            $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
-            $cityData = queryRunner::doSelect($sql1);
-            if (isset($cityData)) {
-                for ($i = 0; $i < count($cityData); $i++) {
-                    $city .= $cityData[$i]['city'] . ",";
-                }
-                $city = rtrim($city, ",");
-                $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
-                $res = queryRunner::doUpdate($qry);
-            }
+            return $result;
         }
-        if (!empty($result)){
-            $query = "SELECT id,roomNumberAllotted FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0' AND name = '".$data['name']."' AND phoneNumber = '".$data['phoneNumber']."'";
-            $result = queryRunner::doSelect($query);
-            if(!empty($result)){
-                return $result;
-            }
-        }
+//            $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
+//            $cityData = queryRunner::doSelect($sql1);
+//            if (isset($cityData)) {
+//                for ($i = 0; $i < count($cityData); $i++) {
+//                    $city .= $cityData[$i]['city'] . ",";
+//                }
+//                $city = rtrim($city, ",");
+//                $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
+//                $res = queryRunner::doUpdate($qry);
+//            }
+//        } else {
+//            $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' WHERE id ='" . $data['id'] . "'";
+//            $result = queryRunner::doUpdate($query);
+//            $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
+//            $cityData = queryRunner::doSelect($sql1);
+//            if (isset($cityData)) {
+//                for ($i = 0; $i < count($cityData); $i++) {
+//                    $city .= $cityData[$i]['city'] . ",";
+//                }
+//                $city = rtrim($city, ",");
+//                $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
+//                $res = queryRunner::doUpdate($qry);
+//            }
+//        }
+//        if (!empty($result)){
+//            $query = "SELECT id,roomNumberAllotted FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0' AND name = '".$data['name']."' AND phoneNumber = '".$data['phoneNumber']."'";
+//            $result = queryRunner::doSelect($query);
+//            if(!empty($result)){
+//                return $result;
+//            }
+//        }
+
+            
     }
 
-    //get complete status form guest table
-    public  function getCompleteStatus() {
-        $query = "SELECT * FROM guest where isCheckout='0'";
+    public  function getInstitutionDetails() {
+        $query = "SELECT * FROM institutions";
         $result = queryRunner::doSelect($query);
         return $result;
     }

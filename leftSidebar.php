@@ -1,4 +1,4 @@
-<?php
+<?php 
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -25,21 +25,21 @@ if (!isset($_SESSION)) {
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'ADMIN') { ?>
                 <li class="active">
                     <a href="home.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="registerInstitution.php"><i class="fa fa-fw fa-plus"></i>Register Institution</a>
                 </li>
+                <li class="active">
+                    <a href="institutionList.php"><i class="fa fa-fw fa-minus"></i>Institute List</a>
+                </li>
                 <li>
-                    <a href="registerTeacher.php"><i class="fa fa-fw fa-minus"></i>Register Teacher</a>
+                    <a href="registerTeacher.php"><i class="fa fa-fw fa-plus"></i>Register Teacher</a>
                 </li>
                 <li>
                     <a href="registerStudent.php.php"><i class="fa fa-fw fa-plus"></i>Register Student</a>
                 </li>
-                
-            <?php  }  ?>
         </ul>
     </div>
     <!-- /.navbar-collapse -->
