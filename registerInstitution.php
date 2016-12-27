@@ -107,16 +107,12 @@
  							                           
                             <div class="form-group">
                                 <label>Status</label>
-                                <select id="status" name="status">
+                                <select class="form-control" id="status" name="status">
                                     <option value="1" selected>Active</option>
                                     <option value="" >Discontinued</option>
                                 </select>
                             </div>
-                                                      
-                            <div class="form-group">
-                            	<input name="roomNumberAlloted" id="roomNumberAlloted" type="number" value="" readonly="readonly"><span class="text-danger">Please check if this is the room number to be alloted</span>
-                            </div>
-							
+                            							
                             <button type="submit" class="btn btn-success">Submit</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
                             </form>
