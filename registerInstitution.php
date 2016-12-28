@@ -1,14 +1,12 @@
 <?php
-//include 'includeSession.php';
-//include dirname(dirname(__FILE__)) . '/anras/config/config.php';
-//$postParams = Functions::getPostParams();
-//$userDataHandlerObj = new userDataHandler();
-//if ($postParams['action'] == 'completeStatus') {
-//    $id = $postParams['userId'];
-//    $result = $userDataHandlerObj->getCompleteStatusById($id);
-//}
-//$roomData = $userDataHandlerObj->allRoomStatus();
-//isset($result[0]) ? $data = $result[0] : '';
+
+include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
+$postParams = Functions::getPostParams();print_r($postParams);
+$userDataHandlerObj = new userDataHandler();
+if ($postParams['action'] == 'editInstitution') {
+    $id = $postParams['editId'];
+    $data = $userDataHandlerObj->getInstituteDetails($id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,13 +29,6 @@
 
         <!-- Custom Fonts -->
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
     </head>
 
@@ -69,8 +60,8 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-
-                            <form role="form" action="action/action.php" method="post">
+                            
+                            <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value='registerInstitution'>
                                 <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
                                     <div class="alert alert-success fade in">
@@ -80,31 +71,31 @@
                                 <?php } unset($_SESSION['message']); ?>
                                 <div class="form-group">
                                     <label>Institution Name</label>
-                                    <input type="text"  class="form-control" name="institute" value="<?php if (isset($data['institute'])) echo $data['institute']; ?>" required="required">
+                                    <input type="text"  class="form-control" name="institute" value="<?php if (isset($data[0]['institute'])) echo $data[0]['institute']; ?>" required="required">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Founder Name</label>
-                                    <input type="text"  class="form-control" name="founder" value="<?php if (isset($data['founder'])) echo $data['founder'];
+                                    <input type="text"  class="form-control" name="founder" value="<?php if (isset($data[0]['founder'])) echo $data[0]['founder'];
                                 else echo ''; ?>" required="required">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Contact</label>
-                                    <input type="tel"  class="form-control" name="contact" value="<?php if (isset($data['contact'])) echo $data['contact'];
+                                    <input type="tel"  class="form-control" name="contact" value="<?php if (isset($data[0]['contact'])) echo $data[0]['contact'];
                                 else echo ''; ?>" required="required">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Subjects</label>
-                                    <input type="text" class="form-control" id="subjects" name="subjects" value="<?php if (isset($data['subjects'])) echo $data['subjects'];
+                                    <input type="text" class="form-control" id="subjects" name="subjects" value="<?php if (isset($data[0]['subjects'])) echo $data[0]['subjects'];
                                 echo ''; ?>" required="required">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Image</label>
                                     <input type="file" class="form-control" id="image" name="image">
-                                    <!--<input id="comingDate" type="date" class="form-control" name="comingDate" value="<?php if (isset($data['dateOfArrival'])) echo $data['dateOfArrival'];
+                                    <!--<input id="comingDate" type="date" class="form-control" name="comingDate" value="<?php if (isset($data[0]['image'])) echo $data[0]['image'];
                                 else echo ''; ?>" required="required">-->
                                 </div>
 
