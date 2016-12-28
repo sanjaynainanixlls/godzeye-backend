@@ -24,8 +24,7 @@ class Action {
             $result = $userDataHandlerObj->registerTeacher($this->postParams);
             if (!empty($result)) {
                 session_start();
-                echo '<script>alert("Teacher Registration  successful!");</script>';
-                //$_SESSION['message'] = "User with ID: " . $result[0]['id'] . " Added Successfully!";
+                $_SESSION['message'] = "Teacher Registration  successful!";
                 header("location: ../home.php");
             } else {
                 echo '<script>alert("Teacher Registration  not successful!");</script>';
