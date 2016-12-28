@@ -105,9 +105,9 @@ class userDataHandler {
         return $result;
     }
 
-    public function getCompleteStatusById($id) {
+    public function getInstituteDetails($id) {
         if (isset($id) && !empty($id)) {
-            $query = "SELECT * FROM guest Where id= '" . $id . "'";
+            $query = "SELECT * FROM institutions WHERE id= '" . $id . "'";
         }
         $result = queryRunner::doSelect($query);
         return $result;
