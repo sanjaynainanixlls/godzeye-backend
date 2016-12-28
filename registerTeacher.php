@@ -1,14 +1,14 @@
 <?php
-//include 'includeSession.php';
-//include dirname(dirname(__FILE__)) . '/anras/config/config.php';
-//$postParams = Functions::getPostParams();
-//$userDataHandlerObj = new userDataHandler();
-//if ($postParams['action'] == 'completeStatus') {
-//    $id = $postParams['userId'];
-//    $result = $userDataHandlerObj->getCompleteStatusById($id);
-//}
-//$roomData = $userDataHandlerObj->allRoomStatus();
-//isset($result[0]) ? $data = $result[0] : '';
+
+include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
+$postParams = Functions::getPostParams();
+$userDataHandlerObj = new userDataHandler();
+if ($postParams['action'] == 'editTeacher') {
+    $id = $postParams['editId'];
+    $result = $userDataHandlerObj->getTeacherDetails($id);
+    $data = $result[0];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,47 +71,44 @@
                         <div class="col-lg-6">
 
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
-                               <input type="hidden" name="action" value='registerTeacher'>
-                               <!-- <?php if (!isset($data)) { ?>
-                                    <input type="hidden" name="status" value="newInstitute">
+                               
+                               <?php if (!isset($data)) { ?>
+                                    <input type="hidden" name="action" value='registerTeacher'>
+                                <?php } else { ?>
+                                    <input type="hidden" name="action" value='editTeacher'>
                                 <?php } ?>
-                                <input type="hidden" name="id" value="<?php if (isset($data['id']))
-                                    echo $data['id'];
-                                else
-                                    echo '';
-                                ?>">-->
                                 <div class="form-group">
                                     <label>First Name</label>
-                                    <input type="text"  class="form-control" name="f_name" value="<?php if (isset($data['institute'])) echo $data['institute']; ?>" >
+                                    <input type="text"  class="form-control" name="f_name" value="<?php if (isset($data['first_name'])) echo $data['first_name']; else echo '';?>" >
                                 </div>
 
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input type="text"  class="form-control" name="l_name" value="<?php if(isset($data['founder']))echo $data['founder'];else echo '';?>" >
+                                <input type="text"  class="form-control" name="l_name" value="<?php if(isset($data['last_name']))echo $data['last_name'];else echo '';?>" >
                             </div>
                             
                             <div class="form-group">
                                 <label>Age</label>
-                                <input type="number"  class="form-control" name="age" value="<?php if(isset($data['contact']))echo $data['contact']; else echo '';?>" >
+                                <input type="number"  class="form-control" name="age" value="<?php if(isset($data['age']))echo $data['age']; else echo '';?>" >
                             </div>
                             
                             <div class="form-group">
                                 <label>Sex</label>
                                 <select class="form-control" name="sex">
                                     <option value="">--SELECT SEX--</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="male" <?php if(isset($data['sex'])){ if($data['sex'] == 'male'){ echo "selected";}}?> >Male</option>
+                                    <option value="female"  <?php if(isset($data['sex'])){ if($data['sex'] == 'female'){ echo "selected";}}?>>Female</option>
                                 </select>
                             </div>
  							
                             <div class="form-group">
                                 <label>Specialization</label>
-                                <input id="specialization" type="text" class="form-control" name="specialization" value="<?php if(isset($data['dateOfArrival']))echo $data['dateOfArrival'];else echo '';?>" >
+                                <input id="specialization" type="text" class="form-control" name="specialization" value="<?php if(isset($data['specialization']))echo $data['specialization'];else echo '';?>" >
                             </div>
  				
                             <div class="form-group">
                                 <label>Address</label>
-                                <input id="address" type="text" class="form-control" name="address" value="<?php if(isset($data['dateOfArrival']))echo $data['dateOfArrival'];else echo '';?>" >
+                                <input id="address" type="text" class="form-control" name="address" value="<?php if(isset($data['address']))echo $data['address'];else echo '';?>" >
                             </div>
                                 
                             <div class="form-group">
@@ -121,27 +118,27 @@
                             
                             <div class="form-group">
                                 <label>Highest Qualification</label>
-                                <input id="h_quali" type="text" class="form-control" name="h_quali" >
+                                <input id="h_quali" type="text" class="form-control" name="h_quali" value="<?php if(isset($data['highest_qual']))echo $data['highest_qual'];else echo '';?>" >
                             </div> 
                                 
                             <div class="form-group">
                                 <label>Contact</label>
-                                <input id="contact" type="tel" class="form-control" name="contact" >
+                                <input id="contact" type="tel" class="form-control" name="contact" value="<?php if(isset($data['contact']))echo $data['contact'];else echo '';?>" >
                             </div> 
                                 
                             <div class="form-group">
                                 <label>Institution</label>
                                 <select class="form-control" id="institution" name="institution">
                                     <option value="">--Select Institution--</option>
-                                    <option value="1" >A</option>
-                                    <option value="0" >B</option>
+                                    <option value="1" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == 1){ echo "selected";}}?>>A</option>
+                                    <option value="0" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == 0){ echo "selected";}}?>>B</option>
                                 </select>
                             </div>                                
                             <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control" id="status" name="status">
-                                    <option value="1" selected>Active</option>
-                                    <option value="0" >Discontinued</option>
+                                    <option value="1" <?php if(isset($data['status'])){ if($data['status'] == 1){ echo "selected";}}?>>Active</option>
+                                    <option value="0" <?php if(isset($data['status'])){ if($data['status'] == 1){ echo "selected";}}?>>Discontinued</option>
                                 </select>
                             </div>
                             							

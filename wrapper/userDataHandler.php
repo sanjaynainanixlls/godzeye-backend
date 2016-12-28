@@ -119,11 +119,26 @@ class userDataHandler {
     }
 
     public function getInstitutionDetails() {
-        $query = "SELECT * FROM institutions";
+        $query = "SELECT * FROM institutions where status=1";
         $result = queryRunner::doSelect($query);
         return $result;
     }
 
+    
+    public function getTeacherList() {
+        $query = "SELECT * FROM teachers where status=1";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+    
+    public function getTeacherDetails($id) {
+        if (isset($id) && !empty($id)) {
+            $query = "SELECT * FROM teachers WHERE id= '" . $id . "' AND status=1";
+        }
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+    
     public function getInstituteDetails($id) {
         if (isset($id) && !empty($id)) {
             $query = "SELECT * FROM institutions WHERE id= '" . $id . "'";
