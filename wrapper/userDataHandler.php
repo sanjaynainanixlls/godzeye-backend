@@ -8,16 +8,51 @@ class userDataHandler {
         return $result;
     }
 
-    public static function registerUser($data) {
-        $data['userId'] = $_SESSION['userId'];
-        $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,isCheckout,createdBy,createdTime)'
-                . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","0"," ' . $data["userId"] . '",now())';
-        $result = queryRunner::doInsert($query);
+    public static function registerTeacher($data) {
 
-        if ($result['status'] == 1) {
-            $query = "SELECT id FROM guest where name='" . $data["name"] . "'AND createdBy='". $data["userId"] ."' AND isCheckout = '0'  AND phoneNumber = '".$data['phoneNumber']."'";
-            $result = queryRunner::doSelect($query);
+        if ($_FILES["timage"]["error"] == 4) {
+            $query = "INSERT INTO teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
+                    . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
+                    . ", institution_id = '" . $data['institution'] . "' ,image=''";
+            $result = queryRunner::doInsert($query);
             return $result;
+        } else {
+            $uploadOk = 1;
+            $target_file = "../media/" . basename($_FILES["timage"]["name"]);
+            $imagename = implode("_", explode(" ", $data['f_name']));
+            $fileData = pathinfo(basename($_FILES["timage"]["name"]));
+
+            $fileName = $imagename . '.' . $fileData['extension'];
+
+            $target_path = ("../media/" . $fileName);
+            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+            if (file_exists($target_path)) {
+                $uploadOk = 0;
+            }
+            $check = getimagesize($_FILES["timage"]["tmp_name"]);
+            if ($check !== false) {
+                $uploadOk = 1;
+            } else {
+                $uploadOk = 0;
+            }
+            if ($_FILES["timage"]["size"] > 500000) {
+                $uploadOk = 0;
+            }
+            // Allow certain file formats
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                $uploadOk = 0;
+            }
+            if ($uploadOk == 1) {
+                if (move_uploaded_file($_FILES["timage"]["tmp_name"], $target_path)) {
+                    $query = "INSERT INTO teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
+                            . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
+                            . ", institution_id = '" . $data['institution'] . "' ,image='" . $fileName . "'";
+                    $result = queryRunner::doInsert($query);
+                    return $result;
+                } else {
+                    return 0;
+                }
+            }
         }
     }
 
@@ -25,7 +60,7 @@ class userDataHandler {
     public static function registerInstitution($data) {
 //        debug($data);exit;
 //        $data['userId'] = $_SESSION['userId'];
-        $city ='';
+        $city = '';
         if (isset($data['institute']) && isset($data['subjects'])) {
             echo $query = 'INSERT INTO institutions (institute,subjects,founder,contact,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $data["image"] . '","' . $data["status"] . '")';
             $result = queryRunner::doInsert($query);
@@ -62,11 +97,9 @@ class userDataHandler {
 //                return $result;
 //            }
 //        }
-
-            
     }
 
-    public  function getInstitutionDetails() {
+    public function getInstitutionDetails() {
         $query = "SELECT * FROM institutions";
         $result = queryRunner::doSelect($query);
         return $result;
@@ -79,7 +112,7 @@ class userDataHandler {
         $result = queryRunner::doSelect($query);
         return $result;
     }
-    
+
     public function checkIfInventoryAlloted($id) {
         if (isset($id) && !empty($id)) {
             $query = "SELECT * FROM inventory Where isReturned = '0' AND guestUserId= '" . $id . "'";
@@ -132,17 +165,16 @@ class userDataHandler {
     }
 
     public function allotInventoryToUser($data) {
-            $query = "INSERT INTO inventory (guestUserId,mattress,pillow,bedsheet,quilt,lockNkey,dasCards,isReturned,createdBy,createdTime)"
+        $query = "INSERT INTO inventory (guestUserId,mattress,pillow,bedsheet,quilt,lockNkey,dasCards,isReturned,createdBy,createdTime)"
                 . " values('" . $data['userId'] . "','" . $data['mattress'] . "','" . $data['pillow'] . "','" . $data['bedsheet'] . "','" . $data['blanket'] . "','" . $data['lock'] . "','" . $data['dasCards'] . "','0','" . $data['createdBy'] . "',now())";
         $result = queryRunner::doInsert($query);
         if (!empty($result)) {
-            $totalAmount = $data['mattress'] + ($data['pillow']/2) + $data['bedsheet'] + $data['blanket'] + $data['lock'] + ($data['dasCards']/2);
-            $totalAmount = $totalAmount*100;
+            $totalAmount = $data['mattress'] + ($data['pillow'] / 2) + $data['bedsheet'] + $data['blanket'] + $data['lock'] + ($data['dasCards'] / 2);
+            $totalAmount = $totalAmount * 100;
             $result = array($data['userId'], $totalAmount);
             return $result;
         }
         return false;
-        
     }
 
     public function allRoomStatus() {
@@ -198,7 +230,7 @@ class userDataHandler {
             return FALSE;
         }
     }
-    
+
     public function notCheckedOutData() {
         $query = "SELECT * FROM guest WHERE isCheckout = '0'";
         $result = queryRunner::doSelect($query);
@@ -219,22 +251,21 @@ class userDataHandler {
     }
 
     public function releaseInventory($data) {
-        $query = "UPDATE inventory set isReturned='1' where guestUserId='".$data['userId']."'";
+        $query = "UPDATE inventory set isReturned='1' where guestUserId='" . $data['userId'] . "'";
         $result = queryRunner::doUpdate($query);
         $returnArray = array($data['returnAmount'], $data['userId']);
         return $returnArray;
     }
-    
-    public function tallyCash($data){
-        $query1 = "SELECT (sum(pillow)/2)+SUM(mattress)+SUM(quilt)+SUM(bedsheet)+SUM(lockNkey)+SUM(dasCards) as moneyDeposits FROM inventory WHERE isReturned='0' AND createdBy='".$data['userId']."'";
+
+    public function tallyCash($data) {
+        $query1 = "SELECT (sum(pillow)/2)+SUM(mattress)+SUM(quilt)+SUM(bedsheet)+SUM(lockNkey)+SUM(dasCards) as moneyDeposits FROM inventory WHERE isReturned='0' AND createdBy='" . $data['userId'] . "'";
         $result1 = queryRunner::doSelect($query1);
         //$result = (($result1[0]['moneyDeposits']) - ($result2[0]['moneyDeposits']));
         //
-        if(is_null($result1[0]['moneyDeposits'])){
+        if (is_null($result1[0]['moneyDeposits'])) {
             $result = 0;
-        }
-        else{
-            $result = ($result1[0]['moneyDeposits']*100);
+        } else {
+            $result = ($result1[0]['moneyDeposits'] * 100);
         }
         return $result;
     }

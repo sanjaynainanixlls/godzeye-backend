@@ -31,11 +31,14 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="registerInstitution.php"><i class="fa fa-fw fa-plus"></i>Register Institution</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="institutionList.php"><i class="fa fa-fw fa-minus"></i>Institute List</a>
                 </li>
                 <li>
                     <a href="registerTeacher.php"><i class="fa fa-fw fa-plus"></i>Register Teacher</a>
+                </li>
+                <li>
+                    <a href="teacherList.php"><i class="fa fa-fw fa-minus"></i>Teacher List</a>
                 </li>
                 <li>
                     <a href="registerStudent.php.php"><i class="fa fa-fw fa-plus"></i>Register Student</a>
