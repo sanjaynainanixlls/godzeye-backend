@@ -19,16 +19,18 @@ class Action {
                 $_SESSION['error'] = "Invalid Username or Password!";
                 header("location: ../index.php");
             }
-        } else if ($this->postParams['action'] == 'registerUser') {
+        } else if ($this->postParams['action'] == 'registerTeacher') {
             $userDataHandlerObj = new userDataHandler();
-            $result = $userDataHandlerObj->registerUser($this->postParams);
+            $result = $userDataHandlerObj->registerTeacher($this->postParams);
             if (!empty($result)) {
                 session_start();
-                $_SESSION['message'] = "User with ID: " . $result[0]['id'] . " Added Successfully!";
-                header("location: ../dataEntry.php");
+                echo '<script>alert("Teacher Registration  successful!");</script>';
+                //$_SESSION['message'] = "User with ID: " . $result[0]['id'] . " Added Successfully!";
+                header("location: ../home.php");
             } else {
+                echo '<script>alert("Teacher Registration  not successful!");</script>';
                 $_SESSION['error'] = "Invalid Username or Password!";
-                header("location: ../index.php");
+                header("location: ../registerTeacher.php");
             }
         }  else if ($this->postParams['action'] == 'registerInstitution') {
             $userDataHandlerObj = new userDataHandler();
