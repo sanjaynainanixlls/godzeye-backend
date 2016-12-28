@@ -47,6 +47,12 @@ $result = $userDataHandlerObj->getInstitutionDetails();
                                 <i class="fa fa-edit"></i> Institution List
                             </li>
                         </ol>
+                        <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
+                                    <div class="alert alert-success fade in">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong style="font-size:16px"><?php echo $_SESSION['message']; ?></strong>
+                                    </div>
+                                <?php } unset($_SESSION['message']); ?>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -75,10 +81,11 @@ $result = $userDataHandlerObj->getInstitutionDetails();
                                             <td><?php echo $value['founder']; ?></td>  
                                             <td><?php echo $value['subjects']; ?></td>
                                             <td><?php echo $value['contact']; ?></td>
-                                            <td><?php echo $value['image']; ?></td>
+                                            <td>
+                                                <?php $dirPath = 'media/institution/'.$value['institute'].'/';?>
+                                                <img width="100px" height="100px" src='<?php echo $dirPath.$value['image']; ?>'/>
+                                            </td>
                                             <td><?php echo $value['status']; ?></td>
-                                            
-                <!--<input type="hidden" name="action" value='editInstitution'>-->
                                             <td>
                                                 <form role="form" action="registerInstitution.php" method="post">
                                                     <input type="hidden" name="editId" value="<?php echo $value['id'];?>">
