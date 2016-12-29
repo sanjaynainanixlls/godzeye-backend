@@ -62,13 +62,13 @@ if ($postParams['action'] == 'editInstitution') {
                         <div class="col-lg-6">
                             
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="action" value='registerInstitution'>
-                                <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
-                                    <div class="alert alert-success fade in">
-                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                        <strong style="font-size:16px"><?php echo $_SESSION['message']; ?></strong>
-                                    </div>
-                                <?php } unset($_SESSION['message']); ?>
+                                <?php if($postParams['action'] != 'editInstitution'){?>
+                                    <input type="hidden" name="action" value='registerInstitution'>
+                                <?php }else{ ?>
+                                    <input type="hidden" name="action" value='editInstitution'>
+                                    <input type="hidden" name="editInstituteId" value="<?php echo $postParams['editId']; ?>"> 
+                                <?php } ?>
+                                
                                 <div class="form-group">
                                     <label>Institution Name</label>
                                     <input type="text"  class="form-control" name="institute" value="<?php if (isset($data[0]['institute'])) echo $data[0]['institute']; ?>" required="required">
@@ -94,9 +94,13 @@ if ($postParams['action'] == 'editInstitution') {
 
                                 <div class="form-group">
                                     <label>Image</label>
-                                    <input type="file" class="form-control" id="image" name="image">
-                                    <!--<input id="comingDate" type="date" class="form-control" name="comingDate" value="<?php if (isset($data[0]['image'])) echo $data[0]['image'];
-                                else echo ''; ?>" required="required">-->
+                                    <?php if(isset($data[0]['image'])){
+                                        $dirPath = 'media/institution/'.$data[0]['institute'].'/';?>
+                                        <img width="100px" height="100px" src='<?php echo $dirPath.$data[0]['image']; ?>'/>
+                                        <input type="file" class="form-control" id="instImage" name="instImage">
+                                    <?php }else{ ?>
+                                        <input type="file" class="form-control" id="instImage" name="instImage">
+                                    <?php } ?>
                                 </div>
 
                                 <div class="form-group">

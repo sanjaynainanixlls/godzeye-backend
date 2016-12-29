@@ -36,7 +36,14 @@ class Action {
             $result = $userDataHandlerObj->registerInstitution($this->postParams);
             if (!empty($result)) {
                     $_SESSION['message'] = "Institute Added Successfully...";
-                    header("location: ../registerInstitution.php");
+                    header("location: ../institutionList.php");
+            }
+        } else if ($this->postParams['action'] == 'editInstitution') {
+            $userDataHandlerObj = new userDataHandler();
+            $result = $userDataHandlerObj->registerInstitution($this->postParams);
+            if (!empty($result)) {
+                    $_SESSION['message'] = "Institute Updated Successfully...";
+                    header("location: ../institutionList.php");
             }
         } else if ($this->postParams['action'] == 'checkOutUser') {
             $userDataHandlerObj = new userDataHandler();
