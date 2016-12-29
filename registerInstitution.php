@@ -1,7 +1,7 @@
 <?php
 
 include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
-$postParams = Functions::getPostParams();print_r($postParams);
+$postParams = Functions::getPostParams();
 $userDataHandlerObj = new userDataHandler();
 if ($postParams['action'] == 'editInstitution') {
     $id = $postParams['editId'];

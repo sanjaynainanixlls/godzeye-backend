@@ -21,7 +21,7 @@ if ($postParams['action'] == 'editTeacher') {
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Register Teacher</title>
+        <title><?php if(!empty($data)){ ?>Edit<?php } else { ?> Register <?php } ?> Teacher</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,9 @@ if ($postParams['action'] == 'editTeacher') {
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Register Teacher
+                                <?php if(!empty($data)){ ?>Edit 
+                                <?php } else { ?> Register 
+                                <?php } ?> Teacher
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
@@ -72,10 +74,10 @@ if ($postParams['action'] == 'editTeacher') {
 
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                
-                               <?php if (!isset($data)) { ?>
-                                    <input type="hidden" name="action" value='registerTeacher'>
-                                <?php } else { ?>
+                               <?php if (!empty($data)) { ?>
                                     <input type="hidden" name="action" value='editTeacher'>
+                                <?php } else { ?>
+                                    <input type="hidden" name="action" value='registerTeacher'>
                                 <?php } ?>
                                 <div class="form-group">
                                     <label>First Name</label>
@@ -116,6 +118,12 @@ if ($postParams['action'] == 'editTeacher') {
                                 <input id="image" type="file" class="form-control" name="timage" >
                             </div>
                             
+                            <?php if(!empty($data)) { ?>
+                            <div class="form-group">
+                                <img src="media/<?php echo $data['image']; ?>" style="height: 50px;width: 50px;">
+                            </div>
+                            <?php } ?>   
+                                    
                             <div class="form-group">
                                 <label>Highest Qualification</label>
                                 <input id="h_quali" type="text" class="form-control" name="h_quali" value="<?php if(isset($data['highest_qual']))echo $data['highest_qual'];else echo '';?>" >
@@ -142,7 +150,12 @@ if ($postParams['action'] == 'editTeacher') {
                                 </select>
                             </div>
                             							
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success"><?php if(!empty($data)){ ?>
+                                Edit
+                            <?php } else { ?>
+                                Submit
+                            <?php } ?>
+                            </button>
                             <button type="reset" class="btn btn-warning">Reset</button>
                             </form>
 
