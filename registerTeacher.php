@@ -8,6 +8,7 @@ if ($postParams['action'] == 'editTeacher') {
     $result = $userDataHandlerObj->getTeacherDetails($id);
     $data = $result[0];
 }
+$instituteData = getInstituteList();
 
 ?>
 <!DOCTYPE html>
@@ -129,9 +130,13 @@ if ($postParams['action'] == 'editTeacher') {
                             <div class="form-group">
                                 <label>Institution</label>
                                 <select class="form-control" id="institution" name="institution">
-                                    <option value="">--Select Institution--</option>
-                                    <option value="1" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == 1){ echo "selected";}}?>>A</option>
-                                    <option value="0" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == 0){ echo "selected";}}?>>B</option>
+                                    <option  selected disabled>--Select Institution--</option>
+                                    <?php foreach ($instituteData as $key => $value) { ?>
+                                    <option value="<?php echo $value['id']; ?>" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == $value['id']){ echo "selected";}}?>>
+                                    <?php echo $value['institute']; ?>
+                                    </option>
+                                    <?php } ?>
+                                    
                                 </select>
                             </div>                                
                             <div class="form-group">
