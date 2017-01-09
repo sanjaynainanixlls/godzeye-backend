@@ -55,6 +55,93 @@ class userDataHandler {
             }
         }
     }
+    
+    public function getTeacherList() {
+        $query = "SELECT * FROM teachers where status=1";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+    
+    public function getTeacherDetails($id) {
+        if (isset($id) && !empty($id)) {
+            $query = "SELECT * FROM teachers WHERE id= '" . $id . "' AND status=1";
+        }
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+    
+    //register New Institution
+    //handling Institution actions
+    public static function registerInstitution($data) {
+        //print_r($data);exit;
+
+        if ($_FILES["instImage"]["error"] == 4) {
+            if (isset($data['institute']) && isset($data['subjects'])) {
+                //to register institution without image
+                if($data['action'] == 'registerInstitution'){
+                    $query = 'INSERT INTO institutions (institute,subjects,founder,contact,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $data["status"] . '")';
+                    $result = queryRunner::doInsert($query);
+                }else{
+                    //to update institution without image
+                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",status= "' . $data["status"] . '" WHERE id="'.$data['editInstituteId'].'"';
+                    $result = queryRunner::doUpdate($query);
+                }
+                return $result;
+            }
+        } else {
+            $uploadOk = 1;
+            $target_file = "../media/" . basename($_FILES["instImage"]["name"]);
+            $imagename = implode("_", explode(" ", $data['institute']));
+            $fileData = pathinfo(basename($_FILES["instImage"]["name"]));
+            $dirPath = "../media/institution/" . $data['institute'];
+            if (!file_exists($dirPath)) {
+                mkdir($dirPath, 0777, true);
+            }
+            $fileName = $imagename . '.' . $fileData['extension'];
+
+            $target_path = ("../media/institution/" . $data["institute"] . '/' . $fileName);
+            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+            if (file_exists($target_path)) {
+                $uploadOk = 0;
+            }
+            $check = getimagesize($_FILES["instImage"]["tmp_name"]);
+            if ($check !== false) {
+                $uploadOk = 1;
+            } else {
+                $uploadOk = 0;
+            }
+            if ($_FILES["instImage"]["size"] > 500000) {
+                $uploadOk = 0;
+            }
+            // Allow certain file formats
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                $uploadOk = 0;
+            }
+            if ($uploadOk == 1) {
+                if (move_uploaded_file($_FILES["instImage"]["tmp_name"], $target_path)) {
+                    //to register institution with image
+                    if($data['action'] == 'registerInstitution'){
+                        $query = 'INSERT INTO institutions (institute,subjects,founder,contact,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $fileName . '","' . $data["status"] . '")';
+                        $result = queryRunner::doInsert($query);
+                    }else{
+                        //to update institution with image
+                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="'.$data['editInstituteId'].'"';
+                        $result = queryRunner::doUpdate($query);
+                    }
+                    return $result;
+                } else {
+                    return 0;
+                }
+            }
+        }
+    }
+
+    public function getInstitutionDetails() {
+        $query = "SELECT * FROM institutions where status=1";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
 
     //update Teacher 
     public static function updateTeacher($data) {
@@ -103,76 +190,8 @@ class userDataHandler {
                 }
             }
         }
-    }
-
-    //register New Institution
-    public static function registerInstitution($data) {
-        //print_r($data);exit;
-
-        if ($_FILES["instImage"]["error"] == 4) {
-            if (isset($data['institute']) && isset($data['subjects'])) {
-                if ($data['action'] == 'registerInstitution') {
-                    $query = 'INSERT INTO institutions (institute,subjects,founder,contact,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $data["status"] . '")';
-                    $result = queryRunner::doInsert($query);
-                } else {
-                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",status= "' . $data["status"] . '" WHERE id="' . $data['editInstituteId'] . '"';
-                    $result = queryRunner::doUpdate($query);
-                }
-                return $result;
-            }
-        } else {
-            $uploadOk = 1;
-            $target_file = "../media/" . basename($_FILES["instImage"]["name"]);
-            $imagename = implode("_", explode(" ", $data['institute']));
-            $fileData = pathinfo(basename($_FILES["instImage"]["name"]));
-            $dirPath = "../media/institution/" . $data['institute'];
-            if (!file_exists($dirPath)) {
-                mkdir($dirPath, 0777, true);
-            }
-            $fileName = $imagename . '.' . $fileData['extension'];
-
-            $target_path = ("../media/institution/" . $data["institute"] . '/' . $fileName);
-            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-
-            if (file_exists($target_path)) {
-                $uploadOk = 0;
-            }
-            $check = getimagesize($_FILES["instImage"]["tmp_name"]);
-            if ($check !== false) {
-                $uploadOk = 1;
-            } else {
-                $uploadOk = 0;
-            }
-            if ($_FILES["instImage"]["size"] > 500000) {
-                $uploadOk = 0;
-            }
-            // Allow certain file formats
-            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                $uploadOk = 0;
-            }
-            if ($uploadOk == 1) {
-                if (move_uploaded_file($_FILES["instImage"]["tmp_name"], $target_path)) {
-                    if ($data['action'] == 'registerInstitution') {
-                        $query = 'INSERT INTO institutions (institute,subjects,founder,contact,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $fileName . '","' . $data["status"] . '")';
-                        $result = queryRunner::doInsert($query);
-                    } else {
-                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="' . $data['editInstituteId'] . '"';
-                        $result = queryRunner::doUpdate($query);
-                    }
-                    return $result;
-                } else {
-                    return 0;
-                }
-            }
-        }
-    }
-
-    public function getInstitutionDetails() {
-        $query = "SELECT * FROM institutions where status=1";
-        $result = queryRunner::doSelect($query);
-        return $result;
-    }
-
+    }    
+    
     public function getTeacherList() {
         $query = "SELECT * FROM teachers where status=1";
         $result = queryRunner::doSelect($query);
@@ -194,164 +213,7 @@ class userDataHandler {
         $result = queryRunner::doSelect($query);
         return $result;
     }
-
-    public function checkIfInventoryAlloted($id) {
-        if (isset($id) && !empty($id)) {
-            $query = "SELECT * FROM inventory Where isReturned = '0' AND guestUserId= '" . $id . "'";
-        }
-        $result = queryRunner::doSelect($query);
-        return $result;
-    }
-
-    public function checkoutUserById($id) {
-        if (isset($id['checkoutId']) && !empty($id['checkoutId'])) {
-            $query = "SELECT * FROM guest Where id= '" . $id['checkoutId'] . "'";
-        }
-        $result = queryRunner::doSelect($query);
-        return $result;
-    }
-
-    public static function entryRoom($data) {
-
-        $query = "UPDATE rooms SET ";
-    }
-
-    public function checkOutUser($data) {
-        $city = '';
-        if ((isset($data['userId']) && !empty($data['userId']))) {
-            $query1 = "UPDATE guest SET isCheckout = '1' WHERE id = '" . $data['userId'] . "'";
-            $userData = queryRunner::doUpdate($query1);
-            if ($userData['status'] == 1) {
-                $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'] . "' AND isCheckout = '0'";
-                $cityData = queryRunner::doSelect($sql1);
-                for ($i = 0; $i < count($cityData); $i++) {
-                    $city .= $cityData[$i]['city'] . ",";
-                }
-                $city = rtrim($city, ",");
-                $qry = "update rooms set occupied = occupied - " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAllotted'] . "'";
-                $res = queryRunner::doUpdate($qry);
-                return $res;
-            }
-        }
-    }
-
-    public function addNewUser($data) {
-        $query = "SELECT username FROM user WHERE username ='" . $data['username'] . "'";
-        $result = queryRunner::doSelect($query);
-        if (empty($result)) {
-            $query = "INSERT into user (name,username,password,role) values ('" . $data['name'] . "','" . $data['username'] . "','" . $data['password'] . "','" . $data['role'] . "')";
-            $result = queryRunner::doInsert($query);
-            return $result;
-        }
-        return false;
-    }
-
-    public function allotInventoryToUser($data) {
-        $query = "INSERT INTO inventory (guestUserId,mattress,pillow,bedsheet,quilt,lockNkey,dasCards,isReturned,createdBy,createdTime)"
-                . " values('" . $data['userId'] . "','" . $data['mattress'] . "','" . $data['pillow'] . "','" . $data['bedsheet'] . "','" . $data['blanket'] . "','" . $data['lock'] . "','" . $data['dasCards'] . "','0','" . $data['createdBy'] . "',now())";
-        $result = queryRunner::doInsert($query);
-        if (!empty($result)) {
-            $totalAmount = $data['mattress'] + ($data['pillow'] / 2) + $data['bedsheet'] + $data['blanket'] + $data['lock'] + ($data['dasCards'] / 2);
-            $totalAmount = $totalAmount * 100;
-            $result = array($data['userId'], $totalAmount);
-            return $result;
-        }
-        return false;
-    }
-
-    public function allRoomStatus() {
-        $query = "SELECT * FROM rooms";
-        $result = queryRunner::doSelect($query);
-        if (!empty($result)) {
-            return $result;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function todayCheckOutData() {
-        $today = date('d/n/Y');
-        $query = "SELECT * FROM guest WHERE dateOfDeparture = '" . $today . "' AND isCheckout = '0'";
-        $result = queryRunner::doSelect($query);
-        if (!empty($result)) {
-            return $result;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function checkoutUsers($data) {
-        $city = '';
-        if ((isset($data['id']) && !empty($data['id']))) {
-            $query1 = "UPDATE guest SET isCheckout = '1' WHERE id IN ('" . implode("','", $data['id']) . "')";
-            $userData = queryRunner::doUpdate($query1);
-            if ($userData['status'] == 1) {
-                for ($i = 0; $i < count($data['roomNumberAllotted']); $i++) {
-                    $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'][$i] . "' AND isCheckout = '0'";
-                    $cityData = queryRunner::doSelect($sql1);
-                    $city = '';
-                    for ($j = 0; $j < count($cityData); $j++) {
-                        $city .= $cityData[$j]['city'] . ",";
-                    }
-                    $city = rtrim($city, ",");
-                    $qry = "update rooms set occupied = occupied - " . $data['numberOfPeople'][$i] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAllotted'][$i] . "'";
-                    $res = queryRunner::doUpdate($qry);
-                    unset($cityData);
-                }
-                return $res;
-            }
-        }
-    }
-
-    public function allCheckOutData() {
-        $query = "SELECT * FROM guest WHERE isCheckout = '1'";
-        $result = queryRunner::doSelect($query);
-        if (!empty($result)) {
-            return $result;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function notCheckedOutData() {
-        $query = "SELECT * FROM guest WHERE isCheckout = '0'";
-        $result = queryRunner::doSelect($query);
-        if (!empty($result)) {
-            return $result;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function getinventoryDetailsById($id) {
-        $query = "SELECT *,(((pillow/2))+(mattress)+(quilt)+(bedsheet)+(lockNkey)+(dasCards/2))*100 as totalAmount FROM inventory where guestUserId='" . $id . "' AND isReturned='0' ";
-        $result = queryRunner::doSelect($query);
-        if (!empty($result))
-            return $result;
-
-        return false;
-    }
-
-    public function releaseInventory($data) {
-        $query = "UPDATE inventory set isReturned='1' where guestUserId='" . $data['userId'] . "'";
-        $result = queryRunner::doUpdate($query);
-        $returnArray = array($data['returnAmount'], $data['userId']);
-        return $returnArray;
-    }
-
-    public function tallyCash($data) {
-        $query1 = "SELECT (sum(pillow)/2)+SUM(mattress)+SUM(quilt)+SUM(bedsheet)+SUM(lockNkey)+SUM(dasCards) as moneyDeposits FROM inventory WHERE isReturned='0' AND createdBy='" . $data['userId'] . "'";
-        $result1 = queryRunner::doSelect($query1);
-        //$result = (($result1[0]['moneyDeposits']) - ($result2[0]['moneyDeposits']));
-        //
-        if (is_null($result1[0]['moneyDeposits'])) {
-            $result = 0;
-        } else {
-            $result = ($result1[0]['moneyDeposits'] * 100);
-        }
-        return $result;
-    }
-
+    
 }
 
 ?>
