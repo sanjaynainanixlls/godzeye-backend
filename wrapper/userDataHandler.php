@@ -56,19 +56,6 @@ class userDataHandler {
         }
     }
     
-    public function getTeacherList() {
-        $query = "SELECT * FROM teachers where status=1";
-        $result = queryRunner::doSelect($query);
-        return $result;
-    }
-    
-    public function getTeacherDetails($id) {
-        if (isset($id) && !empty($id)) {
-            $query = "SELECT * FROM teachers WHERE id= '" . $id . "' AND status=1";
-        }
-        $result = queryRunner::doSelect($query);
-        return $result;
-    }
     
     //register New Institution
     //handling Institution actions
@@ -83,7 +70,7 @@ class userDataHandler {
                     $result = queryRunner::doInsert($query);
                 }else{
                     //to update institution without image
-                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",status= "' . $data["status"] . '" WHERE id="'.$data['editInstituteId'].'"';
+                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",status= "' . $data["status"] . '" ,image="" WHERE id="'.$data['editInstituteId'].'"';
                     $result = queryRunner::doUpdate($query);
                 }
                 return $result;
