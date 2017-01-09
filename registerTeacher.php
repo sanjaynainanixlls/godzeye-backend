@@ -7,6 +7,7 @@ if ($postParams['action'] == 'editTeacher') {
     $id = $postParams['editId'];
     $result = $userDataHandlerObj->getTeacherDetails($id);
     $data = $result[0];
+    $tid = $data['id'];
 }
 
 ?>
@@ -76,6 +77,7 @@ if ($postParams['action'] == 'editTeacher') {
                                
                                <?php if (!empty($data)) { ?>
                                     <input type="hidden" name="action" value='editTeacher'>
+                                    <input type="hidden" name="tid" value="<?php echo $tid; ?>">
                                 <?php } else { ?>
                                     <input type="hidden" name="action" value='registerTeacher'>
                                 <?php } ?>

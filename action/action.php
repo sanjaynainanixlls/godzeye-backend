@@ -25,13 +25,19 @@ class Action {
             if (!empty($result)) {
                 session_start();
                 $_SESSION['message'] = "Teacher Registration  successful!";
-                header("location: ../home.php");
+                header("location: ../teacherList.php");
             } else {
-                echo '<script>alert("Teacher Registration  not successful!");</script>';
                 $_SESSION['error'] = "Invalid Username or Password!";
                 header("location: ../registerTeacher.php");
             }
-        }  else if ($this->postParams['action'] == 'registerInstitution') {
+        } else if ($this->postParams['action'] == 'editTeacher') {
+            $userDataHandlerObj = new userDataHandler();
+            $result = $userDataHandlerObj->updateTeacher($this->postParams);
+            if (!empty($result)) { 
+                    $_SESSION['message'] = "Teacher Details Updated Successfully...";
+                    header("location: ../teacherList.php");
+            }
+        } else if ($this->postParams['action'] == 'registerInstitution') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->registerInstitution($this->postParams);
             if (!empty($result)) {
