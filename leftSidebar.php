@@ -43,6 +43,12 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="registerStudent.php"><i class="fa fa-fw fa-plus"></i>Register Student</a>
                 </li>
+                <li>
+                    <a href="addTests.php"><i class="fa fa-fw fa-plus"></i>Add Tests</a>
+                </li>
+                <li>
+                    <a href="uploadResult.php"><i class="fa fa-fw fa-plus"></i>upload Results</a>
+                </li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->

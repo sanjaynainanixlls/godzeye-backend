@@ -12,3 +12,9 @@ function getInstituteList() {
     $result = queryRunner::doSelect($query);
     return $result;
 }
+
+function getTestNameAndId(){
+    $query = "SELECT id,test_name FROM tests";
+    $result = queryRunner::doSelect($query);
+    return $result;
+}
