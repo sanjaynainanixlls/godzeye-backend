@@ -247,7 +247,7 @@ class userDataHandler {
         }
         $result = queryRunner::doSelect($query);
         if (empty($result)) {
-            $sql = "INSERT INTO tests (test_name) values ('" . $test['test_name'] . "')";
+            $sql = "INSERT INTO tests (test_name,max_marks) values ('" . $test['test_name'] . "','" . $test['max_marks'] . "')";
             $result = queryRunner::doInsert($sql);
             return $result;
         } else {

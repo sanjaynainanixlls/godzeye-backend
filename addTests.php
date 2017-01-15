@@ -64,6 +64,11 @@
                                     <label>Test Name</label>
                                     <input type="text"  class="form-control" name="test_name" required="required">
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label>Maximum Marks</label>
+                                    <input type="number"  class="form-control" name="max_marks" required="required">
+                                </div>
 
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="reset" class="btn btn-warning">Reset</button>
