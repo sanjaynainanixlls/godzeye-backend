@@ -55,8 +55,7 @@ class userDataHandler {
             }
         }
     }
-    
-    
+
     //register New Institution
     //handling Institution actions
     public static function registerInstitution($data) {
@@ -65,12 +64,12 @@ class userDataHandler {
         if ($_FILES["instImage"]["error"] == 4) {
             if (isset($data['institute']) && isset($data['subjects'])) {
                 //to register institution without image
-                if($data['action'] == 'registerInstitution'){
+                if ($data['action'] == 'registerInstitution') {
                     $query = 'INSERT INTO institutions (institute,subjects,founder,contact,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $data["status"] . '")';
                     $result = queryRunner::doInsert($query);
-                }else{
+                } else {
                     //to update institution without image
-                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",status= "' . $data["status"] . '" ,image="" WHERE id="'.$data['editInstituteId'].'"';
+                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",status= "' . $data["status"] . '" ,image="" WHERE id="' . $data['editInstituteId'] . '"';
                     $result = queryRunner::doUpdate($query);
                 }
                 return $result;
@@ -108,12 +107,12 @@ class userDataHandler {
             if ($uploadOk == 1) {
                 if (move_uploaded_file($_FILES["instImage"]["tmp_name"], $target_path)) {
                     //to register institution with image
-                    if($data['action'] == 'registerInstitution'){
+                    if ($data['action'] == 'registerInstitution') {
                         $query = 'INSERT INTO institutions (institute,subjects,founder,contact,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $fileName . '","' . $data["status"] . '")';
                         $result = queryRunner::doInsert($query);
-                    }else{
+                    } else {
                         //to update institution with image
-                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="'.$data['editInstituteId'].'"';
+                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="' . $data['editInstituteId'] . '"';
                         $result = queryRunner::doUpdate($query);
                     }
                     return $result;
@@ -136,7 +135,7 @@ class userDataHandler {
         if ($_FILES["timage"]["error"] == 4) {
             $query = "UPDATE teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
                     . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
-                    . ", institution_id = '" . $data['institution'] . "'  WHERE id = '".$data['tid']."'";
+                    . ", institution_id = '" . $data['institution'] . "'  WHERE id = '" . $data['tid'] . "'";
             $result = queryRunner::doInsert($query);
             return $result;
         } else {
@@ -169,7 +168,7 @@ class userDataHandler {
                 if (move_uploaded_file($_FILES["timage"]["tmp_name"], $target_path)) {
                     $query = "UPDATE teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
                             . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
-                            . ", institution_id = '" . $data['institution'] . "' ,image='" . $fileName . "' WHERE id = '".$data['tid']."'";
+                            . ", institution_id = '" . $data['institution'] . "' ,image='" . $fileName . "' WHERE id = '" . $data['tid'] . "'";
                     $result = queryRunner::doInsert($query);
                     return $result;
                 } else {
@@ -177,8 +176,8 @@ class userDataHandler {
                 }
             }
         }
-    }    
-    
+    }
+
     public function getTeacherList() {
         $query = "SELECT * FROM teachers where status=1";
         $result = queryRunner::doSelect($query);
@@ -200,7 +199,48 @@ class userDataHandler {
         $result = queryRunner::doSelect($query);
         return $result;
     }
-    
+
+    public function registerStudent($data) {
+        //debug($_FILES);
+        //$path = $_FILES['studentSheet']['name'];
+        $csvMimes = array('application/vnd.ms-excel', 'text/plain', 'text/csv', 'text/comma-separated-values', 'text/tsv');
+        if (!empty($_FILES['studentSheet']['name']) && in_array($_FILES['studentSheet']['type'], $csvMimes)) {
+            if (is_uploaded_file($_FILES['studentSheet']['tmp_name'])) {
+
+                //open uploaded csv file with read only mode
+                $csvFile = fopen($_FILES['studentSheet']['tmp_name'], 'r');
+
+                //skip first line
+                fgetcsv($csvFile);
+
+                //parse data from csv file line by line
+                while (($line = fgetcsv($csvFile)) !== FALSE) {
+                    //check whether member already exists in database with same email
+                    //for($i = 0 ;$i<count($line);$i++)
+                    $query = "INSERT INTO students SET  institute_id ='" . $line[0] . "' ,enrollment_number ='" . $line[1] . "', first_name = '" . $line[2] . "',last_name='" . $line[3] . "'"
+                            . ",fathers_name  = '" . $line[4] . "',address = '" . $line[6] . "',contact_number = '" . $line['5'] . "'";
+                    $result = queryRunner::doInsert($query);
+                    //return $result;
+                }
+
+                //close opened csv file
+                fclose($csvFile);
+                return $result;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
+        }
+    }
+
+    //function for student listing
+    public function getStudentList() {
+        $query = "SELECT * FROM students where status=1";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
 }
 
 ?>

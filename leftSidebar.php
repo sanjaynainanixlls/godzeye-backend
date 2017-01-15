@@ -43,6 +43,9 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="registerStudent.php"><i class="fa fa-fw fa-plus"></i>Register Student</a>
                 </li>
+                <li>
+                    <a href="registerStudent.php"><i class="fa fa-fw fa-minus"></i>Student List</a>
+                </li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->
