@@ -58,7 +58,17 @@ class Action {
                     $_SESSION['message'] = "Student List Added Successfully...";
                     header("location: ../studentList.php");
             }
+        }  else if ($this->postParams['action'] == 'addTest') {
+            $userDataHandlerObj = new userDataHandler();
+            $result = $userDataHandlerObj->addTest($this->postParams);
+            if (!empty($result)) {
+                $_SESSION['message'] = "Test Name Added Successfully...";
+            }else{
+                $_SESSION['message'] = "Something Went Wrong / Trying to add duplicate Test...";
+            }
+            header("location: ../addTests.php");
         }
+        
     }
 
 }

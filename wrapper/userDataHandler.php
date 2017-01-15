@@ -240,7 +240,21 @@ class userDataHandler {
         $result = queryRunner::doSelect($query);
         return $result;
     }
-
+    
+    public function addTest($test){
+        if (isset($test['test_name']) && !empty($test['test_name'])) {
+            $query = "SELECT * FROM tests WHERE test_name= '" . $test['test_name'] . "'";
+        }
+        $result = queryRunner::doSelect($query);
+        if(empty($result)){
+            $sql = "INSERT INTO tests (test_name) values ('".$test['test_name']."')";
+            $result = queryRunner::doInsert($sql);
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    
 }
 
 ?>

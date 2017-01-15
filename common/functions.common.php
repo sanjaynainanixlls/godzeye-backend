@@ -52,3 +52,9 @@ function filterArrayKeysSpace($array) {
     }
     return $response;
 }
+
+function getTestNameAndId(){
+    $query = "SELECT id,test_name FROM tests";
+    $result = queryRunner::doSelect($query);
+    return $result;
+}
