@@ -240,21 +240,87 @@ class userDataHandler {
         $result = queryRunner::doSelect($query);
         return $result;
     }
-    
-    public function addTest($test){
+
+    public function addTest($test) {
         if (isset($test['test_name']) && !empty($test['test_name'])) {
             $query = "SELECT * FROM tests WHERE test_name= '" . $test['test_name'] . "'";
         }
         $result = queryRunner::doSelect($query);
-        if(empty($result)){
-            $sql = "INSERT INTO tests (test_name) values ('".$test['test_name']."')";
+        if (empty($result)) {
+            $sql = "INSERT INTO tests (test_name) values ('" . $test['test_name'] . "')";
             $result = queryRunner::doInsert($sql);
             return $result;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
+    public function uploadResult($data) {
+        //debug($_FILES);
+        //$path = $_FILES['studentSheet']['name'];
+        //debug($data);exit;
+        $csvMimes = array('application/vnd.ms-excel', 'text/plain', 'text/csv', 'text/comma-separated-values', 'text/tsv');
+        if (!empty($_FILES['resultSheet']['name']) && in_array($_FILES['resultSheet']['type'], $csvMimes)) {
+            if (is_uploaded_file($_FILES['resultSheet']['tmp_name'])) {
+
+                //open uploaded csv file with read only mode
+                $csvFile = fopen($_FILES['resultSheet']['tmp_name'], 'r');
+
+                //skip first line
+                fgetcsv($csvFile);
+                //parse data from csv file line by line
+                while (($line = fgetcsv($csvFile)) !== FALSE) {
+                    //check whether member already exists in database with same email
+                    //for($i = 0 ;$i<count($line);$i++)
+                    $query = "INSERT INTO result SET  test_id = '" . $data['test'] . "',student_reg_no = '" . $line['0'] . "',marks_obtained = '" . $line['1'] . "'";
+                    $result = queryRunner::doInsert($query);
+                    //return $result;
+                }
+
+                //close opened csv file
+                fclose($csvFile);
+                return $result;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
+        }
+    }
+
+    public function uploadAttendance($data) {
+        //$path = $_FILES['studentSheet']['name'];
+        //debug($data);exit;
+        $csvMimes = array('application/vnd.ms-excel', 'text/plain', 'text/csv', 'text/comma-separated-values', 'text/tsv');
+        if (!empty($_FILES['uploadAttendance']['name']) && in_array($_FILES['uploadAttendance']['type'], $csvMimes)) {
+            if (is_uploaded_file($_FILES['uploadAttendance']['tmp_name'])) {
+
+                //open uploaded csv file with read only mode
+                $csvFile = fopen($_FILES['uploadAttendance']['tmp_name'], 'r');
+
+                //skip first line
+                fgetcsv($csvFile);
+                //parse data from csv file line by line
+                while (($line = fgetcsv($csvFile)) !== FALSE) {
+                    //check whether member already exists in database with same email
+                    //for($i = 0 ;$i<count($line);$i++)
+
+                    $query = "INSERT INTO student_attendance SET  student_reg_no = '" . $line['0'] . "',month = '" . $data['month'] . "',present = '" . $line['1'] . "',absent ='" . $line['2'] . "'";
+                    $result = queryRunner::doInsert($query);
+                    //return $result;
+                }
+
+                //close opened csv file
+                fclose($csvFile);
+                return $result;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
+        }
+    }
+
 }
 
 ?>

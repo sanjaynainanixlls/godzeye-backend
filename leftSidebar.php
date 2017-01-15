@@ -52,6 +52,9 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="uploadResult.php"><i class="fa fa-fw fa-plus"></i>Upload Results</a>
                 </li>
+                <li>
+                    <a href="uploadAttendance.php"><i class="fa fa-fw fa-plus"></i>Upload Attendance</a>
+                </li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->

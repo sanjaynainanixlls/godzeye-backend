@@ -1,4 +1,4 @@
-<?php 
+<?php
 include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
 $test = getTestNameAndId();
 ?>
@@ -55,6 +55,12 @@ $test = getTestNameAndId();
                                     <i class="fa fa-edit"></i> Marks
                                 </li>
                             </ol>
+                            <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
+                                <div class="alert alert-success fade in">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong style="font-size:16px"><?php echo $_SESSION['message']; ?></strong>
+                                </div>
+                            <?php } unset($_SESSION['message']); ?>
                         </div>
                     </div>
                     <!-- /.row -->
@@ -64,24 +70,24 @@ $test = getTestNameAndId();
 
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="uploadResult">                            
-                            <div class="form-group">
-                                <label>SELECT TEST</label>
-                                <select class="form-control" name="test">
-                                    <option value="" selected disabled>--SELECT TEST--</option>
-                                    <?php foreach ($test as $key => $value) { ?>
-                                        <option value="<?php echo $value['id']; ?>"><?php echo $value['test_name']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
- 							
-                                                          
-                            <div class="form-group">
-                                <label>Student List Sheet</label>
-                                <input id="studentSheet" type="file" class="form-control" name="resultSheet" >
-                            </div>
-                                                       							
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
+                                <div class="form-group">
+                                    <label>SELECT TEST</label>
+                                    <select class="form-control" name="test">
+                                        <option value="" selected disabled>--SELECT TEST--</option>
+                                        <?php foreach ($test as $key => $value) { ?>
+                                            <option name="test_id" value="<?php echo $value['id']; ?>"><?php echo $value['test_name']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Student List Sheet</label>
+                                    <input id="studentSheet" type="file" class="form-control" name="resultSheet" >
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-warning">Reset</button>
                             </form>
 
                         </div>
