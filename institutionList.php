@@ -65,9 +65,10 @@ $result = $userDataHandlerObj->getInstitutionDetails();
                                     <tr>  
                                         <th>Id</th>  
                                         <th>Institution Name</th>  
-                                        <th>Founder's Name</th>  
+                                        <th>Description</th>  
                                         <th>Subjects</th> 
                                         <th>Contact</th>
+                                        <th>Address</th>
                                         <th>Image</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -78,9 +79,10 @@ $result = $userDataHandlerObj->getInstitutionDetails();
                                         <tr>  
                                             <td><?php echo $value['id']; ?></td>  
                                             <td><?php echo $value['institute']; ?></td>  
-                                            <td><?php echo $value['founder']; ?></td>  
+                                            <td><?php echo $value['description']; ?></td>  
                                             <td><?php echo $value['subjects']; ?></td>
                                             <td><?php echo $value['contact']; ?></td>
+                                            <td><?php echo $value['address']; ?></td>
                                             <td>
                                                 <?php $dirPath = 'media/institution/'.$value['institute'].'/';?>
                                                 <img width="100px" height="100px" src='<?php echo $dirPath.$value['image']; ?>'/>

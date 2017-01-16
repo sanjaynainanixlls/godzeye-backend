@@ -65,11 +65,11 @@ class userDataHandler {
             if (isset($data['institute']) && isset($data['subjects'])) {
                 //to register institution without image
                 if ($data['action'] == 'registerInstitution') {
-                    $query = 'INSERT INTO institutions (institute,subjects,founder,contact,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $data["status"] . '")';
+                    $query = 'INSERT INTO institutions (institute,subjects,description,contact,address,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data["address"] . '","' . $data["status"] . '")';
                     $result = queryRunner::doInsert($query);
                 } else {
                     //to update institution without image
-                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",status= "' . $data["status"] . '" ,image="" WHERE id="' . $data['editInstituteId'] . '"';
+                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",status= "' . $data["status"] . '"  WHERE id="' . $data['editInstituteId'] . '"';
                     $result = queryRunner::doUpdate($query);
                 }
                 return $result;
@@ -108,11 +108,11 @@ class userDataHandler {
                 if (move_uploaded_file($_FILES["instImage"]["tmp_name"], $target_path)) {
                     //to register institution with image
                     if ($data['action'] == 'registerInstitution') {
-                        $query = 'INSERT INTO institutions (institute,subjects,founder,contact,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $fileName . '","' . $data["status"] . '")';
+                        $query = 'INSERT INTO institutions (institute,subjects,description,contact,address,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data["address"] . '","' . $fileName . '","' . $data["status"] . '")';
                         $result = queryRunner::doInsert($query);
                     } else {
                         //to update institution with image
-                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="' . $data['editInstituteId'] . '"';
+                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="' . $data['editInstituteId'] . '"';
                         $result = queryRunner::doUpdate($query);
                     }
                     return $result;
