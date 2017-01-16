@@ -242,12 +242,12 @@ class userDataHandler {
     }
 
     public function addTest($test) {
-        if (isset($test['test_name']) && !empty($test['test_name'])) {
-            $query = "SELECT * FROM tests WHERE test_name= '" . $test['test_name'] . "'";
+        if ((isset($test['test_name']) && !empty($test['test_name'])) && (isset($test['institution']) && !empty($test['institution']))) {
+            $query = "SELECT * FROM tests WHERE test_name= '" . $test['test_name'] . "' AND institute_id='".$test['institution']."'";
         }
         $result = queryRunner::doSelect($query);
         if (empty($result)) {
-            $sql = "INSERT INTO tests (test_name,max_marks) values ('" . $test['test_name'] . "','" . $test['max_marks'] . "')";
+            $sql = "INSERT INTO tests (test_name,institute_id,max_marks) values ('" . $test['test_name'] . "','" . $test['institution'] . "','" . $test['max_marks'] . "')";
             $result = queryRunner::doInsert($sql);
             return $result;
         } else {

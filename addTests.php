@@ -1,3 +1,7 @@
+<?php 
+include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
+$instituteData = getInstituteList();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,6 +63,18 @@
                             
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value='addTest'>
+                                
+                                <div class="form-group">
+                                    <label>Select Institution</label>
+                                    <select class="form-control" name="institution">
+                                        <option value="" selected disabled>--SELECT INSTITUTION--</option>
+                                        <?php foreach ($instituteData as $key => $value) { ?>
+                                            <option value="<?php echo $value['id']; ?>" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == $value['id']){ echo "selected";}}?>>
+                                        <?php echo $value['institute']; ?>
+                                        </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                                 
                                 <div class="form-group">
                                     <label>Test Name</label>

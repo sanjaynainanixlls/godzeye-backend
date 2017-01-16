@@ -65,9 +65,9 @@ $instituteData = getInstituteList();
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="registerStudent">                            
                             <div class="form-group">
-                                <label>SELECT INSTITUTION</label>
+                                <label>Select Institution</label>
                                 <select class="form-control" name="institution">
-                                    <option value="" selected disabled>--SELECT INSTITUTION--</option>
+                                    <option value="" selected disabled>--Select Institution--</option>
                                     <?php foreach ($instituteData as $key => $value) { ?>
                                         <option value="<?php echo $value['id']; ?>" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == $value['id']){ echo "selected";}}?>>
                                     <?php echo $value['institute']; ?>
