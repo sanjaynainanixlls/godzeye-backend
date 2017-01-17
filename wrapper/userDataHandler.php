@@ -272,7 +272,7 @@ class userDataHandler {
                 while (($line = fgetcsv($csvFile)) !== FALSE) {
                     //check whether member already exists in database with same email
                     //for($i = 0 ;$i<count($line);$i++)
-                    $query = "INSERT INTO result SET  test_id = '" . $data['test'] . "',student_reg_no = '" . $line['0'] . "',marks_obtained = '" . $line['1'] . "'";
+                    $query = "INSERT INTO result SET institute_id = '".$data['institution']."', test_id = '" . $data['test'] . "',student_reg_no = '" . $line['0'] . "',marks_obtained = '" . $line['1'] . "'";
                     $result = queryRunner::doInsert($query);
                     //return $result;
                 }
@@ -305,7 +305,7 @@ class userDataHandler {
                     //check whether member already exists in database with same email
                     //for($i = 0 ;$i<count($line);$i++)
 
-                    $query = "INSERT INTO student_attendance SET  student_reg_no = '" . $line['0'] . "',month = '" . $data['month'] . "',present = '" . $line['1'] . "',absent ='" . $line['2'] . "'";
+                    $query = "INSERT INTO student_attendance SET institution_id = '" . $data['institution'] . "', student_reg_no = '" . $line['0'] . "',month = '" . $data['month'] . "',present = '" . $line['1'] . "',absent ='" . $line['2'] . "'";
                     $result = queryRunner::doInsert($query);
                     //return $result;
                 }
@@ -321,6 +321,15 @@ class userDataHandler {
         }
     }
 
+    
+    public function getTestListAsPerInstitute($instituteId){
+        $query = "SELECT * FROM tests where institute_id = '" . $instituteId . "'";
+        $result = queryRunner::doSelect($query);
+        if($result){
+            return $result;
+        }
+        return false;
+    }
 }
 
 ?>

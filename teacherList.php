@@ -117,5 +117,3 @@ $result = $userDataHandlerObj->getTeacherList();
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Additional JavaScript -->
-    <script src="js/script.js"></script>
-    <script src="js/roomStatus.js"></script>
