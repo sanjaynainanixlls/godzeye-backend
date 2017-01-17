@@ -1,6 +1,6 @@
 <?php
 include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
-$test = getTestNameAndId();
+$instituteData = getInstituteList();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,13 +70,22 @@ $test = getTestNameAndId();
 
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="uploadResult">                            
+                                
                                 <div class="form-group">
-                                    <label>SELECT TEST</label>
-                                    <select class="form-control" name="test">
-                                        <option value="" selected disabled>--SELECT TEST--</option>
-                                        <?php foreach ($test as $key => $value) { ?>
-                                            <option name="test_id" value="<?php echo $value['id']; ?>"><?php echo $value['test_name']; ?></option>
+                                    <label>Select Institution</label>
+                                    <select class="form-control" name="institution" id="institution">
+                                        <option value="" selected disabled>--SELECT INSTITUTION--</option>
+                                        <?php foreach ($instituteData as $key => $value) { ?>
+                                            <option name="institution_id" id="institution_id" value="<?php echo $value['id']; ?>"><?php echo $value['institute']; ?></option>
                                         <?php } ?>
+                                    </select>
+                                </div>
+                                
+                                
+                                <div class="form-group">
+                                    <label>Select Test</label>
+                                    <select class="form-control test" name="test" >
+                                        <option value=""  selected disabled>--SELECT TEST--</option>
                                     </select>
                                 </div>
 
@@ -110,8 +119,7 @@ $test = getTestNameAndId();
         <script src="js/bootstrap.min.js"></script>
 
         <!-- Additional JavaScript -->
-        <script src="js/script.js"></script>
-        <script src="js/roomStatus.js"></script>
+        <script src="js/upload_result.js"></script>
 
     </body>
 
