@@ -1,3 +1,7 @@
+<?php 
+include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
+$instituteData = getInstituteList();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,8 +70,19 @@
 
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="uploadAttendance">                            
+                                
                                 <div class="form-group">
-                                    <label>SELECT MONTH</label>
+                                    <label>Select Institution</label>
+                                    <select class="form-control" name="institution" id="institution">
+                                        <option value="" selected disabled>--SELECT INSTITUTION--</option>
+                                        <?php foreach ($instituteData as $key => $value) { ?>
+                                            <option name="institution_id" id="institution_id" value="<?php echo $value['id']; ?>"><?php echo $value['institute']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Select Month</label>
                                     <select class="form-control" name="month">
                                         <option value="" selected disabled>--SELECT MONTH--</option>
                                         <option value="1">January</option>
@@ -115,8 +130,6 @@
         <script src="js/bootstrap.min.js"></script>
 
         <!-- Additional JavaScript -->
-        <script src="js/script.js"></script>
-        <script src="js/roomStatus.js"></script>
 
     </body>
 
