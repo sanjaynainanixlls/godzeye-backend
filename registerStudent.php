@@ -23,7 +23,7 @@ $instituteData = getInstituteList();
 
         <!-- Custom Fonts -->
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -65,15 +65,10 @@ $instituteData = getInstituteList();
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="registerStudent">                            
                             <div class="form-group">
-                                <label>Select Institution</label>
-                                <select class="form-control" name="institution">
-                                    <option value="" selected disabled>--Select Institution--</option>
-                                    <?php foreach ($instituteData as $key => $value) { ?>
-                                        <option value="<?php echo $value['id']; ?>" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == $value['id']){ echo "selected";}}?>>
-                                    <?php echo $value['institute']; ?>
-                                    </option>
-                                    <?php } ?>
-                                </select>
+
+                                <label>INSTITUTION</label>
+                                <input id="tokens" name="ins_name" class="form-control">
+
                             </div>
  							
                                                           
@@ -101,14 +96,20 @@ $instituteData = getInstituteList();
 
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
-
+        <script src="jquery-ui/jquery-ui.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
         <!-- Additional JavaScript -->
         <script src="js/script.js"></script>
         <script src="js/roomStatus.js"></script>
-
+           <script>
+        $(function () {
+            $("#tokens").autocomplete({
+                source: 'action/Autocomplete.php'
+            });
+        });
+    </script>
     </body>
 
 </html>

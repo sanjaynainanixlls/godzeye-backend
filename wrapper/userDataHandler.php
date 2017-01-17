@@ -200,8 +200,16 @@ class userDataHandler {
         return $result;
     }
 
+    public function getInstituteid($name) {
+       
+        $query = "SELECT DISTINCT id FROM institutions WHERE institute= '" . $name . "'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
     public function registerStudent($data) {
-        //debug($_FILES);
+        $id = $this->getInstituteid($data['ins_name']);
+        $id = $id[0]['id'];
+       //debug($_FILES);exit();
         //$path = $_FILES['studentSheet']['name'];
         $csvMimes = array('application/vnd.ms-excel', 'text/plain', 'text/csv', 'text/comma-separated-values', 'text/tsv');
         if (!empty($_FILES['studentSheet']['name']) && in_array($_FILES['studentSheet']['type'], $csvMimes)) {
@@ -217,7 +225,7 @@ class userDataHandler {
                 while (($line = fgetcsv($csvFile)) !== FALSE) {
                     //check whether member already exists in database with same email
                     //for($i = 0 ;$i<count($line);$i++)
-                    $query = "INSERT INTO students SET  institute_id ='" . $line[0] . "' ,enrollment_number ='" . $line[1] . "', first_name = '" . $line[2] . "',last_name='" . $line[3] . "'"
+                    $query = "INSERT INTO students SET  institute_id ='" . $id . "' ,enrollment_number ='" . $line[1] . "', first_name = '" . $line[2] . "',last_name='" . $line[3] . "'"
                             . ",fathers_name  = '" . $line[4] . "',address = '" . $line[6] . "',contact_number = '" . $line['5'] . "'";
                     $result = queryRunner::doInsert($query);
                     //return $result;
