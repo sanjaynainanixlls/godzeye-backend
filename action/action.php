@@ -67,6 +67,20 @@ class Action {
                 $_SESSION['message'] = "Something Went Wrong / Trying to add duplicate Test...";
             }
             header("location: ../addTests.php");
+        } else if ($this->postParams['action'] == 'uploadResult') {
+            $userDataHandlerObj = new userDataHandler();
+            $result = $userDataHandlerObj->uploadResult($this->postParams);
+            if (!empty($result)) {
+                    $_SESSION['message'] = "Results Uploaded Successfully...";
+                    header("location: ../uploadResult.php");
+            }
+        } else if ($this->postParams['action'] == 'uploadAttendance') {
+            $userDataHandlerObj = new userDataHandler();
+            $result = $userDataHandlerObj->uploadAttendance($this->postParams);
+            if (!empty($result)) {
+                    $_SESSION['message'] = "Attendance Uploaded Successfully...";
+                    header("location: ../uploadAttendance.php");
+            }
         }
         
     }

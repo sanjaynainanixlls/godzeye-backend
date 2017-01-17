@@ -75,8 +75,8 @@ if ($postParams['action'] == 'editInstitution') {
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Founder Name</label>
-                                    <input type="text"  class="form-control" name="founder" value="<?php if (isset($data[0]['founder'])) echo $data[0]['founder'];
+                                    <label>Description</label>
+                                    <input type="text"  class="form-control" name="description" value="<?php if (isset($data[0]['description'])) echo $data[0]['description'];
                                 else echo ''; ?>" required="required">
                                 </div>
 
@@ -90,6 +90,12 @@ if ($postParams['action'] == 'editInstitution') {
                                     <label>Subjects</label>
                                     <input type="text" class="form-control" id="subjects" name="subjects" value="<?php if (isset($data[0]['subjects'])) echo $data[0]['subjects'];
                                 echo ''; ?>" required="required">
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="tel"  class="form-control" name="address" value="<?php if (isset($data[0]['address'])) echo $data[0]['address'];
+                                else echo ''; ?>" required="required">
                                 </div>
 
                                 <div class="form-group">

@@ -65,11 +65,11 @@ class userDataHandler {
             if (isset($data['institute']) && isset($data['subjects'])) {
                 //to register institution without image
                 if ($data['action'] == 'registerInstitution') {
-                    $query = 'INSERT INTO institutions (institute,subjects,founder,contact,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $data["status"] . '")';
+                    $query = 'INSERT INTO institutions (institute,subjects,description,contact,address,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data["address"] . '","' . $data["status"] . '")';
                     $result = queryRunner::doInsert($query);
                 } else {
                     //to update institution without image
-                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",status= "' . $data["status"] . '" ,image="" WHERE id="' . $data['editInstituteId'] . '"';
+                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",status= "' . $data["status"] . '"  WHERE id="' . $data['editInstituteId'] . '"';
                     $result = queryRunner::doUpdate($query);
                 }
                 return $result;
@@ -108,11 +108,11 @@ class userDataHandler {
                 if (move_uploaded_file($_FILES["instImage"]["tmp_name"], $target_path)) {
                     //to register institution with image
                     if ($data['action'] == 'registerInstitution') {
-                        $query = 'INSERT INTO institutions (institute,subjects,founder,contact,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["founder"] . '","' . $data["contact"] . '","' . $fileName . '","' . $data["status"] . '")';
+                        $query = 'INSERT INTO institutions (institute,subjects,description,contact,address,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data["address"] . '","' . $fileName . '","' . $data["status"] . '")';
                         $result = queryRunner::doInsert($query);
                     } else {
                         //to update institution with image
-                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",founder="' . $data["founder"] . '" ,contact= "' . $data["contact"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="' . $data['editInstituteId'] . '"';
+                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="' . $data['editInstituteId'] . '"';
                         $result = queryRunner::doUpdate($query);
                     }
                     return $result;
@@ -248,21 +248,87 @@ class userDataHandler {
         $result = queryRunner::doSelect($query);
         return $result;
     }
-    
-    public function addTest($test){
-        if (isset($test['test_name']) && !empty($test['test_name'])) {
-            $query = "SELECT * FROM tests WHERE test_name= '" . $test['test_name'] . "'";
+
+    public function addTest($test) {
+        if ((isset($test['test_name']) && !empty($test['test_name'])) && (isset($test['institution']) && !empty($test['institution']))) {
+            $query = "SELECT * FROM tests WHERE test_name= '" . $test['test_name'] . "' AND institute_id='".$test['institution']."'";
         }
         $result = queryRunner::doSelect($query);
-        if(empty($result)){
-            $sql = "INSERT INTO tests (test_name) values ('".$test['test_name']."')";
+        if (empty($result)) {
+            $sql = "INSERT INTO tests (test_name,institute_id,max_marks) values ('" . $test['test_name'] . "','" . $test['institution'] . "','" . $test['max_marks'] . "')";
             $result = queryRunner::doInsert($sql);
             return $result;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
+    public function uploadResult($data) {
+        //debug($_FILES);
+        //$path = $_FILES['studentSheet']['name'];
+        //debug($data);exit;
+        $csvMimes = array('application/vnd.ms-excel', 'text/plain', 'text/csv', 'text/comma-separated-values', 'text/tsv');
+        if (!empty($_FILES['resultSheet']['name']) && in_array($_FILES['resultSheet']['type'], $csvMimes)) {
+            if (is_uploaded_file($_FILES['resultSheet']['tmp_name'])) {
+
+                //open uploaded csv file with read only mode
+                $csvFile = fopen($_FILES['resultSheet']['tmp_name'], 'r');
+
+                //skip first line
+                fgetcsv($csvFile);
+                //parse data from csv file line by line
+                while (($line = fgetcsv($csvFile)) !== FALSE) {
+                    //check whether member already exists in database with same email
+                    //for($i = 0 ;$i<count($line);$i++)
+                    $query = "INSERT INTO result SET  test_id = '" . $data['test'] . "',student_reg_no = '" . $line['0'] . "',marks_obtained = '" . $line['1'] . "'";
+                    $result = queryRunner::doInsert($query);
+                    //return $result;
+                }
+
+                //close opened csv file
+                fclose($csvFile);
+                return $result;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
+        }
+    }
+
+    public function uploadAttendance($data) {
+        //$path = $_FILES['studentSheet']['name'];
+        //debug($data);exit;
+        $csvMimes = array('application/vnd.ms-excel', 'text/plain', 'text/csv', 'text/comma-separated-values', 'text/tsv');
+        if (!empty($_FILES['uploadAttendance']['name']) && in_array($_FILES['uploadAttendance']['type'], $csvMimes)) {
+            if (is_uploaded_file($_FILES['uploadAttendance']['tmp_name'])) {
+
+                //open uploaded csv file with read only mode
+                $csvFile = fopen($_FILES['uploadAttendance']['tmp_name'], 'r');
+
+                //skip first line
+                fgetcsv($csvFile);
+                //parse data from csv file line by line
+                while (($line = fgetcsv($csvFile)) !== FALSE) {
+                    //check whether member already exists in database with same email
+                    //for($i = 0 ;$i<count($line);$i++)
+
+                    $query = "INSERT INTO student_attendance SET  student_reg_no = '" . $line['0'] . "',month = '" . $data['month'] . "',present = '" . $line['1'] . "',absent ='" . $line['2'] . "'";
+                    $result = queryRunner::doInsert($query);
+                    //return $result;
+                }
+
+                //close opened csv file
+                fclose($csvFile);
+                return $result;
+            } else {
+                return 0;
+            }
+        } else {
+            return -1;
+        }
+    }
+
 }
 
 ?>

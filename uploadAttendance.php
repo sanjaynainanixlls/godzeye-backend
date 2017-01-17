@@ -1,7 +1,3 @@
-<?php 
-include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
-$instituteData = getInstituteList();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +9,7 @@ $instituteData = getInstituteList();
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Register Students</title>
+        <title>Upload Attendance</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +19,7 @@ $instituteData = getInstituteList();
 
         <!-- Custom Fonts -->
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -48,13 +44,19 @@ $instituteData = getInstituteList();
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Register Students
+                                Upload Attendance
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
-                                    <i class="fa fa-edit"></i> Student
+                                    <i class="fa fa-edit"></i> Attendance
                                 </li>
                             </ol>
+                            <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
+                                <div class="alert alert-success fade in">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong style="font-size:16px"><?php echo $_SESSION['message']; ?></strong>
+                                </div>
+                            <?php } unset($_SESSION['message']); ?>
                         </div>
                     </div>
                     <!-- /.row -->
@@ -63,22 +65,34 @@ $instituteData = getInstituteList();
                         <div class="col-lg-6">
 
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="action" value="registerStudent">                            
-                            <div class="form-group">
+                                <input type="hidden" name="action" value="uploadAttendance">                            
+                                <div class="form-group">
+                                    <label>SELECT MONTH</label>
+                                    <select class="form-control" name="month">
+                                        <option value="" selected disabled>--SELECT MONTH--</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
 
-                                <label>INSTITUTION</label>
-                                <input id="tokens" name="ins_name" class="form-control">
 
-                            </div>
- 							
-                                                          
-                            <div class="form-group">
-                                <label>Student List Sheet</label>
-                                <input id="studentSheet" type="file" class="form-control" name="studentSheet" >
-                            </div>
-                                                       							
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
+                                <div class="form-group">
+                                    <label>Student Attendance Sheet</label>
+                                    <input id="uploadAttendance" type="file" class="form-control" name="uploadAttendance" >
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-warning">Reset</button>
                             </form>
 
                         </div>
@@ -96,20 +110,14 @@ $instituteData = getInstituteList();
 
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
-        <script src="jquery-ui/jquery-ui.min.js"></script>
+
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
         <!-- Additional JavaScript -->
         <script src="js/script.js"></script>
         <script src="js/roomStatus.js"></script>
-           <script>
-        $(function () {
-            $("#tokens").autocomplete({
-                source: 'action/Autocomplete.php'
-            });
-        });
-    </script>
+
     </body>
 
 </html>
