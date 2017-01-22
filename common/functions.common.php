@@ -12,6 +12,9 @@ function debug($val) {
 function getInstituteList() {
     $query = "SELECT * FROM institutions WHERE status=1";
     $result = queryRunner::doSelect($query);
-    return $result;
+    if(!empty($result)){
+        return $result;
+    }
+    return false;
 }
 
