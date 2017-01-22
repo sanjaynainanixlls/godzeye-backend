@@ -371,14 +371,14 @@
                             <div class="ajax-target">
                                 <div class="row">
                                 <!-- Grid View Starts -->
-                                <?php foreach ($institute as $key => $values){ debug($values);?>
+                                <?php foreach ($institute as $key => $values){ ?>
                                     <div class="col-md-4 col-sm-6">
                                         <div class="single-course grid-course">
                                             <div class="course-thumbnail">
                                                 <a href="course.html" class="cover-info">
                                                     <div class="text">
                                                         <h4><?php echo $values['institute'];?></h4>
-                                                        <p>Institute Description Institute Description</p>
+                                                        <p><?php echo $values['description'];?></p>
                                                     </div>
                                                 </a>
 
@@ -388,7 +388,7 @@
                                             <div class="course-details">
                                                 <h3 class="title">
                                                     <a href="course.html">
-                                                        <?php echo $values['institute_name'];?>
+                                                        <?php echo $values['institute'];?>
                                                     </a>
                                                 </h3>
 
@@ -399,7 +399,7 @@
                                                     </li>
                                                     <li>
                                                         <span>Contact :</span>
-                                                        <span></span>
+                                                        <span><?php echo $values['contact'];?></span>
                                                     </li>
                                                 </ul>
 
