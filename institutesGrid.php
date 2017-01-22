@@ -150,7 +150,7 @@
                                             <p><?php echo $values['description']; ?></p>
                                         </div>
                                     </a>
-                                    <img src="<?php echo dirname(dirname(__FILE__)) ."/godzeye-backend/admin/media/institution/".$values['institute']."/".$values['image'];?>" alt="<?php echo $values['institute'];?>" />
+                                    <img src="<?php echo "admin/media/institution/".$values['institute']."/".$values['image'];?>" alt="<?php echo $values['institute'];?>" />
                                 </div>
 
                                 <div class="course-details">
