@@ -1,6 +1,6 @@
 <?php 
 
-include dirname(dirname(__FILE__)) . '/godzeye-backend/config/config.php';
+include dirname(dirname(__FILE__)) . '/config/config.php';
 $userDataHandlerObj = new userDataHandler();
 $result = $userDataHandlerObj->getInstitutionDetails();
 
