@@ -141,6 +141,7 @@
                 <div class="row">
                     <!-- Grid View Starts -->
                     <?php foreach ($institute as $key => $values) { ?>
+                        
                         <div class="col-md-4 col-sm-6">
                             <div class="single-course grid-course">
                                 <div class="course-thumbnail">
@@ -150,7 +151,7 @@
                                             <p><?php echo $values['description']; ?></p>
                                         </div>
                                     </a>
-                                    <img src="<?php echo dirname(dirname(__FILE__)) ."/godzeye-backend/admin/media/institution/".$values['institute']."/".$values['image'];?>" alt="<?php echo $values['institute'];?>" />
+                                    <img src="<?php echo "admin/media/institution/".$values['institute']."/".$values['image'];?>" alt="<?php echo $values['institute'];?>" />
                                 </div>
 
                                 <div class="course-details">
