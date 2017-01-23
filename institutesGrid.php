@@ -175,7 +175,7 @@
                                     <form id="institutesId">
                                         <input type="hidden" id="instituteId" name="instituteId" value="<?php echo $values['id'];?>">
                                         <div class="course-action">
-                                            <button type="button" class="button btn theme-btn-1 register-btn">View Details</button>
+                                            <button type="button" class="button btn theme-btn-1">View Details</button>
                                         </div>
                                     </form>
                                 </div>
