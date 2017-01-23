@@ -171,12 +171,13 @@
                                             <span><?php echo $values['contact']; ?></span>
                                         </li>
                                     </ul>
-
-                                    <div class="course-action">
-                                        <a href="#" class="btn theme-btn-1 register-btn">
-                                            <span class="button">Register</span>
-                                        </a>
-                                    </div>
+                                    
+                                    <form id="institutesId">
+                                        <input type="hidden" id="instituteId" name="instituteId" value="<?php echo $values['id'];?>">
+                                        <div class="course-action">
+                                            <button type="button" class="button btn theme-btn-1 register-btn">View Details</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -188,3 +189,6 @@
     </div>
 </section>
 <?php include_once 'footer.php';?>
+
+<!-- Including JS Files-->
+<script src="js/institutesGrid.js"></script>
