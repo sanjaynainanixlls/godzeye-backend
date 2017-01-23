@@ -171,10 +171,10 @@
                                         </li>
                                     </ul>
                                     
-                                    <form id="institutesId">
+                                    <form id="institutesId" action="institutedetail.php" method="post">
                                         <input type="hidden" id="instituteId" name="instituteId" value="<?php echo $values['id'];?>">
                                         <div class="course-action">
-                                            <button type="button" class="button btn theme-btn-1">View Details</button>
+                                            <button type="submit" class="button btn theme-btn-1">View Details</button>
                                         </div>
                                     </form>
                                 </div>
