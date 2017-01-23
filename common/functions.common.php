@@ -18,3 +18,13 @@ function getInstituteList() {
     return false;
 }
 
+function getInstituteData($id){
+    $query = "SELECT * FROM institutions WHERE status=1 AND id='$id'";
+    $result = queryRunner::doSelect($query);
+    if(!empty($result)){
+        return $result;
+    }
+    return false;
+    
+}
+

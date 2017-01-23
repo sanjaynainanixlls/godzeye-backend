@@ -141,6 +141,7 @@
                 <div class="row">
                     <!-- Grid View Starts -->
                     <?php foreach ($institute as $key => $values) { ?>
+                        
                         <div class="col-md-4 col-sm-6">
                             <div class="single-course grid-course">
                                 <div class="course-thumbnail">
