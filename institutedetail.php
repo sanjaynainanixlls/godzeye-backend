@@ -1,5 +1,7 @@
 <?php
 session_start();
+include_once 'config/config.php';
+$institute = getInstituteList();
 ?>
 <!DOCTYPE html>
 <html>
