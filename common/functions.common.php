@@ -28,3 +28,12 @@ function getInstituteData($id){
     
 }
 
+function getTeacherData($id){
+    $query = "SELECT * FROM teachers WHERE status=1 AND institution_id='$id'";
+    $result = queryRunner::doSelect($query);
+    if(!empty($result)){
+        return $result;
+    }
+    return false;
+    
+}

@@ -1,7 +1,10 @@
 <?php
 session_start();
 include_once 'config/config.php';
-$institute = getInstituteList();
+$instituteData = getInstituteData($_POST['instituteId']);
+$teacherData = getTeacherData($_POST['instituteId']);
+$insName = explode(",", $instituteData[0]['subjects']);
+//debug($teacherData);
 ?>
 <!DOCTYPE html>
 <html>
@@ -232,7 +235,7 @@ $institute = getInstituteList();
                 <section class="section-hero">
                     <div class="hero-content courses-list">
                         <div class="container">
-                            <h1 class="heading">Institute Name</h1>
+                            <h1 class="heading"><?php echo $instituteData[0]['institute'];?></h1>
                         </div>
                     </div>
                 </section>
@@ -245,29 +248,20 @@ $institute = getInstituteList();
                                 <div class="col-md-7">
                                     <div class="main-content">
                                         <div class="course-cover">
-                                            <img src="img/single-course-cover.jpg" alt="course cover" />
+                                            <img src="<?php echo "admin/media/institution/".$instituteData[0]['institute']."/".$instituteData[0]['image'];?>" alt="course cover" />
                                         </div>
 
                                         <div class="course-body">
-                                            <h2>Institute Name</h2>
+                                            <h2><?php echo $instituteData[0]['institute'];?></h2>
 
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio.</p>
-
-                                            <p>Maecenas sodales, nisl eget dignissim molestie, ligula est consectetur metus, et mollis justo urna sit amet nulla. Etiam lectus arcu, pellentesque eu tellus tempor, tristique ultrices leo. Nullam at felis mauris. Aenean in neque eu ligula tempor ornare. Mauris tristique in elit a blandit. Nam laoreet vulputate nisi eu accumsan. Sed faucibus arcu nec est facilisis dignissim. Fusce risus leo, euismod ut cursus vitae, imperdiet id quam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce mollis mi vulputate leo vestibulum, quis scelerisque libero condimentum. Praesent rutrum consequat lacus quis suscipit. Proin dapibus mi non semper lobortis.</p>
-
-                                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce mollis mi vulputate leo vestibulum, quis scelerisque libero condimentum. Praesent rutrum consequat lacus quis suscipit. Proin dapibus mi non semper lobortis.</p>
-
-                                            <h2>Aenean in neque</h2>
-
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio.</p>
-
-                                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio.</p>
+                                            <p><?php echo $instituteData[0]['description'];?></p>
 
                                             <h4>Subjects</h4>
+                                            <?php for($i = 0;$i < count($insName);$i++) { ?>
                                             <ul class="course-description-list">
                                                 <li class="lesson">
                                                     <div class="heading">
-                                                        <span class="lesson-nr no-select">Maths</span>
+                                                        <span class="lesson-nr no-select"><?php echo $insName[$i];?></span>
                                                     </div>
 
                                                     <div class="body">
@@ -280,41 +274,7 @@ $institute = getInstituteList();
                                                         </li>
                                                     </ul>
                                                 </li>
-
-                                                <li class="lesson">
-                                                    <div class="heading">
-                                                        <span class="lesson-nr no-select">Chemistry</span>
-                                                    </div>
-
-                                                    <div class="body">
-                                                    </div>
-
-                                                    <ul class="lesson-description">
-
-                                                    </ul>
-                                                </li>
-
-                                                <li class="lesson">
-                                                    <div class="heading">
-                                                        <span class="lesson-nr no-select">Biology</span>
-                                                    </div>
-
-                                                    <div class="body">
-                                                    </div>
-
-                                                    <ul class="lesson-description">
-                                                    </ul>
-                                                </li>
-
-                                                <li class="lesson">
-                                                    <div class="heading">
-                                                        <span class="lesson-nr no-select">Physics</span>
-                                                    </div>
-
-                                                    <div class="body">
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                            <?php } ?>
 
                                             <div class="share-block">
                                                 <div class="row row-fit-10">
@@ -344,7 +304,7 @@ $institute = getInstituteList();
                                         <div class="location-box">
                                             <h3 class="box-title">Address</h3>
 
-                                            <p><span>Dickenson street 37/2</span><br />Old Valyria, New Zealand</p>
+                                            <p><span><?php echo $instituteData[0]['address'];?></span></p>
                                             <div class="map" id="map-canvas"></div>
                                         </div>
                                     </div>
@@ -354,16 +314,17 @@ $institute = getInstituteList();
                                 <div class="col-md-12">
                                     <h1 class="heading text-center" style="text-align:center"><strong>Teachers</strong></h1>
                                 </div>
+                                <?php if($teacherData) { foreach ($teacherData as $key => $value) { ?>
                                 <div class="col-md-4 col-sm-6">
                                     <div class="team-member">
                                         <div class="photo">
                                             <a href="member.html">
-                                                <img src="img/member-1.jpg" alt="member avatar" />
+                                                <img src="<?php echo "admin/media/institution/".$instituteData[0]['institute']."/".$value['image'];?>" alt="member avatar" />
                                             </a>
                                         </div>
 
-                                        <h4><a href="member.html">Zack Thoumb</a></h4>
-                                        <p class="expertise-area">Specialization</p>
+                                        <h4><a href="member.html"><?php echo $value['first_name']." ".$value['last_name'];?></a></h4>
+                                        <p class="expertise-area"><?php echo $value['specialization'];?></p>
 
                                         <p class="member-info">Maecenas sed diam eget risus varius blandit sit amet non magna. Donec  nulla non metus auctor fringilla. Nulla non metus auctor fringilla.</p>
 
@@ -373,49 +334,9 @@ $institute = getInstituteList();
                                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                         </ul> -->
                                     </div>
+                                
                                 </div>
-
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="team-member">
-                                        <div class="photo">
-                                            <a href="member.html">
-                                                <img src="img/member-1.jpg" alt="member avatar" />
-                                            </a>
-                                        </div>
-
-                                        <h4><a href="member.html">Zack Thoumb</a></h4>
-                                        <p class="expertise-area">Specialization</p>
-
-                                        <p class="member-info">Maecenas sed diam eget risus varius blandit sit amet non magna. Donec  nulla non metus auctor fringilla. Nulla non metus auctor fringilla.</p>
-
-                                        <!-- <ul class="social-block">
-                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul> -->
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="team-member">
-                                        <div class="photo">
-                                            <a href="member.html">
-                                                <img src="img/member-1.jpg" alt="member avatar" />
-                                            </a>
-                                        </div>
-
-                                        <h4><a href="member.html">Zack Thoumb</a></h4>
-                                        <p class="expertise-area">Specialization</p>
-
-                                        <p class="member-info">Maecenas sed diam eget risus varius blandit sit amet non magna. Donec  nulla non metus auctor fringilla. Nulla non metus auctor fringilla.</p>
-
-                                        <!-- <ul class="social-block">
-                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul> -->
-                                    </div>
-                                </div>
+                                <?php } } ?>
                             </div>
                         </div>
                     </div>
