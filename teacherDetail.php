@@ -30,7 +30,7 @@ $instituteData = getInstituteData($teacherDetail[0]['institution_id']);
                                     <div class="col-sm-8 col-md-9 col-lg-8">
                                         <div class="profile">
                                             <?php
-                                            if ($teacherDetail[0]['institution_id'] == 'null' || $teacherDetail[0]['entity'] == '0') {
+                                            if ($teacherDetail[0]['institution_id'] == 'null' && $teacherDetail[0]['entity_type'] == '0') {
                                                 $profileImg = 'admin/media/independent/' . $teacherDetail[0]["image"];
                                             } else {
                                                 $profileImg = 'admin/media/institution/' . toSlug($instituteData[0]["institute"]) . '/' . $teacherDetail[0]["image"];
@@ -46,7 +46,7 @@ $instituteData = getInstituteData($teacherDetail[0]['institution_id']);
                                         </div>
                                     </div>
                                     <?php
-                                    if ($teacherDetail[0]['institution_id'] == 'null' || $teacherDetail[0]['entity'] == '0') {
+                                    if ($teacherDetail[0]['institution_id'] == 'null' && $teacherDetail[0]['entity_type'] == '0') {
                                         $address = $teacherDetail[0]['address'];
                                         $phone = $teacherDetail[0]['contact'];
                                         $email = $teacherDetail[0]['email'];
