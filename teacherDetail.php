@@ -34,7 +34,7 @@ $instituteData = getInstituteData($teacherDetail[0]['institution_id']);
                                                 if($teacherDetail[0]['institution_id'] == 'null'){
                                                     $profileImg = 'admin/media/independent/' .  $teacherDetail[0]["image"];
                                                 }else{
-                                                    $profileImg = 'admin/media/institution/' .$instituteData[0]["institute"].'/'.  $teacherDetail[0]["image"];
+                                                    $profileImg = 'admin/media/institution/' .toSlug($instituteData[0]["institute"]).'/'.  $teacherDetail[0]["image"];
                                                 }
 ?>
                                                 <div class="avatar">

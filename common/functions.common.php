@@ -8,6 +8,11 @@ function debug($val) {
     print_r($val);
 }
 
+//convert to slug
+function toSlug($value){
+   $slugVal = implode("_", explode(" ", $value));
+   return $slugVal;
+}
 //get all details of Institutes
 function getInstituteList() {
     $query = "SELECT * FROM institutions WHERE status=1";
