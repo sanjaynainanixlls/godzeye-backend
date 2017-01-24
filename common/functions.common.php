@@ -34,6 +34,7 @@ function getInstituteData($id){
 }
 
 function getTeacherData($instituteId,$teacherId){
+    $cond = '';
     if($instituteId != '' && $teacherId == ''){
         $cond = "AND institution_id='$instituteId'";
     }

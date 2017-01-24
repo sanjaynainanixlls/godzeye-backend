@@ -4,7 +4,7 @@ include_once 'config/config.php';
 if (!$_REQUEST['teacherId']) {
     header('Location: ' . '/teacherList.php');
 }
-$teacherDetail = getTeacherData('',$_REQUEST['teacherId']);
+$teacherDetail = getTeacherData('', $_REQUEST['teacherId']);
 $instituteData = getInstituteData($teacherDetail[0]['institution_id']);
 ?>
 <!-- Main Content -->
@@ -23,64 +23,64 @@ $instituteData = getInstituteData($teacherDetail[0]['institution_id']);
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php
-                    if ($teacherDetail[0]) { ?>
-                            <div class="single-member-box">
-                                <div class="member-social-box">
-                                    <div class="row">
-                                        <div class="col-sm-8 col-md-9 col-lg-8">
-                                            <div class="profile">
-                                                <?php 
-                                                if($teacherDetail[0]['institution_id'] == 'null'){
-                                                    $profileImg = 'admin/media/independent/' .  $teacherDetail[0]["image"];
-                                                }else{
-                                                    $profileImg = 'admin/media/institution/' .toSlug($instituteData[0]["institute"]).'/'.  $teacherDetail[0]["image"];
-                                                }
-?>
-                                                <div class="avatar">
-                                                    <img src="<?php echo $profileImg; ?>" alt="<?php echo $teacherDetail[0]['first_name'].' '.$teacherDetail[0]['last_name']; ?>" />
-                                                </div>
-                                                <div class="short-info">
-                                                    <h3 class="name"><?php echo $teacherDetail[0]['first_name'].' '.$teacherDetail[0]['last_name'];?></h3>
-                                                    <p class="covered-areas"><?php echo $teacherDetail[0]['highest_qual'];?></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?php 
-                                            if($teacherDetail[0]['institution_id'] == 'null'){
-                                                $address = $teacherDetail[0]['address'];
-                                                $phone = $teacherDetail[0]['contact'];
-                                                $email = $teacherDetail[0]['email'];
-                                            }else{
-                                                $address = $instituteData[0]['address'];
-                                                $phone = $instituteData[0]['contact'];
-                                                $email = $instituteData[0]['email'];
+                    <?php if ($teacherDetail[0]) { ?>
+                        <div class="single-member-box">
+                            <div class="member-social-box">
+                                <div class="row">
+                                    <div class="col-sm-8 col-md-9 col-lg-8">
+                                        <div class="profile">
+                                            <?php
+                                            if ($teacherDetail[0]['institution_id'] == 'null') {
+                                                $profileImg = 'admin/media/independent/' . $teacherDetail[0]["image"];
+                                            } else {
+                                                $profileImg = 'admin/media/institution/' . toSlug($instituteData[0]["institute"]) . '/' . $teacherDetail[0]["image"];
                                             }
-                                        ?>
-                                        <div class="col-sm-4 col-md-3 col-lg-4">
-                                            <div class="profile-info">
-                                                <ul>
-                                                    <li class="office"><?php echo $address;?></li>
-                                                    <li class="phone"><?php echo $phone;?></li>
-                                                    <li class="mail"><?php echo $email;?></li>
-                                                </ul>
+                                            ?>
+                                            <div class="avatar">
+                                                <img src="<?php echo $profileImg; ?>" alt="<?php echo $teacherDetail[0]['first_name'] . ' ' . $teacherDetail[0]['last_name']; ?>" />
+                                            </div>
+                                            <div class="short-info">
+                                                <h3 class="name"><?php echo $teacherDetail[0]['first_name'] . ' ' . $teacherDetail[0]['last_name']; ?></h3>
+                                                <p class="covered-areas"><?php echo $teacherDetail[0]['highest_qual']; ?></p>
                                             </div>
                                         </div>
                                     </div>
+                                    <?php
+                                    if ($teacherDetail[0]['institution_id'] == 'null') {
+                                        $address = $teacherDetail[0]['address'];
+                                        $phone = $teacherDetail[0]['contact'];
+                                        $email = $teacherDetail[0]['email'];
+                                    } else {
+                                        $address = $instituteData[0]['address'];
+                                        $phone = $instituteData[0]['contact'];
+                                        $email = $instituteData[0]['email'];
+                                    }
+                                    ?>
+                                    <div class="col-sm-4 col-md-3 col-lg-4">
+                                        <div class="profile-info">
+                                            <ul>
+                                                <?php if ($address) { ?><li class="office"><?php echo $address ?></li> <?php } ?>
+                                                <?php if ($phone) { ?><li class="phone"><?php echo $phone; ?></li> <?php } ?>
+                                                <?php if ($email) { ?><li class="mail"><?php echo $email; ?></li> <?php } ?>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <?php if($teacherDetail[0]['specialization']){
-                                    $specializations = explode(",", $teacherDetail[0]['specialization']); ?>
+                            </div>
+                            <?php if ($teacherDetail[0]['specialization']) {
+                                $specializations = explode(",", $teacherDetail[0]['specialization']);
+                                ?>
                                 <div>
                                     <h3>Specialization</h3>
                                     <ul>
-                                        <?php foreach($specializations as $key=>$specialization){?>
-                                            <li><?php echo $specialization;?></li> 
+                                        <?php foreach ($specializations as $key => $specialization) { ?>
+                                            <li><?php echo $specialization; ?></li> 
                                         <?php } ?>
                                     </ul>
                                 </div>
-                                <?php }?>
-                            </div>
-                            <?php
+                            <?php } ?>
+                        </div>
+                        <?php
                     } else {
                         ?>
                         <div class="single-member-box">
