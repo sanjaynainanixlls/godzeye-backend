@@ -73,8 +73,9 @@ $instituteData = getInstituteData($teacherDetail[0]['institution_id']);
                                 <div>
                                     <h3>Specialization</h3>
                                     <ul>
-                                        <?php foreach($specializations as $specialization)?>
-                                        <li><?php echo $specialization;?></li> 
+                                        <?php foreach($specializations as $key=>$specialization){?>
+                                            <li><?php echo $specialization;?></li> 
+                                        <?php } ?>
                                     </ul>
                                 </div>
                                 <?php }?>
