@@ -219,14 +219,3 @@
                     </ul>
                 </nav>
             </header>
-
-            <!-- Main Content -->
-            <div class="content-wrapper">
-                <!-- Hero Section -->
-                <section class="section-hero">
-                    <div class="hero-content courses-list">
-                        <div class="container">
-                            <h1 class="heading">Institutes</h1>
-                        </div>
-                    </div>
-                </section>

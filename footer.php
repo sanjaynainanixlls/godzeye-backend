@@ -1,22 +1,3 @@
-<!-- Call to Action Box -->
-<div class="call-to-action-box" data-parallax-bg="img/call-to-action-bg.jpg">
-    <div class="box-img"><span></span></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7">
-                <h2>Enjoy our courses Today</h2>
-            </div>
-
-            <div class="col-md-5">
-                <div class="button-wrapper">
-                    <a href="#" class="btn theme-btn-3">Get in touch</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
 <!-- Footer -->
 <footer class="fixed">
     <div class="container">

@@ -28,8 +28,14 @@ function getInstituteData($id){
     
 }
 
-function getTeacherData($id){
-    $query = "SELECT * FROM teachers WHERE status=1 AND institution_id='$id'";
+function getTeacherData($instituteId,$teacherId){
+    if($instituteId != '' && $teacherId == ''){
+        $cond = "AND institution_id='$instituteId'";
+    }
+    if($instituteId == '' && $teacherId != ''){
+        $cond = "AND id='$teacherId'";
+    }
+    $query = "SELECT * FROM teachers WHERE status=1 $cond";
     $result = queryRunner::doSelect($query);
     if(!empty($result)){
         return $result;

@@ -2,7 +2,7 @@
 session_start();
 include_once 'config/config.php';
 $instituteData = getInstituteData($_POST['instituteId']);
-$teacherData = getTeacherData($_POST['instituteId']);
+$teacherData = getTeacherData($_POST['instituteId'],'');
 $insName = explode(",", $instituteData[0]['subjects']);
 //debug($teacherData);
 ?>
@@ -235,7 +235,7 @@ $insName = explode(",", $instituteData[0]['subjects']);
                 <section class="section-hero">
                     <div class="hero-content courses-list">
                         <div class="container">
-                            <h1 class="heading"><?php echo $instituteData[0]['institute'];?></h1>
+                            <h1 class="heading"><?php echo $instituteData[0]['institute']; ?></h1>
                         </div>
                     </div>
                 </section>
@@ -248,53 +248,53 @@ $insName = explode(",", $instituteData[0]['subjects']);
                                 <div class="col-md-7">
                                     <div class="main-content">
                                         <div class="course-cover">
-                                            <img src="<?php echo "admin/media/institution/".$instituteData[0]['institute']."/".$instituteData[0]['image'];?>" alt="course cover" />
+                                            <img src="<?php echo "admin/media/institution/" . $instituteData[0]['institute'] . "/" . $instituteData[0]['image']; ?>" alt="course cover" />
                                         </div>
 
                                         <div class="course-body">
-                                            <h2><?php echo $instituteData[0]['institute'];?></h2>
+                                            <h2><?php echo $instituteData[0]['institute']; ?></h2>
 
-                                            <p><?php echo $instituteData[0]['description'];?></p>
+                                            <p><?php echo $instituteData[0]['description']; ?></p>
 
                                             <h4>Subjects</h4>
-                                            <?php for($i = 0;$i < count($insName);$i++) { ?>
-                                            <ul class="course-description-list">
-                                                <li class="lesson">
-                                                    <div class="heading">
-                                                        <span class="lesson-nr no-select"><?php echo $insName[$i];?></span>
-                                                    </div>
+                                            <?php for ($i = 0; $i < count($insName); $i++) { ?>
+                                                <ul class="course-description-list">
+                                                    <li class="lesson">
+                                                        <div class="heading">
+                                                            <span class="lesson-nr no-select"><?php echo $insName[$i]; ?></span>
+                                                        </div>
 
-                                                    <div class="body">
+                                                        <div class="body">
 
-                                                    </div>
+                                                        </div>
 
-                                                    <ul class="lesson-description">
-                                                        <li>
+                                                        <ul class="lesson-description">
+                                                            <li>
 
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            <?php } ?>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                <?php } ?>
 
-                                            <div class="share-block">
-                                                <div class="row row-fit-10">
-                                                    <div class="col-xs-6 col-sm-3">
-                                                        <a class="facebook" href="#">facebook</a>
-                                                    </div>
+                                                <div class="share-block">
+                                                    <div class="row row-fit-10">
+                                                        <div class="col-xs-6 col-sm-3">
+                                                            <a class="facebook" href="#">facebook</a>
+                                                        </div>
 
-                                                    <div class="col-xs-6 col-sm-3">
-                                                        <a class="twitter" href="#">twitter</a>
-                                                    </div>
+                                                        <div class="col-xs-6 col-sm-3">
+                                                            <a class="twitter" href="#">twitter</a>
+                                                        </div>
 
-                                                    <div class="col-xs-6 col-sm-3">
-                                                        <a class="pinterest" href="#">pinterest</a>
-                                                    </div>
+                                                        <div class="col-xs-6 col-sm-3">
+                                                            <a class="pinterest" href="#">pinterest</a>
+                                                        </div>
 
-                                                    <div class="col-xs-6 col-sm-3">
-                                                        <a class="dribbble" href="#">dribbble</a>
+                                                        <div class="col-xs-6 col-sm-3">
+                                                            <a class="dribbble" href="#">dribbble</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -304,7 +304,7 @@ $insName = explode(",", $instituteData[0]['subjects']);
                                         <div class="location-box">
                                             <h3 class="box-title">Address</h3>
 
-                                            <p><span><?php echo $instituteData[0]['address'];?></span></p>
+                                            <p><span><?php echo $instituteData[0]['address']; ?></span></p>
                                             <div class="map" id="map-canvas"></div>
                                         </div>
                                     </div>
@@ -314,29 +314,29 @@ $insName = explode(",", $instituteData[0]['subjects']);
                                 <div class="col-md-12">
                                     <h1 class="heading text-center" style="text-align:center"><strong>Teachers</strong></h1>
                                 </div>
-                                <?php if($teacherData) { foreach ($teacherData as $key => $value) { ?>
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="team-member">
-                                        <div class="photo">
-                                            <a href="member.html">
-                                                <img src="<?php echo "admin/media/institution/".$instituteData[0]['institute']."/".$value['image'];?>" alt="member avatar" />
-                                            </a>
-                                        </div>
+                                <?php if ($teacherData) {
+                                    foreach ($teacherData as $key => $value) {
+                                        ?>
+                                        <form id="teacherData" name="teacherData" action="teacherDetail.php" method="post">
+                                            <input type="hidden" id="teacherId" name="teacherId" value="<?php echo $value['id']; ?>">
+                                            <div class="col-md-4 col-sm-6">
+                                                <div class="team-member">
+                                                    <div class="photo">
+                                                        <div>
+                                                            <img src="<?php echo "admin/media/institution/" . $instituteData[0]['institute'] . "/" . $value['image']; ?>" alt="member avatar" />
+                                                        </div>
+                                                    </div>
 
-                                        <h4><a href="member.html"><?php echo $value['first_name']." ".$value['last_name'];?></a></h4>
-                                        <p class="expertise-area"><?php echo $value['specialization'];?></p>
+                                                    <h4><a href="member.html"><?php echo $value['first_name'] . " " . $value['last_name']; ?></a></h4>
+                                                    <p class="expertise-area"><?php echo $value['specialization']; ?></p>
 
-                                        <p class="member-info">Maecenas sed diam eget risus varius blandit sit amet non magna. Donec  nulla non metus auctor fringilla. Nulla non metus auctor fringilla.</p>
-
-                                        <!-- <ul class="social-block">
-                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul> -->
-                                    </div>
-                                
-                                </div>
-                                <?php } } ?>
+                                                    <button type="submit" class="button btn theme-btn-1">View Detail</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    <?php }
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
