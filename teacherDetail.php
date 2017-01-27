@@ -1,7 +1,7 @@
 <?php
 include_once 'header.php';
 include_once 'config/config.php';
-if (!$_REQUEST['teacherId']) {
+if ($_REQUEST['teacherId'] == '') {
     header('Location: ' . '/teacherList.php');
 }
 $teacherDetail = getTeacherData('', $_REQUEST['teacherId']);
@@ -45,7 +45,7 @@ $instituteData = getInstituteData($teacherDetail[0]['institution_id']);
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
+                                    <?php 
                                     if ($teacherDetail[0]['institution_id'] == NULL && $teacherDetail[0]['entity_type'] == '0') {
                                         $address = $teacherDetail[0]['address'];
                                         $phone = $teacherDetail[0]['contact'];
