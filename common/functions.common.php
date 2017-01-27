@@ -8,6 +8,11 @@ function debug($val) {
     print_r($val);
 }
 
+//convert to slug
+function toSlug($value){
+   $slugVal = implode("_", explode(" ", $value));
+   return $slugVal;
+}
 //get all details of Institutes
 function getInstituteList() {
     $query = "SELECT * FROM institutions WHERE status=1";
@@ -28,8 +33,15 @@ function getInstituteData($id){
     
 }
 
-function getTeacherData($id){
-    $query = "SELECT * FROM teachers WHERE status=1 AND institution_id='$id'";
+function getTeacherData($instituteId,$teacherId){
+    $cond = '';
+    if($instituteId != '' && $teacherId == ''){
+        $cond = "AND institution_id='$instituteId'";
+    }
+    if($instituteId == '' && $teacherId != ''){
+        $cond = "AND id='$teacherId'";
+    }
+    $query = "SELECT * FROM teachers WHERE status=1 $cond";
     $result = queryRunner::doSelect($query);
     if(!empty($result)){
         return $result;
