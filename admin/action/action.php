@@ -22,7 +22,11 @@ class Action {
         } else if ($this->postParams['action'] == 'registerTeacher') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->registerTeacher($this->postParams);
-            if (!empty($result)) {
+            if($result == 2){
+                $_SESSION['message'] = "Teacher already exist!";
+                header("location: ../registerTeacher.php");   
+            }
+            else if (!empty($result)) {
                 session_start();
                 $_SESSION['message'] = "Teacher Registration  successful!";
                 header("location: ../teacherList.php");
@@ -40,7 +44,11 @@ class Action {
         } else if ($this->postParams['action'] == 'registerInstitution') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->registerInstitution($this->postParams);
-            if (!empty($result)) {
+            if($result == 2){
+                $_SESSION['message'] = "Institution already exist!";
+                header("location: ../registerInstitution.php");   
+            }
+            else if (!empty($result)) {
                     $_SESSION['message'] = "Institute Added Successfully...";
                     header("location: ../institutionList.php");
             }

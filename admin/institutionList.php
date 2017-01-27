@@ -68,6 +68,7 @@ $result = $userDataHandlerObj->getInstitutionDetails();
                                         <th>Description</th>  
                                         <th>Subjects</th> 
                                         <th>Contact</th>
+                                        <th>Email</th>
                                         <th>Address</th>
                                         <th>Image</th>
                                         <th>Status</th>
@@ -82,6 +83,7 @@ $result = $userDataHandlerObj->getInstitutionDetails();
                                             <td><?php echo $value['description']; ?></td>  
                                             <td><?php echo $value['subjects']; ?></td>
                                             <td><?php echo $value['contact']; ?></td>
+                                            <td><?php echo $value['email']; ?></td>
                                             <td><?php echo $value['address']; ?></td>
                                             <td>
                                                 <?php $dirPath = 'media/institution/'.$value['institute'].'/';?>

@@ -87,6 +87,12 @@ if ($postParams['action'] == 'editInstitution') {
                                 </div>
 
                                 <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email"  class="form-control" name="email" value="<?php if (isset($data[0]['email'])) echo $data[0]['email'];
+                                else echo ''; ?>" required="required">
+                                </div>
+                                    
+                                <div class="form-group">
                                     <label>Subjects</label>
                                     <input type="text" class="form-control" id="subjects" name="subjects" value="<?php if (isset($data[0]['subjects'])) echo $data[0]['subjects'];
                                 echo ''; ?>" required="required">
@@ -110,12 +116,20 @@ if ($postParams['action'] == 'editInstitution') {
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="form-control" id="status" name="status">
-                                        <option value="1" selected>Active</option>
-                                        <option value="" >Discontinued</option>
+                                    <label>Featured</label>
+                                    <select class="form-control" id="is_featured" name="is_featured">
+                                        <option value="1" >Featured</option>
+                                        <option value="0" selected>Not Featured</option>
                                     </select>
                                 </div>
+                                    
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option value="1" <?php if(isset($data[0]['status'])){ if($data[0]['status'] == 1){ echo "selected";}}?>>Active</option>
+                                    <option value="0" <?php if(isset($data[0]['status'])){ if($data[0]['status'] == 0){ echo "selected";}}?>>Discontinued</option>
+                                </select>
+                            </div>
 
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="reset" class="btn btn-warning">Reset</button>
