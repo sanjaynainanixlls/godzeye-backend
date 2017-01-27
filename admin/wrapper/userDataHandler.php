@@ -95,7 +95,7 @@ class userDataHandler {
                     }
                 } else {
                     //to update institution without image
-                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",status= "' . $data["status"] . ',is_featured="' . $data['is_featured'] . '"  WHERE id="' . $data['editInstituteId'] . '"';
+                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",status= "' . $data["status"] . '",is_featured="' . $data['is_featured'] . '",email= "'.$data['email'].'"  WHERE id="' . $data['editInstituteId'] . '"';
                     $result = queryRunner::doUpdate($query);
                 }
                 return $result;
@@ -208,7 +208,7 @@ class userDataHandler {
     }
 
     public function getTeacherList() {
-        $query = "SELECT * FROM teachers where status=1";
+        $query = "SELECT t.*,i.institute FROM teachers AS t INNER JOIN institutions AS i ON i.id = t.institution_id where t.status=1";
         $result = queryRunner::doSelect($query);
         return $result;
     }

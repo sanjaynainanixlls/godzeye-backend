@@ -1,6 +1,6 @@
 <?php 
 
-include dirname(dirname(__FILE__)) . '/config/config.php';
+include dirname(dirname(__FILE__)) . '/admin/config/config.php';
 $userDataHandlerObj = new userDataHandler();
 $result = $userDataHandlerObj->getInstitutionDetails();
 
@@ -63,34 +63,34 @@ $result = $userDataHandlerObj->getInstitutionDetails();
                             <table class="data datatable table table-striped table-bordered table-hover" id="institution">  
                                 <thead>  
                                     <tr>  
-                                        <th>Id</th>  
-                                        <th>Institution Name</th>  
-                                        <th>Description</th>  
-                                        <th>Subjects</th> 
-                                        <th>Contact</th>
-                                        <th>Email</th>
-                                        <th>Address</th>
-                                        <th>Image</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th >Id</th>  
+                                        <th class="col-md-2">Institution Name</th>  
+                                        <th class="col-md-3">Description</th>  
+                                        <th class="col-md-2">Subjects</th> 
+                                        <th class="col-md-2">Contact</th>
+                                        <th class="col-md-2">Email</th>
+                                        <th class="col-md-3">Address</th>
+                                        <th class="col-md-2">Image</th>
+                                        <th class="col-md-3">Status</th>
+                                        <th class="col-md-3">Action</th>
                                     </tr>  
                                 </thead>  
                                 <tbody>  
                                     <?php foreach ($result as $key => $value) { ?>
                                         <tr>  
-                                            <td><?php echo $value['id']; ?></td>  
-                                            <td><?php echo $value['institute']; ?></td>  
-                                            <td><?php echo $value['description']; ?></td>  
-                                            <td><?php echo $value['subjects']; ?></td>
-                                            <td><?php echo $value['contact']; ?></td>
-                                            <td><?php echo $value['email']; ?></td>
-                                            <td><?php echo $value['address']; ?></td>
-                                            <td>
+                                            <td class="col-md-1"><?php echo $value['id']; ?></td>  
+                                            <td class="col-md-3"><?php echo $value['institute']; ?></td>  
+                                            <td class="col-md-2"><?php echo $value['description']; ?></td>  
+                                            <td class="col-md-2"><?php echo $value['subjects']; ?></td>
+                                            <td class="col-md-2"><?php echo $value['contact']; ?></td>
+                                            <td class="col-md-2"><?php echo $value['email']; ?></td>
+                                            <td class="col-md-2"><?php echo $value['address']; ?></td>
+                                            <td class="col-md-2">
                                                 <?php $dirPath = 'media/institution/'.$value['institute'].'/';?>
                                                 <img width="100px" height="100px" src='<?php echo $dirPath.$value['image']; ?>'/>
                                             </td>
-                                            <td><?php echo $value['status']; ?></td>
-                                            <td>
+                                            <td class="col-md-2"><?php echo $value['status']; ?></td>
+                                            <td class="col-md-2">
                                                 <form role="form" action="registerInstitution.php" method="post">
                                                     <input type="hidden" name="editId" value="<?php echo $value['id'];?>">
                                                     <input type="hidden" name="action" value="editInstitution">
