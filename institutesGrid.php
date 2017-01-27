@@ -185,7 +185,7 @@
                                                 </li>
                                             </ul>
 
-                                            <form id="institutesId" action="institutedetail.php" method="post">
+                                            <form id="institutesId" action="instituteDetail.php" method="post">
                                                 <input type="hidden" id="instituteId" name="instituteId" value="<?php echo $values['id']; ?>">
                                                 <div class="course-action">
                                                     <button type="submit" class="button btn theme-btn-1">View Details</button>
@@ -196,46 +196,7 @@
                                 </div>
                                 <?php
                             }
-                        } else {
-                            ?>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="single-course grid-course">
-                                    <div class="course-thumbnail">
-                                        <a href="course.html" class="cover-info">
-                                            <div class="text">
-                                                <h4>INSTITUTE NAME</h4>
-                                                <p>Institute Description Goes Here...</p>
-                                            </div>
-                                        </a>
-                                        <img src="course.html" />
-                                    </div>
-
-                                    <div class="course-details">
-                                        <h3 class="title">
-                                            <a href="course.html"></a>
-                                        </h3>
-
-                                        <ul class="course-meta">
-                                            <li>
-                                                <span>Subjects :</span>
-                                                <span>XYZ</span>
-                                            </li>
-                                            <li>
-                                                <span>Contact :</span>
-                                                <span>+91-9999999999</span>
-                                            </li>
-                                        </ul>
-
-                                        <form id="institutesId" action="#" method="post">
-                                            <!--<input type="hidden" id="instituteId" name="instituteId" value="">-->
-                                            <div class="course-action">
-                                                <button type="submit" class="button btn theme-btn-1">View Details</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
+                        } ?>
                         <!-- Grid View Ends -->
                     </div>
                 </div>

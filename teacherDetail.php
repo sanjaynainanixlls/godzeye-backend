@@ -81,48 +81,7 @@ $instituteData = getInstituteData($teacherDetail[0]['institution_id']);
                             <?php } ?>
                         </div>
                         <?php
-                    } else {
-                        ?>
-                        <div class="single-member-box">
-                            <div class="member-social-box">
-                                <div class="row">
-                                    <div class="col-sm-8 col-md-9 col-lg-8">
-                                        <div class="profile">
-                                            <div class="avatar">
-                                                <img src="img/single-avatar.jpg" alt="single member avatar" />
-                                            </div>
-                                            <div class="short-info">
-                                                <h3 class="name">John isner</h3>
-                                                <p class="covered-areas">Education</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-4 col-md-3 col-lg-4">
-                                        <div class="profile-info">
-                                            <ul>
-                                                <li class="office">Everingham Road Sheffield, 15/2</li>
-                                                <li class="phone">+1-234-567-89</li>
-                                                <li class="mail">john.isner@levelup.com</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-                            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Duis mollis, est non commodo luctus.</p>
-
-                            <h3>Specialization</h3>
-
-                            <ul>
-                                <li class="office">Everingham Road Sheffield, 15/2</li>
-                                <li class="phone">+1-234-567-89</li>
-                                <li class="mail">john.isner@levelup.com</li>
-                            </ul>
-                        </div>
-                    <?php } ?>
+                    } ?>
                 </div>
             </div>
         </div>
