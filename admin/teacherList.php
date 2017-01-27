@@ -1,6 +1,6 @@
 <?php 
 
-include dirname(dirname(__FILE__)) . '/config/config.php';
+include dirname(__FILE__) .'/config/config.php';
 $userDataHandlerObj = new userDataHandler();
 $result = $userDataHandlerObj->getTeacherList();
 
@@ -12,7 +12,7 @@ $result = $userDataHandlerObj->getTeacherList();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Institution List</title>
+    <title>Teacher List</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -64,6 +64,7 @@ $result = $userDataHandlerObj->getTeacherList();
                                         <th>Address</th>
                                         <th>Specialization</th>
                                         <th>Contact</th>
+                                        <th>Email</th>
                                         <th>Institute Name</th>
                                         <th>Image</th>
                                         <th>Status</th>
@@ -80,8 +81,15 @@ $result = $userDataHandlerObj->getTeacherList();
                                             <td><?php echo $value['address']; ?></td>
                                             <td><?php echo $value['specialization']; ?></td>                                            
                                             <td><?php echo $value['contact']; ?></td>
+                                            <td><?php echo $value['email']; ?></td>
                                             <td><?php $result =  $userDataHandlerObj->getInstituteDetails($value['contact']); echo $result[0]['institute'];  ?></td>
-                                            <td><img src="media/<?php echo $value['image']; ?>" style="height: 20px;width: 20px;"></td>
+                                            <td>
+                                                <?php $img = $userDataHandlerObj->getInstitutionName($value['institution_id']);
+                                                //debug($img);
+                                                $dirPath = 'media/institution/'.$img[0]['institute'].'/';
+                                                ?>
+                                                <img width="100px" height="100px" src='<?php echo $dirPath.$value['image']; ?>'/>
+                                            </td>
                                             <td><?php echo $value['status']; ?></td>
                                             
                 <!--<input type="hidden" name="action" value='editInstitution'>-->

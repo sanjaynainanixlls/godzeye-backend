@@ -112,6 +112,12 @@ $instituteData = getInstituteList();
                             </div>
  				
                             <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email"  class="form-control" name="email" value="<?php if (isset($data['email'])) echo $data['email'];
+                                else echo ''; ?>" required="required">
+                            </div>
+                                    
+                            <div class="form-group">
                                 <label>Address</label>
                                 <input id="address" type="text" class="form-control" name="address" value="<?php if(isset($data['address']))echo $data['address'];else echo '';?>" >
                             </div>
@@ -139,7 +145,7 @@ $instituteData = getInstituteList();
                                 
                             <div class="form-group">
                                 <label>Institution</label>
-                                <select class="form-control" id="institution" name="institution">
+                                <select class="form-control" id="institution" name="institution" required>
                                     <option  selected disabled>--Select Institution--</option>
                                     <?php foreach ($instituteData as $key => $value) { ?>
                                     <option value="<?php echo $value['id']; ?>" <?php if(isset($data['institution_id'])){ if($data['institution_id'] == $value['id']){ echo "selected";}}?>>
@@ -148,12 +154,20 @@ $instituteData = getInstituteList();
                                     <?php } ?>
                                     
                                 </select>
-                            </div>                                
+                            </div>  
+                             <div class="form-group">
+                                    <label>Featured</label>
+                                    <select class="form-control" id="is_featured" name="is_featured">
+                                        <option value="0" <?php if(isset($data['is_featured'])){ if($data['is_featured'] == 0){ echo "selected";}}?>>Not Featured</option>
+                                        <option value="1" <?php if(isset($data['is_featured'])){ if($data['is_featured'] == 1){ echo "selected";}}?>>Featured</option>
+                                    </select>
+                             </div>
+                                    
                             <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control" id="status" name="status">
                                     <option value="1" <?php if(isset($data['status'])){ if($data['status'] == 1){ echo "selected";}}?>>Active</option>
-                                    <option value="0" <?php if(isset($data['status'])){ if($data['status'] == 1){ echo "selected";}}?>>Discontinued</option>
+                                    <option value="0" <?php if(isset($data['status'])){ if($data['status'] == 0){ echo "selected";}}?>>Discontinued</option>
                                 </select>
                             </div>
                             							

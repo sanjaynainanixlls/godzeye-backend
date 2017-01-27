@@ -8,68 +8,94 @@ class userDataHandler {
         return $result;
     }
 
+    public static function checkTeacher($email, $insId) {
+        $query = "SELECT email FROM teachers WHERE email = '" . $email . "' AND institution_id = '" . ($insId) . "'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
     public static function registerTeacher($data) {
 
-        if ($_FILES["timage"]["error"] == 4) {
-            $query = "INSERT INTO teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
-                    . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
-                    . ", institution_id = '" . $data['institution'] . "' ,image=''";
-            $result = queryRunner::doInsert($query);
-            return $result;
-        } else {
-            $uploadOk = 1;
-            $target_file = "../media/" . basename($_FILES["timage"]["name"]);
-            $imagename = implode("_", explode(" ", $data['f_name']));
-            $fileData = pathinfo(basename($_FILES["timage"]["name"]));
-
-            $fileName = $imagename . '.' . $fileData['extension'];
-
-            $target_path = ("../media/" . $fileName);
-            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-            if (file_exists($target_path)) {
-                $uploadOk = 0;
-            }
-            $check = getimagesize($_FILES["timage"]["tmp_name"]);
-            if ($check !== false) {
-                $uploadOk = 1;
+        $checkTeacher = self::checkTeacher($data['email'], $data['institution']);
+        if (empty($checkTeacher)) {
+            if ($_FILES["timage"]["error"] == 4) {
+                $query = "INSERT INTO teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
+                        . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
+                        . ", institution_id = '" . $data['institution'] . "' ,image='',email='" . $data['email'] . "',is_featured='" . $data['is_featured'] . "'";
+                $result = queryRunner::doInsert($query);
+                return $result;
             } else {
-                $uploadOk = 0;
-            }
-            if ($_FILES["timage"]["size"] > 500000) {
-                $uploadOk = 0;
-            }
-            // Allow certain file formats
-            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                $uploadOk = 0;
-            }
-            if ($uploadOk == 1) {
-                if (move_uploaded_file($_FILES["timage"]["tmp_name"], $target_path)) {
-                    $query = "INSERT INTO teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
-                            . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
-                            . ", institution_id = '" . $data['institution'] . "' ,image='" . $fileName . "'";
-                    $result = queryRunner::doInsert($query);
-                    return $result;
+                $uploadOk = 1;
+                $target_file = "../media/" . basename($_FILES["timage"]["name"]);
+                $imagename = implode("_", explode(" ", $data['f_name'])) . "_" . $data['l_name'];
+                $fileData = pathinfo(basename($_FILES["timage"]["name"]));
+                $insName = self::getInstituteName($data['institution']);
+                //debug($insName);exit();
+                $dirPath = "../media/institution/" . $insName[0]['institute'];
+                if (!file_exists($dirPath)) {
+                    mkdir($dirPath, 0777, true);
+                }
+                $fileName = $imagename . '.' . $fileData['extension'];
+
+                $target_path = ("../media/institution/" . $insName[0]['institute'] . '/' . $fileName);
+                $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                if (file_exists($target_path)) {
+                    $uploadOk = 0;
+                }
+                $check = getimagesize($_FILES["timage"]["tmp_name"]);
+                if ($check !== false) {
+                    $uploadOk = 1;
                 } else {
-                    return 0;
+                    $uploadOk = 0;
+                }
+                if ($_FILES["timage"]["size"] > 500000) {
+                    $uploadOk = 0;
+                }
+                // Allow certain file formats
+                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                    $uploadOk = 0;
+                }
+                if ($uploadOk == 1) {
+                    if (move_uploaded_file($_FILES["timage"]["tmp_name"], $target_path)) {
+                        $query = "INSERT INTO teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
+                                . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
+                                . ", institution_id = '" . $data['institution'] . "' ,image='" . $fileName . "',email='" . $data['email'] . "',is_featured='" . $data['is_featured'] . "'";
+                        $result = queryRunner::doInsert($query);
+                        return $result;
+                    } else {
+                        return 0;
+                    }
                 }
             }
+        } else {
+            return 2;
         }
+    }
+
+    public static function checkInstitute($iName, $iEmail) {
+        $query = "SELECT institute FROM institutions WHERE email = '" . $iEmail . "' AND institute = '" . ($iName) . "'";
+        $result = queryRunner::doSelect($query);
+        return $result;
     }
 
     //register New Institution
     //handling Institution actions
     public static function registerInstitution($data) {
         //print_r($data);exit;
-
+        $checkIns = self::checkInstitute($data['email'], $data['institute']);
         if ($_FILES["instImage"]["error"] == 4) {
             if (isset($data['institute']) && isset($data['subjects'])) {
                 //to register institution without image
                 if ($data['action'] == 'registerInstitution') {
-                    $query = 'INSERT INTO institutions (institute,subjects,description,contact,address,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data["address"] . '","' . $data["status"] . '")';
-                    $result = queryRunner::doInsert($query);
+                    if (empty($checkIns)) {
+                        $query = 'INSERT INTO institutions (institute,subjects,description,contact,email,address,status,is_featured)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data['email'] . '","' . $data["address"] . '","' . $data["status"] . '","' . $data['is_featured'] . '")';
+                        $result = queryRunner::doInsert($query);
+                    } else {
+                        return 2;
+                    }
                 } else {
                     //to update institution without image
-                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",status= "' . $data["status"] . '"  WHERE id="' . $data['editInstituteId'] . '"';
+                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",status= "' . $data["status"] . ',is_featured="' . $data['is_featured'] . '"  WHERE id="' . $data['editInstituteId'] . '"';
                     $result = queryRunner::doUpdate($query);
                 }
                 return $result;
@@ -108,11 +134,15 @@ class userDataHandler {
                 if (move_uploaded_file($_FILES["instImage"]["tmp_name"], $target_path)) {
                     //to register institution with image
                     if ($data['action'] == 'registerInstitution') {
-                        $query = 'INSERT INTO institutions (institute,subjects,description,contact,address,image,status)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data["address"] . '","' . $fileName . '","' . $data["status"] . '")';
-                        $result = queryRunner::doInsert($query);
+                        if (empty($checkIns)) {
+                            $query = 'INSERT INTO institutions (institute,subjects,description,contact,email,address,image,status,is_featured)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data['email'] . '","' . $data["address"] . '","' . $fileName . '","' . $data["status"] . '","' . $data['is_featured'] . '")';
+                            $result = queryRunner::doInsert($query);
+                        } else {
+                            return 2;
+                        }
                     } else {
                         //to update institution with image
-                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",image= "' . $fileName . '",status= "' . $data["status"] . '" WHERE id="' . $data['editInstituteId'] . '"';
+                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",image= "' . $fileName . '",status= "' . $data["status"] . ',email="' . $data['email'] . '",is_featured = "' . $data['is_featured'] . '" WHERE id="' . $data['editInstituteId'] . '"';
                         $result = queryRunner::doUpdate($query);
                     }
                     return $result;
@@ -135,18 +165,17 @@ class userDataHandler {
         if ($_FILES["timage"]["error"] == 4) {
             $query = "UPDATE teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
                     . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
-                    . ", institution_id = '" . $data['institution'] . "'  WHERE id = '" . $data['tid'] . "'";
+                    . ", institution_id = '" . $data['institution'] . "',email='" . $data['email'] . "',is_featured='" . $data['is_featured'] . "'  WHERE id = '" . $data['tid'] . "'";
             $result = queryRunner::doInsert($query);
             return $result;
         } else {
             $uploadOk = 1;
             $target_file = "../media/" . basename($_FILES["timage"]["name"]);
-            $imagename = implode("_", explode(" ", $data['f_name']));
+            $imagename = implode("_", explode(" ", $data['f_name'])) . "_" . $data['l_name'];
             $fileData = pathinfo(basename($_FILES["timage"]["name"]));
-
-            $fileName = $imagename . '.' . $fileData['extension'];
-
-            $target_path = ("../media/" . $fileName);
+            $insName = self::getInstituteName($data['institution']);
+            //debug($insName);exit();
+            $dirPath = "../media/institution/" . $insName[0]['institute'];
             $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
             if (file_exists($target_path)) {
                 $uploadOk = 0;
@@ -168,7 +197,7 @@ class userDataHandler {
                 if (move_uploaded_file($_FILES["timage"]["tmp_name"], $target_path)) {
                     $query = "UPDATE teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
                             . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
-                            . ", institution_id = '" . $data['institution'] . "' ,image='" . $fileName . "' WHERE id = '" . $data['tid'] . "'";
+                            . ", institution_id = '" . $data['institution'] . "' ,image='" . $fileName . "',email='" . $data['email'] . "',is_featured='" . $data['is_featured'] . "' WHERE id = '" . $data['tid'] . "'";
                     $result = queryRunner::doInsert($query);
                     return $result;
                 } else {
@@ -201,15 +230,16 @@ class userDataHandler {
     }
 
     public function getInstituteid($name) {
-       
+
         $query = "SELECT DISTINCT id FROM institutions WHERE institute= '" . $name . "'";
         $result = queryRunner::doSelect($query);
         return $result;
     }
+
     public function registerStudent($data) {
         $id = $this->getInstituteid($data['ins_name']);
         $id = $id[0]['id'];
-       //debug($_FILES);exit();
+        //debug($_FILES);exit();
         //$path = $_FILES['studentSheet']['name'];
         $csvMimes = array('application/vnd.ms-excel', 'text/plain', 'text/csv', 'text/comma-separated-values', 'text/tsv');
         if (!empty($_FILES['studentSheet']['name']) && in_array($_FILES['studentSheet']['type'], $csvMimes)) {
@@ -251,7 +281,7 @@ class userDataHandler {
 
     public function addTest($test) {
         if ((isset($test['test_name']) && !empty($test['test_name'])) && (isset($test['institution']) && !empty($test['institution']))) {
-            $query = "SELECT * FROM tests WHERE test_name= '" . $test['test_name'] . "' AND institute_id='".$test['institution']."'";
+            $query = "SELECT * FROM tests WHERE test_name= '" . $test['test_name'] . "' AND institute_id='" . $test['institution'] . "'";
         }
         $result = queryRunner::doSelect($query);
         if (empty($result)) {
@@ -280,7 +310,7 @@ class userDataHandler {
                 while (($line = fgetcsv($csvFile)) !== FALSE) {
                     //check whether member already exists in database with same email
                     //for($i = 0 ;$i<count($line);$i++)
-                    $query = "INSERT INTO result SET institute_id = '".$data['institution']."', test_id = '" . $data['test'] . "',student_reg_no = '" . $line['0'] . "',marks_obtained = '" . $line['1'] . "'";
+                    $query = "INSERT INTO result SET institute_id = '" . $data['institution'] . "', test_id = '" . $data['test'] . "',student_reg_no = '" . $line['0'] . "',marks_obtained = '" . $line['1'] . "'";
                     $result = queryRunner::doInsert($query);
                     //return $result;
                 }
@@ -329,15 +359,24 @@ class userDataHandler {
         }
     }
 
-    
-    public function getTestListAsPerInstitute($instituteId){
-        $query = "SELECT * FROM tests where institute_id = '" . $instituteId . "'";
+    public static function getInstitutionName($id) {
+        $query = "SELECT institute FROM institutions where id = '" . $id . "' AND status=1";
         $result = queryRunner::doSelect($query);
-        if($result){
+        if ($result) {
             return $result;
         }
         return false;
     }
+
+    public function getTestListAsPerInstitute($instituteId) {
+        $query = "SELECT * FROM tests where institute_id = '" . $instituteId . "'";
+        $result = queryRunner::doSelect($query);
+        if ($result) {
+            return $result;
+        }
+        return false;
+    }
+
 }
 
 ?>
