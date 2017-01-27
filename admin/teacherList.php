@@ -1,6 +1,6 @@
 <?php 
 
-include dirname(__FILE__) .'/config/config.php';
+include dirname(dirname(__FILE__)) . '/admin/config/config.php';
 $userDataHandlerObj = new userDataHandler();
 $result = $userDataHandlerObj->getTeacherList();
 
@@ -84,9 +84,9 @@ $result = $userDataHandlerObj->getTeacherList();
                                             <td><?php echo $value['email']; ?></td>
                                             <td><?php $result =  $userDataHandlerObj->getInstituteDetails($value['contact']); echo $result[0]['institute'];  ?></td>
                                             <td>
-                                                <?php $img = $userDataHandlerObj->getInstitutionName($value['institution_id']);
+                                                <?php $img = $value['institute'];
                                                 //debug($img);
-                                                $dirPath = 'media/institution/'.$img[0]['institute'].'/';
+                                                $dirPath = 'media/institution/'.$img.'/';
                                                 ?>
                                                 <img width="100px" height="100px" src='<?php echo $dirPath.$value['image']; ?>'/>
                                             </td>
