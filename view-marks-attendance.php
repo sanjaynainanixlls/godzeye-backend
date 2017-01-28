@@ -95,4 +95,4 @@ $institute = getInstituteList();
 
 <?php include_once 'footer.php'; ?>
 <!-- Additional JS -->
-<?php include_once 'js/view-marks-attendance.js'; ?>
+<script src="js/view-marks-attendance.js"></script>

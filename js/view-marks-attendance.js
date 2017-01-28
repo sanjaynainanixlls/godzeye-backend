@@ -1,9 +1,12 @@
 
 $(document).ready(function () {
+    //alert('aa');
      $("#institute").autocomplete({
         source: 'common/autocomplete.php',
-        select: function(event, ui) { console.log(ui);
-            $("#instituteName").val(ui.item.id);
+        select: function(event, ui) { 
+            //var val = JSON.stringify(ui);
+            //console.log(ui.item.label);
+            $("#instituteName").val(ui.item.label);
         }
     });
    

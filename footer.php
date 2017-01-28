@@ -65,7 +65,7 @@
 
 <!-- Scripts -->
 <script src="js/jquery.js"></script>
-<script src="js/jquery-ui.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script src="js/lightbox.js"></script>
 <script src="js/velocity.js"></script>
 <script src="js/modernizr.js"></script>

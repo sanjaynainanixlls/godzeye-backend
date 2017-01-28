@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/bootstrap.css" />
         <link rel="stylesheet" href="css/icomoon.css" />
         <link rel="stylesheet" href="css/screen.css" />
+        <link rel="stylesheet" href="css/jquery-ui.min.css" />
     </head>
     <body data-smooth-scroll="on">
         <form class="global-search-form">

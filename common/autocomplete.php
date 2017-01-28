@@ -1,6 +1,6 @@
 <?php
 
-include_once '/config/config.php';
+include dirname(dirname(__FILE__)) . '/config/config.php';
 class autocomplete{
     public function execute($token){
         $AutoObj = new autoCompleteWord();
