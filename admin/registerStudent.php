@@ -23,7 +23,7 @@ $instituteData = getInstituteList();
 
         <!-- Custom Fonts -->
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+        <link rel="stylesheet" href="../css/jquery-ui.min.css">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -55,6 +55,12 @@ $instituteData = getInstituteList();
                                     <i class="fa fa-edit"></i> Student
                                 </li>
                             </ol>
+                            <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
+                                    <div class="alert alert-success fade in">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong style="font-size:16px"><?php echo $_SESSION['message']; ?></strong>
+                                    </div>
+                            <?php } unset($_SESSION['message']); ?>
                         </div>
                     </div>
                     <!-- /.row -->
@@ -96,13 +102,13 @@ $instituteData = getInstituteList();
 
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
-        <script src="jquery-ui/jquery-ui.min.js"></script>
+        <script src="../js/jquery-ui.min.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
         <!-- Additional JavaScript -->
 
-        <script src="js/roomStatus.js"></script>
+       
            <script>
         $(function () {
             $("#tokens").autocomplete({

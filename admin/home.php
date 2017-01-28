@@ -15,7 +15,7 @@ include 'includeSession.php';
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>HOME :: ANRAS</title>
+        <title>HOME</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">

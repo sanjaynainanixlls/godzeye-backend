@@ -255,8 +255,9 @@ class userDataHandler {
                 while (($line = fgetcsv($csvFile)) !== FALSE) {
                     //check whether member already exists in database with same email
                     //for($i = 0 ;$i<count($line);$i++)
-                    $query = "INSERT INTO students SET  institute_id ='" . $id . "' ,enrollment_number ='" . $line[1] . "', first_name = '" . $line[2] . "',last_name='" . $line[3] . "'"
-                            . ",fathers_name  = '" . $line[4] . "',address = '" . $line[6] . "',contact_number = '" . $line['5'] . "'";
+                    //debug($line);exit();
+                    $query = "INSERT INTO students SET  institute_id ='" . $id . "' ,enrollment_number ='" . $line[0] . "', first_name = '" . $line[1] . "',last_name='" . $line[2] . "'"
+                            . ",fathers_name  = '" . $line[3] . "',address = '" . $line[6] . "',email='$line[5]',contact_number = '" . $line[4] . "'";
                     $result = queryRunner::doInsert($query);
                     //return $result;
                 }
