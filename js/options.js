@@ -50,7 +50,8 @@
 				cart = jQuery('.shopping-cart'),
 				cartToggle = jQuery('.shopping-cart-toggle'),
 				paymentType = jQuery('#payment-type'),
-				creditCard = jQuery('#credit-card-payment');
+				creditCard = jQuery('#credit-card-payment'),
+				marksDisplay = jQuery('#marksDisplay');
 
 
 			function hamburgerToggle() {
@@ -142,14 +143,46 @@
 				});
 			});
 
-			jQuery('.credit-card-btn').one('click', function () {
+			jQuery('#attendanceButton').on('click', function () {
 				creditCard.velocity('slideDown', {duration: 290});
-
+				jQuery('#marksDisplay').hide();
 				creditCard.velocity("scroll", {
 					offset: -((creditCard.height()/2) + jQuery('header').outerHeight(true)),
 					delay: 30
 				});
+				jQuery('#displayMarksAndAttendance').hide();
 			});
+			jQuery('#marksButton').on('click', function () {
+				marksDisplay.velocity('slideDown', {duration: 290});
+				creditCard.hide();
+				marksDisplay.velocity("scroll", {
+					offset: -((marksDisplay.height()/2) + jQuery('header').outerHeight(true)),
+					delay: 30
+				});
+				jQuery('#displayMarksAndAttendance').hide();
+			});
+
+			jQuery('#checkMarksButton').on('click', function(){
+					jQuery('#marksAttendanceForm').show();
+					jQuery('#viewDetailsLabel').text('Check Marks');
+			});
+			jQuery('#checkAttendanceButton').on('click', function(){
+					jQuery('#marksAttendanceForm').show();
+					jQuery('#viewDetailsLabel').text('Check Attendance');
+			});
+
+			jQuery('#viewDetailsLabel').on('click', function(){
+					jQuery('#viewMarksAttendanceDetails').show();
+			});
+
+			// jQuery('.credit-card-btn').one('click', function () {
+			// 	creditCard.velocity('slideDown', {duration: 290});
+			//
+			// 	creditCard.velocity("scroll", {
+			// 		offset: -((creditCard.height()/2) + jQuery('header').outerHeight(true)),
+			// 		delay: 30
+			// 	});
+			// });
 
 			// Enroll to course
 			jQuery('.section-courses').on('click', '.single-course .enroll-btn', function (e) {
@@ -196,7 +229,7 @@
 					speed: 980,
 					auto: true,
 					pause: 5500,
-					mode: 'fade',					
+					mode: 'fade',
 					pager: false,
 					autoHover: true,
 					controls: false,
@@ -310,7 +343,7 @@
 
 				jQuery(window).on('resize', function () {
 					fh = footer.height();
-					
+
 					if (jQuery(window).width() > 767) {
 						jQuery('.content-wrapper').css({
 							'margin-bottom': fh
@@ -344,7 +377,7 @@
 		              icon: 'img/map-pin.png'
 		            });
 		    }
-		    
+
 			if (mapCanvas.length) {
 		    	google.maps.event.addDomListener(window, 'load', initialize_contact_map);
 			}
@@ -472,7 +505,7 @@
 			  e = e || window.event;
 			  if (e.preventDefault)
 			      e.preventDefault();
-			  e.returnValue = false;  
+			  e.returnValue = false;
 			}
 
 			function preventDefaultForScrollKeys(e) {
@@ -493,9 +526,9 @@
 
 			function enableScroll() {
 				if (window.removeEventListener) window.removeEventListener('DOMMouseScroll', preventDefault, false);
-				window.onmousewheel = document.onmousewheel = null; 
-				window.onwheel = null; 
-				window.ontouchmove = null;  
+				window.onmousewheel = document.onmousewheel = null;
+				window.onwheel = null;
+				window.ontouchmove = null;
 				document.onkeydown = null;
 				jQuery('body').removeClass('no-scroll');
 			}
@@ -553,7 +586,7 @@
 				}, 300);
 
 				return false;
-			}); 
+			});
 
 			jQuery(document).on('click', function () {
 				popup.removeClass('active');
@@ -602,7 +635,7 @@
 					keepCourseBtn = removeCourseAction.find('.keep'),
 					deleteCourseBtn = removeCourseAction.find('.remove');
 
-				
+
 
 				removeCourseBtn.on('click', function (e) {
 					e.preventDefault();
@@ -674,7 +707,7 @@
 						object.addClass('visible current');
 					}
 				});
-			});	
+			});
 		},
 
 		coursesFilters: function () {
@@ -720,7 +753,7 @@
 				}
 			});
 
-			// Advanced Filters 
+			// Advanced Filters
 			advancedFiltersToggle.on('click', function (e) {
 				e.preventDefault();
 
@@ -788,7 +821,7 @@
 						onSelect: function (date) {
 							input.attr('data-selection', date);
 							input.attr('value', date);
-							obj.removeClass('open');	
+							obj.removeClass('open');
 						}
 					});
 				}
@@ -802,7 +835,7 @@
 				e.stopPropagation();
 			});
 
-			// Reset Filters  
+			// Reset Filters
 			resetBtn.on('click', function (e) {
 				e.preventDefault();
 
@@ -811,7 +844,7 @@
 
 					input.attr('value', "");
 					input.attr('data-selection', "");
-					
+
 					if (input.attr('name') === "course-category") {
 						input.attr('placeholder', "All categories (95)");
 					}

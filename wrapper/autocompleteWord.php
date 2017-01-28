@@ -1,15 +1,9 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-class AutoCompleteWord {
+class autoCompleteWord {
 
     public function getToken($token) {
-        $query = "SELECT institute FROM institutions WHERE institute LIKE '" . $token . "%' ORDER BY id ASC";
+        echo $query = "SELECT institute FROM institutions WHERE institute LIKE '" . $token . "%' ORDER BY id ASC";
         $result = queryRunner::doSelect($query);
         if (count($result) < 5) {
             $qry = "SELECT institute FROM institutions WHERE institute LIKE '%" . $token . "%' ORDER BY id ASC";
