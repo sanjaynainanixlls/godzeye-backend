@@ -12,7 +12,7 @@ $(document).on('change','#institution',function(){
     });
 });
 
-function createTestOptions(data){
+function createTestOptions(data){console.log(data);
     var htmlContent = '<option value=""  selected disabled>--SELECT TEST--</option>';
     if(data){
         var testData = JSON.parse(data);

@@ -338,6 +338,26 @@ class userDataHandler {
         }
         return false;
     }
+    
+    public function getTestListByInstitute($institute){
+        $query = "SELECT ts.* FROM tests as ts INNER JOIN institutions as inst ON inst.id=ts.institute_id where inst.institute = '" . $institute . "'";
+        $result = queryRunner::doSelect($query);
+        if($result){
+            return $result;
+        }
+        return false;
+    }
+    
+    public function getTestList($institute,$testTerm){
+        $query = "SELECT ts.test_name FROM tests as ts INNER JOIN institutions as inst ON inst.id=ts.institute_id where inst.institute = '" . $institute . "' AND test_name like '%".$testTerm."%'";
+        //echo $query;
+        $result = queryRunner::doSelect($query);
+        if($result){
+            echo json_encode($result);
+            exit();
+        }
+        return false;
+    }
 }
 
 ?>

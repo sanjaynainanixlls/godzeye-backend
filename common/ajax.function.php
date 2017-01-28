@@ -3,13 +3,22 @@
 include dirname(dirname(__FILE__)) . '/config/config.php';
 $postParams = Functions::getPostParams();
 
-if(isset($postParams['instituteId']) && !empty($postParams['instituteId'])){
-    getTestList($postParams['instituteId']);
+if(isset($postParams['institute']) && !empty($postParams['institute']) && !isset($postParams['testTerm'])){
+    getTestList($postParams['institute']);
+}
+if((isset($postParams['institute']) && !empty($postParams['institute'])) && (isset($postParams['testTerm']) && !empty($postParams['testTerm']))){
+    getTests($postParams['institute'],$postParams['testTerm']);
 }
 
-function getTestList($instituteId) {
+function getTestList($institute) {
     $userDataHandlerObj = new userDataHandler();
-    $result = $userDataHandlerObj->getTestListAsPerInstitute($instituteId);
+    $result = $userDataHandlerObj->getTestListByInstitute($institute);
+    echo json_encode($result);
+}
+
+function getTests($institute,$testTerm) {
+    $userDataHandlerObj = new userDataHandler();
+    $result = $userDataHandlerObj->getTestList($institute,$testTerm);
     echo json_encode($result);
 }
 

@@ -42,6 +42,7 @@ $institute = getInstituteList();
                             <label>
                                 <input type="text" class="form-input js-input" id="testName" name="testName" />
                                 <span>Name of the test</span>
+                                <input type="hidden" id="testsName" name="testsName">
                             </label>
 
                             <label>
