@@ -168,6 +168,7 @@
                                         jQuery('#regNumber1').val('');
                                         jQuery('#AttendanceForm').hide();
 					jQuery('#marksForm').show();
+                                        $('#noResult').hide();
                                         jQuery('#attendanceTable').hide();
 			});
 			jQuery('#checkAttendanceButton').on('click', function(){
@@ -176,6 +177,7 @@
                                         jQuery('#regNumber').val('');
                                         jQuery('#marksForm').hide();
 					jQuery('#AttendanceForm').show();
+                                        $('#noResult').hide();
                                         jQuery('#resultTable').hide();
 			});
 

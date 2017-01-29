@@ -88,6 +88,7 @@ $institute = getInstituteList();
                             <table id="resultTable" class="table table-bordered" style="text-align:center;width:100%;display:none"></table>
                             <table id='attendanceTable' class="table table-bordered" style="text-align:center;width:100%;display:none"></table>
                         </div>
+                        <div id='noResult' class='text-center' style="text-align: center"></div>
                     </div>
                 </div>
             </div>

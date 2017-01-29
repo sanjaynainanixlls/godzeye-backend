@@ -44,20 +44,28 @@ $(document).on('click','#viewDetailsLabel',function(){
                 method:'post',
                 dataType:'json'
             }).done(function(data){
-                var reshtml = '<thead><tr class="text-center" style="text-align:center">';
-                    reshtml += '<th style="padding:10px;border:1px solid black">Test Name</th>';
-                    reshtml += '<th style="padding:10px;border:1px solid black">Registration Number</th>';
-                    reshtml += '<th style="padding:10px;border:1px solid black">Maximum Marks</th>';
-                    reshtml += '<th style="padding:10px;border:1px solid black">Marks Obtained</th>';
-                    reshtml += '</tr> </thead>';
-                    reshtml += '<tbody><tr class="text-center" style="text-align:center">';
-                    reshtml += '<td style="padding:10px;border:1px solid black" id="resTestName">'+data[0].test_name+'</td>';
-                    reshtml += '<td style="padding:10px;border:1px solid black" id="resRegNo">'+data[0].student_reg_no+'</td>';
-                    reshtml += '<td style="padding:10px;border:1px solid black" id="resMaxMarks">'+data[0].max_marks+'</td>';
-                    reshtml += '<td style="padding:10px;border:1px solid black" id="resMarksObtained">'+data[0].marks_obtained+'</td>';
-                    reshtml += '</tr></tbody></table>';
-                $('#resultTable').html(reshtml);
-                $('#resultTable').show();
+                if(data == false){
+                    var reshtml = 'Sorry... No records found!!!';
+                    $('#noResult').html(reshtml);
+                    $('#noResult').show();
+                }
+                if(data != false){
+                    $('#noResult').hide();
+                    var reshtml = '<thead><tr class="text-center" style="text-align:center">';
+                        reshtml += '<th style="padding:10px;border:1px solid black">Test Name</th>';
+                        reshtml += '<th style="padding:10px;border:1px solid black">Registration Number</th>';
+                        reshtml += '<th style="padding:10px;border:1px solid black">Maximum Marks</th>';
+                        reshtml += '<th style="padding:10px;border:1px solid black">Marks Obtained</th>';
+                        reshtml += '</tr> </thead>';
+                        reshtml += '<tbody><tr class="text-center" style="text-align:center">';
+                        reshtml += '<td style="padding:10px;border:1px solid black" id="resTestName">'+data[0].test_name+'</td>';
+                        reshtml += '<td style="padding:10px;border:1px solid black" id="resRegNo">'+data[0].student_reg_no+'</td>';
+                        reshtml += '<td style="padding:10px;border:1px solid black" id="resMaxMarks">'+data[0].max_marks+'</td>';
+                        reshtml += '<td style="padding:10px;border:1px solid black" id="resMarksObtained">'+data[0].marks_obtained+'</td>';
+                        reshtml += '</tr></tbody></table>';
+                    $('#resultTable').html(reshtml);
+                    $('#resultTable').show();
+                }
             });
         }
 });
@@ -82,21 +90,28 @@ $(document).on('click','#viewDetailsLabel1',function(){
                 method:'post',
                 dataType:'json'
             }).done(function(data){
-                console.log(data);
-                var reshtml = '<thead><tr class="text-center" style="text-align:center">';
-                    reshtml += '<th style="padding:10px;border:1px solid black">Registration Number</th>';
-                    reshtml += '<th style="padding:10px;border:1px solid black">Month</th>';
-                    reshtml += '<th style="padding:10px;border:1px solid black">Present Days</th>';
-                    reshtml += '<th style="padding:10px;border:1px solid black">Absent Days</th>';
-                    reshtml += '</tr> </thead>';
-                    reshtml += '<tbody><tr class="text-center" style="text-align:center">';
-                    reshtml += '<td style="padding:10px;border:1px solid black" id="resRegNo1">'+data[0].student_reg_no+'</td>';
-                    reshtml += '<td style="padding:10px;border:1px solid black" id="resMonth">'+data[0].month+'</td>';
-                    reshtml += '<td style="padding:10px;border:1px solid black" id="resPresent">'+data[0].present+'</td>';
-                    reshtml += '<td style="padding:10px;border:1px solid black" id="resAbsent">'+data[0].absent+'</td>';
-                    reshtml += '</tr></tbody></table>';
-                $('#attendanceTable').html(reshtml);
-                $('#attendanceTable').show();
+                if(data == false){
+                    var reshtml = 'Sorry... No records found!!!';
+                    $('#noResult').html(reshtml);
+                    $('#noResult').show();
+                }
+                if(data != false){
+                    $('#noResult').hide();
+                    var reshtml = '<thead><tr class="text-center" style="text-align:center">';
+                        reshtml += '<th style="padding:10px;border:1px solid black">Registration Number</th>';
+                        reshtml += '<th style="padding:10px;border:1px solid black">Month</th>';
+                        reshtml += '<th style="padding:10px;border:1px solid black">Present Days</th>';
+                        reshtml += '<th style="padding:10px;border:1px solid black">Absent Days</th>';
+                        reshtml += '</tr> </thead>';
+                        reshtml += '<tbody><tr class="text-center" style="text-align:center">';
+                        reshtml += '<td style="padding:10px;border:1px solid black" id="resRegNo1">'+data[0].student_reg_no+'</td>';
+                        reshtml += '<td style="padding:10px;border:1px solid black" id="resMonth">'+data[0].month+'</td>';
+                        reshtml += '<td style="padding:10px;border:1px solid black" id="resPresent">'+data[0].present+'</td>';
+                        reshtml += '<td style="padding:10px;border:1px solid black" id="resAbsent">'+data[0].absent+'</td>';
+                        reshtml += '</tr></tbody></table>';
+                    $('#attendanceTable').html(reshtml);
+                    $('#attendanceTable').show();
+                }
             });
         }
 });
