@@ -339,22 +339,33 @@ class userDataHandler {
         return false;
     }
     
-    public function getTestListByInstitute($institute){
-        $query = "SELECT ts.* FROM tests as ts INNER JOIN institutions as inst ON inst.id=ts.institute_id where inst.institute = '" . $institute . "'";
+    public function getTestList($institute,$testTerm){
+        $query = "SELECT ts.test_name FROM tests as ts INNER JOIN institutions as inst ON inst.id=ts.institute_id where inst.institute = '" . $institute . "' AND test_name like '%".$testTerm."%'";
+        //echo $query;
         $result = queryRunner::doSelect($query);
-        if($result){
+        if ($result) {
+            foreach ($result as $key => $value) {
+                $res[] = $value['test_name'];
+            }
+            return $res;
+        }
+        return false;
+    }
+    
+    public function getMarks($selectedInst,$selectedTest,$regNo){
+        $query = "SELECT ts.test_name,res.student_reg_no,ts.max_marks,res.marks_obtained FROM result as res INNER JOIN tests as ts ON ts.id=res.test_id INNER JOIN institutions as inst ON inst.id=res.institute_id WHERE res.student_reg_no='".$regNo."' AND ts.test_name='".$selectedTest."' AND inst.institute='".$selectedInst."'";
+        $result = queryRunner::doSelect($query);
+        if ($result) {
             return $result;
         }
         return false;
     }
     
-    public function getTestList($institute,$testTerm){
-        $query = "SELECT ts.test_name FROM tests as ts INNER JOIN institutions as inst ON inst.id=ts.institute_id where inst.institute = '" . $institute . "' AND test_name like '%".$testTerm."%'";
-        //echo $query;
+    public function getAttendance($selectedInst,$month,$regNo){
+        $query = "SELECT atn.student_reg_no,atn.month,atn.present,atn.absent FROM student_attendance as atn INNER JOIN institutions as inst ON inst.id=atn.institute_id WHERE atn.student_reg_no='".$regNo."' AND atn.month='".$month."' AND inst.institute='".$selectedInst."'";
         $result = queryRunner::doSelect($query);
-        if($result){
-            echo json_encode($result);
-            exit();
+        if ($result) {
+            return $result;
         }
         return false;
     }

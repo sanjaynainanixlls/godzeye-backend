@@ -163,17 +163,25 @@
 			});
 
 			jQuery('#checkMarksButton').on('click', function(){
-					jQuery('#marksAttendanceForm').show();
-					jQuery('#viewDetailsLabel').text('Check Marks');
+                                        jQuery('#instituteName1').val('');
+                                        jQuery('#mothId').val('');
+                                        jQuery('#regNumber1').val('');
+                                        jQuery('#AttendanceForm').hide();
+					jQuery('#marksForm').show();
+                                        jQuery('#attendanceTable').hide();
 			});
 			jQuery('#checkAttendanceButton').on('click', function(){
-					jQuery('#marksAttendanceForm').show();
-					jQuery('#viewDetailsLabel').text('Check Attendance');
+                                        jQuery('#instituteName').val('');
+                                        jQuery('#testsName').val('');
+                                        jQuery('#regNumber').val('');
+                                        jQuery('#marksForm').hide();
+					jQuery('#AttendanceForm').show();
+                                        jQuery('#resultTable').hide();
 			});
 
-			jQuery('#viewDetailsLabel').on('click', function(){
-					jQuery('#viewMarksAttendanceDetails').show();
-			});
+//			jQuery('#viewDetailsLabel').on('click', function(){
+//					jQuery('#viewMarksAttendanceDetails').show();
+//			});
 
 			// jQuery('.credit-card-btn').one('click', function () {
 			// 	creditCard.velocity('slideDown', {duration: 290});

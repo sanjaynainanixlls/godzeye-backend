@@ -5,6 +5,7 @@ class autocomplete{
     public function execute($token){
         $AutoObj = new autoCompleteWord();
         $result = $AutoObj->getToken($token);
+        //debug($result);
         echo json_encode($result);
     }
 }
