@@ -26,7 +26,7 @@ include_once 'header.php';
                                 <div class="col-md-7">
                                     <div class="main-content">
                                         <div class="course-cover">
-                                            <img src="<?php echo "admin/media/institution/" . $instituteData[0]['institute'] . "/" . $instituteData[0]['image']; ?>" alt="course cover" />
+                                            <img src="<?php echo "admin/media/institution/" . toSlug($instituteData[0]['institute']) . "/" . $instituteData[0]['image']; ?>" alt="course cover" />
                                         </div>
 
                                         <div class="course-body">
@@ -101,7 +101,7 @@ include_once 'header.php';
                                                 <div class="team-member">
                                                     <div class="photo">
                                                         <div>
-                                                            <img src="<?php echo "admin/media/institution/" . $instituteData[0]['institute'] . "/" . $value['image']; ?>" alt="member avatar" />
+                                                            <img src="<?php echo "admin/media/institution/" . toSlug($instituteData[0]['institute']) . "/" . $value['image']; ?>" alt="member avatar" />
                                                         </div>
                                                     </div>
 

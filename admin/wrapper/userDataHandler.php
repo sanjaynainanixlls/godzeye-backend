@@ -31,13 +31,13 @@ class userDataHandler {
                 $fileData = pathinfo(basename($_FILES["timage"]["name"]));
                 $insName = self::getInstitutionName($data['institution']);
                 
-                $dirPath = "../media/institution/" . $insName[0]['institute'];
+                $dirPath = "../media/institution/" . implode("_", explode(" ", $insName[0]['institute']));
                 if (!file_exists($dirPath)) {
                     mkdir($dirPath, 0777, true);
                 }
                 $fileName = $imagename . '.' . $fileData['extension'];
 
-                $target_path = ("../media/institution/" . $insName[0]['institute'] . '/' . $fileName);
+                $target_path = ($dirPath . '/' . $fileName);
                 $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                 if (file_exists($target_path)) {
                     $uploadOk = 0;
@@ -105,13 +105,13 @@ class userDataHandler {
             $target_file = "../media/" . basename($_FILES["instImage"]["name"]);
             $imagename = implode("_", explode(" ", $data['institute']));
             $fileData = pathinfo(basename($_FILES["instImage"]["name"]));
-            $dirPath = "../media/institution/" . $data['institute'];
+            $dirPath = "../media/institution/" . implode("_", explode(" ", $data['institute']));
             if (!file_exists($dirPath)) {
                 mkdir($dirPath, 0777, true);
             }
             $fileName = $imagename . '.' . $fileData['extension'];
 
-            $target_path = ("../media/institution/" . $data["institute"] . '/' . $fileName);
+            $target_path = ($dirPath . '/' . $fileName);
             $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
 
             if (file_exists($target_path)) {
@@ -176,10 +176,10 @@ class userDataHandler {
             $fileData = pathinfo(basename($_FILES["timage"]["name"]));
             $insName = self::getInstitutionName($data['institution']);
             
-            $dirPath = "../media/institution/" . $insName[0]['institute'];
+            $dirPath = "../media/institution/" . implode("_", explode(" ",$insName[0]['institute']));
             
             $fileName = $imagename . '.' . $fileData['extension'];
-            $target_path = ("../media/institution/" . $insName[0]['institute'] . '/' . $fileName);
+            $target_path = ($dirPath . '/' . $fileName);
             $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
             
             if (file_exists($target_path)) {

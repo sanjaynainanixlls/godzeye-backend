@@ -88,7 +88,7 @@ $result = $userDataHandlerObj->getTeacherList();
                                             <td><?php echo $value['specialization']; ?></td>                                            
                                             <td><?php echo $value['contact']; ?></td>
                                             <td><?php echo $value['email']; ?></td>
-                                            <td><?php $result =  $userDataHandlerObj->getInstituteDetails($value['contact']); echo $result[0]['institute'];  ?></td>
+                                            <td><?php $result =  $userDataHandlerObj->getInstituteDetails($value['institution_id']); echo $result[0]['institute'];  ?></td>
                                             <td>
                                                 <?php $img = $value['institute'];
                                                 //debug($img);
