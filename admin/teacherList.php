@@ -90,8 +90,7 @@ $result = $userDataHandlerObj->getTeacherList();
                                             <td><?php echo $value['email']; ?></td>
                                             <td><?php $result =  $userDataHandlerObj->getInstituteDetails($value['institution_id']); echo $result[0]['institute'];  ?></td>
                                             <td>
-                                                <?php $img = $value['institute'];
-                                                //debug($img);
+                                                <?php $img = implode("_", explode(" ", $value['institute']));
                                                 $dirPath = 'media/institution/'.$img.'/';
                                                 ?>
                                                 <img width="100px" height="100px" src='<?php echo $dirPath.$value['image']; ?>'/>
