@@ -22,11 +22,11 @@ $institute = getInstituteList();
                 <div class="row" style="margin:20px 0px;text-align:center">
 
                     <div class="text-center col-md-6 col-md-offset-3">
-                        <button class="btn theme-btn-1 ">
-                            <span id="checkMarksButton" class="button selectedOption">Check Marks</span>
+                        <button class="btn theme-btn-1 " style="background-color:white">
+                            <span id="checkMarksButton" class="button selectedOption" style="color:#43b9c7 !important">Check Marks</span>
                         </button>
-                        <button class="text-center btn theme-btn-1 " >
-                            <span id="checkAttendanceButton" class="button selectedOption">Check Attendance</span>
+                        <button class="text-center btn theme-btn-1 " style="background-color:white">
+                            <span id="checkAttendanceButton" class="button selectedOption" style="color:#43b9c7 !important">Check Attendance</span>
                         </button>
                     </div>
                 </div>

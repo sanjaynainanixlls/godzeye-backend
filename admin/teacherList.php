@@ -88,9 +88,10 @@ $result = $userDataHandlerObj->getTeacherList();
                                             <td><?php echo $value['specialization']; ?></td>                                            
                                             <td><?php echo $value['contact']; ?></td>
                                             <td><?php echo $value['email']; ?></td>
-                                            <td><?php $result =  $userDataHandlerObj->getInstituteDetails($value['institution_id']); echo $result[0]['institute'];  ?></td>
+                                            <td><?php $result =  $userDataHandlerObj->getInstituteDetails($value['contact']); echo $result[0]['institute'];  ?></td>
                                             <td>
-                                                <?php $img = implode("_", explode(" ", $value['institute']));
+                                                <?php $img = $value['institute'];
+                                                //debug($img);
                                                 $dirPath = 'media/institution/'.$img.'/';
                                                 ?>
                                                 <img width="100px" height="100px" src='<?php echo $dirPath.$value['image']; ?>'/>

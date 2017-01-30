@@ -2,38 +2,45 @@
 <footer class="fixed">
     <div class="container">
         <div class="footer-wrapper">
-            <img src="img/director.png" alt="footer brand" class="footer-brand" />
+            <img src="img/Logo_1485715651310.png" alt="footer brand" class="footer-brand" width="100px" />
 
             <ul class="social-block">
-                <li><a href="https://twitter.com/TeslaThemes"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://dribbble.com/TeslaThemes/"><i class="fa fa-dribbble"></i></a></li>
-                <li><a href="https://www.facebook.com/TeslaThemes"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://www.pinterest.com/teslathemes/"><i class="fa fa-pinterest"></i></a></li>
-                <li><a href="https://www.facebook.com/TeslaThemes/photos_stream"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="https://www.linkedin.com/grp/home?gid=5039596"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
+                <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
             </ul>
 
             <div class="main-area">
                 <div class="menu">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="courses-grid.html">Courses</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="course.html">Single Course</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li>
+                            <a href="index.php">Home</a>
+                        </li>
+                        <li>
+                            <a href="institutesGrid.php">Browse Institutes</a>
+                        </li>
+                        <li>
+                            <a href="teachersGrid.php">Browse Teachers</a>
+                        </li>
+                        <li>
+                            <a href="view-marks-attendance.php">View Marks & Attendance</a>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="row">
                     <div class="col-md-4">
                         <div class="footer-widget widget_info">
-                            <p><span>Dr. Edward B. Smith</span><br />Superintendent of Public<br />Instruction</p>
+                            <p><span>Godzeye India Private Limited</span><br /><br /></p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="footer-widget widget_contact">
-                            <p>Braavos Department of Education<br />877-644-6338 |<br /><a href="#">contact@courses.com</a></p>
+                            <p>A-431, Chattarpur Enclave Phase-1<br />New Delhi |<br /><a href="#">contact@godzeye.in</a></p>
                         </div>
                     </div>
 
@@ -56,7 +63,7 @@
             </div>
 
             <div class="copyrights">
-                <p>Copyright 2015. Designed by <a href="http://www.teslathemes.com" target="blank">TeslaThemes</a></p>
+                <p>Copyright 2017. Designed by <a href="http://www.xcelerators.biz" target="blank">Xcelerators</a></p>
             </div>
         </div>
     </div>

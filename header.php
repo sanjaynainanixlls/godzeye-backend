@@ -26,109 +26,23 @@
 
         <!-- Page Wrapper -->
         <div id="page">
-            <!-- Register Poup -->
-            <div class="register-popup">
-                <div class="popup-wrapper">
-                    <span class="close-popup-btn icon-cross"></span>
-
-                    <form id="register-form">
-                        <div class="section-header">
-                            <h1>Register</h1>
-                        </div>
-
-                        <label>
-                            <span>First Name *</span>
-                            <input type="text" class="js-input" name="register-first-name" />
-                        </label>
-
-                        <label>
-                            <span>Last Name *</span>
-                            <input type="text" class="js-input" name="register-last-name" />
-                        </label>
-
-                        <label>
-                            <span>E-mail address *</span>
-                            <input type="text" class="js-input" name="register-email" />
-                        </label>
-
-                        <label>
-                            <span>Password *</span>
-                            <input type="password" class="js-input" name="register-password" />
-                        </label>
-
-                        <label>
-                            <span>Confirm Password *</span>
-                            <input type="password" class="js-input" name="register-password" />
-                        </label>
-
-                        <div class="btn-wrapper">
-                            <button class="btn theme-btn-3">Register</button>
-                        </div>
-
-                        <div class="section-header small">
-                            <h1><span>or</span></h1>
-                        </div>
-
-                        <div class="social-buttons">
-                            <a href="#" class="facebook">facebook</a>
-                            <a href="#" class="google-plus">google+</a>
-                        </div>
-
-                        <p><a href="#" class="forgot-password">Forgot password?</a></p>
-                        <p>Have an account already? <a href="#" class="login-btn">Login here</a></p>
-                    </form>
-
-                    <form id="login-form">
-                        <div class="section-header">
-                            <h1>Login</h1>
-                        </div>
-
-                        <label>
-                            <span>E-mail address *</span>
-                            <input type="text" class="js-input" name="login-email" />
-                        </label>
-
-                        <label>
-                            <span>Password *</span>
-                            <input type="password" class="js-input" name="login-password" />
-                        </label>
-
-                        <div class="btn-wrapper">
-                            <button class="btn theme-btn-3">Login</button>
-                        </div>
-
-                        <div class="section-header small">
-                            <h1><span>or</span></h1>
-                        </div>
-
-                        <div class="social-buttons">
-                            <a href="#" class="facebook">facebook</a>
-                            <a href="#" class="google-plus">google+</a>
-                        </div>
-
-                        <p><a href="#" class="forgot-password">Forgot password?</a></p>
-                        <p>Don't have an account? <a href="#" class="register-btn">Register here</a></p>
-                    </form>
-                </div>
-            </div>
-
             <!-- Header -->
             <header>
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-4 col-sm-2">
-                            <a class="brand" href="index.html">
-                                <img src="img/identity.png" alt="identity" />
+                            <a class="brand" href="index.php">
+                                <img src="img/Logo_1485715651310.png" width="100px" alt="identity" />
                             </a>
                         </div>
 
                         <div class="col-xs-8 col-sm-10">
                             <div class="action-bar">
                                 <ul class="social-block">
-                                    <li><a href="https://www.facebook.com/TeslaThemes"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="https://twitter.com/TeslaThemes"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="https://www.pinterest.com/teslathemes/"><i class="fa fa-pinterest"></i></a></li>
-                                    <li><a href="https://dribbble.com/TeslaThemes/"><i class="fa fa-dribbble"></i></a></li>
+                                    <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
+                                    <li><a href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
                                 </ul>
 
                                 <span class="search-box-toggle no-select">
@@ -142,44 +56,6 @@
                                         <span class="menui bottom-menu"></span>
                                     </span>
                                 </span>
-
-                                <div class="shopping-cart">
-                                    <span class="shopping-cart-toggle icon-carticon">
-                                        <span class="cart-items-total">2</span>
-                                    </span>
-
-                                    <div class="cart">
-                                        <ul>
-                                            <li class="cart-course">
-                                                <a href="#" class="remove-from-cart"><i class="icon-cross"></i></a>
-                                                <a class="cover" href="course.html">
-                                                    <img src="img/cart-course.jpg" alt="cart course cover" />
-                                                </a>
-                                                <p class="title">
-                                                    <a href="course.html">Technology for kids</a>
-                                                </p>
-                                                <span class="price">$59</span>
-                                            </li>
-
-                                            <li class="cart-course">
-                                                <a href="#" class="remove-from-cart"><i class="icon-cross"></i></a>
-                                                <a class="cover" href="course.html">
-                                                    <img src="img/cart-course-2.jpg" alt="cart course cover" />
-                                                </a>
-                                                <p class="title">
-                                                    <a href="course.html">Best measurement course</a>
-                                                </p>
-                                                <span class="price">$39</span>
-                                            </li>
-                                        </ul>
-
-                                        <div class="cart-action">
-                                            <a href="cart.html" class="cart-btn">View cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <a class="my-account" href="myaccount.html"><span class="icon icon-MyAccount"></span><span class="popup">My account</span></a>
                             </div>
                         </div>
                     </div>
@@ -187,16 +63,17 @@
 
                 <nav>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li>
-                            <a href="courses-grid.html">Courses</a>
-                            <ul>
-                                <li class="current-menu-item"><a href="courses-grid.html">Grid overlay</a></li>
-                                <li><a href="courses-list.html">List overlay</a></li>
-                                <li><a href="course-online.html">Online Course</a></li>
-                                <li><a href="course.html">Offline Course</a></li>
-                            </ul>
+                            <a href="institutesGrid.php">Browse Institutes</a>
                         </li>
+                        <li>
+                            <a href="teachersGrid.php">Browse Teachers</a>
+                        </li>
+                        <li>
+                            <a href="view-marks-attendance.php">View Marks & Attendance</a>
+                        </li>
+<!--
                         <li>
                             <a href="#">Pages</a>
                             <ul>
@@ -216,6 +93,7 @@
                                 <li><a href="blogpost-sidebar.html">Blog post with sidebar</a></li>
                             </ul>
                         </li>
+-->
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>

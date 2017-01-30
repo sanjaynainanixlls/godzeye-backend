@@ -86,7 +86,7 @@ $result = $userDataHandlerObj->getInstitutionDetails();
                                             <td class="col-md-2"><?php echo $value['email']; ?></td>
                                             <td class="col-md-2"><?php echo $value['address']; ?></td>
                                             <td class="col-md-2">
-                                                <?php $dirPath = 'media/institution/'.implode("_", explode(" ",$value['institute'])).'/';?>
+                                                <?php $dirPath = 'media/institution/'.$value['institute'].'/';?>
                                                 <img width="100px" height="100px" src='<?php echo $dirPath.$value['image']; ?>'/>
                                             </td>
                                             <td class="col-md-2"><?php echo $value['status']; ?></td>

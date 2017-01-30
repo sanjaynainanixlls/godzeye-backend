@@ -22,21 +22,21 @@ $institute = getInstituteList();
                                 <li>
                                     <a class="current" href="#" data-target="grid-all"><span>All courses</span></a>
                                 </li>
-        
+
                                 <li>
                                     <a href="#" data-target="grid-online"><span>Online</span></a>
                                 </li>
-        
+
                                 <li>
                                     <a href="#" data-target="grid-offline"><span>Offline</span></a>
                                 </li>
                             </ul>
-        
+
                             <div class="advanced-filters-toggle">
                                 <a href="#">
                                     <p>Show advanced filters</p>
                                 </a>
-        
+
                                 <span class="icon">
                                     <span class="bar"></span>
                                     <span class="bar"></span>
@@ -45,18 +45,18 @@ $institute = getInstituteList();
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="advanced-filters-box">
                         <div class="container">
                             <h2>Advanced filters</h2>
-        
+
                             <div class="row">
                                 <div class="col-xs-6 col-md-3">
                                     <div class="filter-input-box">
                                         <span class="caption">Course category</span>
                                         <div class="input-box selext-box">
                                             <input type="text" value="" readonly class="js-input no-select" data-selection="all" placeholder="All categories (95)" name="course-category" />
-        
+
                                             <div class="dropdown">
                                                 <ul class="list">
                                                     <li data-option="all">All categories <span>(95)</span></li>
@@ -69,12 +69,12 @@ $institute = getInstituteList();
                                             </div>
                                         </div>
                                     </div>
-        
+
                                     <div class="filter-input-box">
                                         <span class="caption">Sort by</span>
                                         <div class="input-box selext-box">
                                             <input type="text" value="" readonly class="js-input no-select" data-selection="new" placeholder="Newest courses" name="course-sorting" />
-        
+
                                             <div class="dropdown">
                                                 <ul class="list">
                                                     <li data-option="new">Newest courses</li>
@@ -85,7 +85,7 @@ $institute = getInstituteList();
                                         </div>
                                     </div>
                                 </div>
-        
+
                                 <div class="col-xs-6 col-md-3">
                                     <div class="filter-input-box">
                                         <span class="caption">Keywords</span>
@@ -93,25 +93,25 @@ $institute = getInstituteList();
                                             <input type="text" value="" class="js-input" name="course-keywords" />
                                         </div>
                                     </div>
-        
+
                                     <div class="filter-input-box">
                                         <span class="caption">Offline courses by date</span>
                                         <div class="input-box selext-box date-select">
                                             <input type="text" value="" readonly class="js-input no-select" data-selection="new" placeholder="Newest courses" name="course-date" />
-        
+
                                             <div class="dropdown">
                                                 <div id="calendar" class="calendar"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-        
+
                                 <div class="col-xs-6 col-md-3">
                                     <div class="filter-input-box">
                                         <span class="caption">Course instructor</span>
                                         <div class="input-box selext-box">
                                             <input type="text" value="" readonly class="js-input no-select" data-selection="all" placeholder="All instructors" name="course-instructor" />
-        
+
                                             <div class="dropdown">
                                                 <ul class="list">
                                                     <li data-option="zack">Zack Thoumb</li>
@@ -125,7 +125,7 @@ $institute = getInstituteList();
                                         </div>
                                     </div>
                                 </div>
-        
+
                                 <div class="col-xs-6 col-md-3">
                                     <div class="filters-action">
                                         <a href="#" class="apply btn theme-btn-1 blue">
@@ -157,13 +157,11 @@ $institute = getInstituteList();
                                 <div class="col-md-4 col-sm-6">
                                     <div class="single-course grid-course">
                                         <div class="course-thumbnail">
-                                            <a href="course.html" class="cover-info">
                                                 <div class="text">
                                                     <h4><?php echo $values['institute']; ?></h4>
                                                     <p><?php echo $values['description']; ?></p>
                                                 </div>
-                                            </a>
-                                            <img src="<?php echo "admin/media/institution/" . toSlug($values['institute']) . "/" . $values['image']; ?>" alt="<?php echo $values['institute']; ?>" />
+                                            <img src="<?php echo "admin/media/institution/" . $values['institute'] . "/" . $values['image']; ?>" alt="<?php echo $values['institute']; ?>" />
                                         </div>
 
                                         <div class="course-details">
@@ -187,7 +185,7 @@ $institute = getInstituteList();
                                             <form id="institutesId" action="instituteDetail.php" method="post">
                                                 <input type="hidden" id="instituteId" name="instituteId" value="<?php echo $values['id']; ?>">
                                                 <div class="course-action">
-                                                    <button type="submit" class="button btn theme-btn-1">View Details</button>
+                                                    <button type="submit" style="padding:17px 23px;background-color:white" class="button btn theme-btn-1">View Details</button>
                                                 </div>
                                             </form>
                                         </div>
