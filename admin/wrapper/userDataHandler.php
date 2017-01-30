@@ -29,8 +29,8 @@ class userDataHandler {
                 $target_file = "../media/" . basename($_FILES["timage"]["name"]);
                 $imagename = implode("_", explode(" ", $data['f_name'])) . "_" . $data['l_name'];
                 $fileData = pathinfo(basename($_FILES["timage"]["name"]));
-                $insName = self::getInstituteName($data['institution']);
-                //debug($insName);exit();
+                $insName = self::getInstitutionName($data['institution']);
+                
                 $dirPath = "../media/institution/" . $insName[0]['institute'];
                 if (!file_exists($dirPath)) {
                     mkdir($dirPath, 0777, true);
@@ -169,14 +169,19 @@ class userDataHandler {
             $result = queryRunner::doInsert($query);
             return $result;
         } else {
+            
             $uploadOk = 1;
             $target_file = "../media/" . basename($_FILES["timage"]["name"]);
             $imagename = implode("_", explode(" ", $data['f_name'])) . "_" . $data['l_name'];
             $fileData = pathinfo(basename($_FILES["timage"]["name"]));
-            $insName = self::getInstituteName($data['institution']);
-            //debug($insName);exit();
+            $insName = self::getInstitutionName($data['institution']);
+            
             $dirPath = "../media/institution/" . $insName[0]['institute'];
+            
+            $fileName = $imagename . '.' . $fileData['extension'];
+            $target_path = ("../media/institution/" . $insName[0]['institute'] . '/' . $fileName);
             $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+            
             if (file_exists($target_path)) {
                 $uploadOk = 0;
             }
@@ -194,7 +199,7 @@ class userDataHandler {
                 $uploadOk = 0;
             }
             if ($uploadOk == 1) {
-                if (move_uploaded_file($_FILES["timage"]["tmp_name"], $target_path)) {
+                if (move_uploaded_file($_FILES["timage"]["tmp_name"], $target_file)) {
                     $query = "UPDATE teachers SET  first_name='" . $data['f_name'] . "' ,last_name='" . $data['l_name'] . "', age= '" . $data['age'] . "',sex='" . $data['sex'] . "'"
                             . ",specialization = '" . $data['specialization'] . "',address = '" . $data['address'] . "',highest_qual = '" . $data['h_quali'] . "',contact = '" . $data['contact'] . "'"
                             . ", institution_id = '" . $data['institution'] . "' ,image='" . $fileName . "',email='" . $data['email'] . "',is_featured='" . $data['is_featured'] . "' WHERE id = '" . $data['tid'] . "'";
@@ -256,8 +261,8 @@ class userDataHandler {
                     //check whether member already exists in database with same email
                     //for($i = 0 ;$i<count($line);$i++)
                     //debug($line);exit();
-                    $query = "INSERT INTO students SET  institute_id ='" . $id . "' ,enrollment_number ='" . $line[0] . "', first_name = '" . $line[1] . "',last_name='" . $line[2] . "'"
-                            . ",fathers_name  = '" . $line[3] . "',address = '" . $line[6] . "',email='$line[5]',contact_number = '" . $line[4] . "'";
+                    $query = "INSERT INTO students SET  institute_id ='" . $id . "', first_name = '" . $line[0] . "',last_name='" . $line[1] . "'"
+                            . ",fathers_name  = '" . $line[2] . "',address = '" . $line[5] . "',email='$line[4]',contact_number = '" . $line[3] . "'";
                     $result = queryRunner::doInsert($query);
                     //return $result;
                 }
@@ -328,28 +333,19 @@ class userDataHandler {
     }
 
     public function uploadAttendance($data) {
-        //$path = $_FILES['studentSheet']['name'];
-        //debug($data);exit;
         $csvMimes = array('application/vnd.ms-excel', 'text/plain', 'text/csv', 'text/comma-separated-values', 'text/tsv');
         if (!empty($_FILES['uploadAttendance']['name']) && in_array($_FILES['uploadAttendance']['type'], $csvMimes)) {
             if (is_uploaded_file($_FILES['uploadAttendance']['tmp_name'])) {
-
-                //open uploaded csv file with read only mode
                 $csvFile = fopen($_FILES['uploadAttendance']['tmp_name'], 'r');
-
-                //skip first line
                 fgetcsv($csvFile);
-                //parse data from csv file line by line
                 while (($line = fgetcsv($csvFile)) !== FALSE) {
                     //check whether member already exists in database with same email
                     //for($i = 0 ;$i<count($line);$i++)
 
-                    $query = "INSERT INTO student_attendance SET institution_id = '" . $data['institution'] . "', student_reg_no = '" . $line['0'] . "',month = '" . $data['month'] . "',present = '" . $line['1'] . "',absent ='" . $line['2'] . "'";
-                    $result = queryRunner::doInsert($query);
+                   $query = "INSERT INTO student_attendance SET institute_id = '" . $data['institution'] . "', student_reg_no = '" . $line['0'] . "',month = '" . $data['month'] . "',present = '" . $line['1'] . "',absent ='" . $line['2'] . "'";
+                   $result = queryRunner::doInsert($query);
                     //return $result;
                 }
-
-                //close opened csv file
                 fclose($csvFile);
                 return $result;
             } else {

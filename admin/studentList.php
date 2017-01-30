@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 include dirname(dirname(__FILE__)) . '/config/config.php';
 $userDataHandlerObj = new userDataHandler();
 $result = $userDataHandlerObj->getStudentList();
@@ -47,20 +46,25 @@ $result = $userDataHandlerObj->getStudentList();
                                 <i class="fa fa-edit"></i> Student List
                             </li>
                         </ol>
+                        <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
+                            <div class="alert alert-success fade in">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong style="font-size:16px"><?php echo $_SESSION['message']; ?></strong>
+                            </div>
+                        <?php } unset($_SESSION['message']); ?>
                     </div>
                 </div>
                 <!-- /.row -->
-                
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="table-responsive">
                             <table class="data datatable table table-striped table-bordered table-hover" id="institution">  
                                 <thead>  
                                     <tr>  
-                                        <th>Id</th>  
+                                        <th>Enrollment Number</th>   
                                         <th>Student Name</th>  
                                         <th>Father's Name</th>
-                                        <th>Enrollment Number</th>  
                                         <th>Institute Name</th> 
                                         <th>Contact Number</th>
                                         <th>Address</th>
@@ -72,27 +76,26 @@ $result = $userDataHandlerObj->getStudentList();
                                 <tbody>  
                                     <?php foreach ($result as $key => $value) { ?>
                                         <tr>  
-                                            <td><?php echo $value['id']; ?></td>  
-                                            <td><?php echo $value['first_name']." ".$value['last_name']; ?></td>  
+                                            <td><?php echo $value['enrollment_number']; ?></td>  
+                                            <td><?php echo $value['first_name'] . " " . $value['last_name']; ?></td>  
                                             <td><?php echo $value['fathers_name']; ?></td> 
-                                            <td><?php echo $value['enrollment_number']; ?></td> 
-                                            
-                                            <td><?php $result = $userDataHandlerObj->getInstituteDetails($value['institute_id']);echo $result[0]['institute']; ?></td>
-                                            
+                                            <td><?php $result = $userDataHandlerObj->getInstituteDetails($value['institute_id']);
+                                        echo $result[0]['institute']; ?></td>
+
                                             <td><?php echo $value['contact_number']; ?></td>                                            
                                             <td><?php echo $value['address']; ?></td>
                                             <td><img src="media/<?php echo $value['image']; ?>" style="height: 20px;width: 20px;"></td>
                                             <td><?php echo $value['status']; ?></td>
-                                            
-                <!--<input type="hidden" name="action" value='editInstitution'>-->
+
+    <!--<input type="hidden" name="action" value='editInstitution'>-->
                                             <td>
                                                 <form role="form" action="editStudent.php" method="post">
-                                                    <input type="hidden" name="editId" value="<?php echo $value['id'];?>">
+                                                    <input type="hidden" name="editId" value="<?php echo $value['id']; ?>">
                                                     <input type="hidden" name="action" value="editStudent">
                                                     <input type="submit" value="EDIT">
                                                 </form>
                                             </td>
-                                            </tr>  
+                                        </tr>  
                                     <?php } ?>
                                 </tbody>
                             </table>
@@ -101,7 +104,7 @@ $result = $userDataHandlerObj->getStudentList();
 
                 </div>
                 <!-- /.row -->
-                
+
             </div>
             <!-- /.container-fluid -->
 

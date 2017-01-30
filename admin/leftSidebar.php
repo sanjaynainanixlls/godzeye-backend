@@ -44,7 +44,7 @@ if (!isset($_SESSION)) {
                     <a href="registerStudent.php"><i class="fa fa-fw fa-plus"></i>Register Student</a>
                 </li>
                 <li>
-                   <a href="registerStudent.php"><i class="fa fa-fw fa-minus"></i>Student List</a>
+                    <a href="studentList.php"><i class="fa fa-fw fa-minus"></i>Student List</a>
                 </li>
                 <li>
                     <a href="addTests.php"><i class="fa fa-fw fa-plus"></i>Add Tests</a>
