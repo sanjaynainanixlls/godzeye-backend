@@ -10,7 +10,7 @@
 			this.bxSliderInit();
 			this.parallaxInit();
 			this.fixedElements();
-			this.googleMapsInit();
+			//this.googleMapsInit();
 			this.loadFlickr();
 			this.isotopeInit();
 			this.nrOnly();
@@ -367,31 +367,7 @@
 			}
 		},
 
-		googleMapsInit: function () {
-			var mapCanvas = jQuery('#map-canvas');
-
-			function initialize_contact_map() {
-			    var mapOptions = {
-						center: new google.maps.LatLng(-37.882281, 144.791277),
-						zoom: 15,
-						// disableDefaultUI: true,
-						scrollwheel: false,
-						disableDefaultUI: true,
-						mapTypeId: google.maps.MapTypeId.ROADMAP
-			        };
-			    var contact_map = new google.maps.Map(mapCanvas[0],mapOptions),
-			    	marker = new google.maps.Marker({
-		              map: contact_map,
-		              position: new google.maps.LatLng(-37.882281,144.791277),
-		              animation: google.maps.Animation.DROP,
-		              icon: 'img/map-pin.png'
-		            });
-		    }
-
-			if (mapCanvas.length) {
-		    	google.maps.event.addDomListener(window, 'load', initialize_contact_map);
-			}
-		},
+		
 
 		isotopeInit: function () {
 			var isotopeContainer = jQuery('.isotope-container');
