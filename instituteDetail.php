@@ -23,15 +23,14 @@ include_once 'header.php';
                     <div class="container">
                         <div class="single-course-page">
                             <div class="row">
-                                <div class="col-md-7">
+                                <div class="col-md-7" style="text-align:center">
                                     <div class="main-content">
                                         <div class="course-cover">
-                                            <img src="<?php echo "admin/media/institution/" . toSlug($instituteData[0]['institute']) . "/" . $instituteData[0]['image']; ?>" alt="course cover" />
+                                            <img width="100%" src="<?php echo "admin/media/institution/" . toSlug($instituteData[0]['institute']) . "/" . $instituteData[0]['image']; ?>" alt="course cover" />
                                         </div>
-
+                                        
                                         <div class="course-body">
-                                            <h2><?php echo $instituteData[0]['institute']; ?></h2>
-
+                                            <h2 style="margin-bottom:10px"><?php echo $instituteData[0]['institute']; ?></h2>
                                             <p><?php echo $instituteData[0]['description']; ?></p>
 
                                             <h4>Subjects</h4>
@@ -76,17 +75,32 @@ include_once 'header.php';
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-5">
                                     <div class="sidebar-description">
                                         <div class="location-box">
-                                            <h3 class="box-title">Address</h3>
-
                                             <p><span><?php echo $instituteData[0]['address']; ?></span></p>
                                             <div class="map" id="map-canvas"></div>
+
+                                            <script>
+                                              function initMap() {
+                                                var uluru = {lat: 26.904264, lng: 75.827809};
+                                                var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                                                  zoom: 15,
+                                                  center: uluru
+                                                });
+                                                var marker = new google.maps.Marker({
+                                                  position: uluru,
+                                                  map: map
+                                                });
+                                              }
+                                            </script>
+                                            <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYHeYHxmN5nmk2kqzg86xUkwynn61Ob4c&callback=initMap"></script>
                                         </div>
                                     </div>
                                 </div>
+
+                                
                             </div>
                             <?php if ($teacherData) { ?>
                             <div class="row">
@@ -124,15 +138,4 @@ include_once 'header.php';
             <!-- Footer -->
             <?php include_once 'footer.php';?>
 
-        <!-- Scripts -->
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
-        <script src="js/jquery.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <script src="js/lightbox.js"></script>
-        <script src="js/velocity.js"></script>
-        <script src="js/modernizr.js"></script>
-        <script src="js/smooth-scroll.js"></script>
-        <script src="js/bxslider.js"></script>
-        <script src="js/options.js"></script>
-    </body>
-</html>
+        
