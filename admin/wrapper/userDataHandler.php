@@ -88,14 +88,14 @@ class userDataHandler {
                 //to register institution without image
                 if ($data['action'] == 'registerInstitution') {
                     if (empty($checkIns)) {
-                        $query = 'INSERT INTO institutions (institute,subjects,description,contact,email,address,status,is_featured)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data['email'] . '","' . $data["address"] . '","' . $data["status"] . '","' . $data['is_featured'] . '")';
+                        $query = 'INSERT INTO institutions (institute,subjects,description,contact,email,address,latitude,longitude,status,is_featured)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data['email'] . '","' . $data["address"] . '","' . $data["latitude"] . '","' . $data["longitude"] . '","' . $data["status"] . '","' . $data['is_featured'] . '")';
                         $result = queryRunner::doInsert($query);
                     } else {
                         return 2;
                     }
                 } else {
                     //to update institution without image
-                    $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",status= "' . $data["status"] . '",is_featured="' . $data['is_featured'] . '",email= "'.$data['email'].'"  WHERE id="' . $data['editInstituteId'] . '"';
+                  echo  $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",latitude="' . $data["latitude"] . '",longitude="' . $data["longitude"] . '",status= "' . $data["status"] . '",is_featured="' . $data['is_featured'] . '",email= "'.$data['email'].'"  WHERE id="' . $data['editInstituteId'] . '"';
                     $result = queryRunner::doUpdate($query);
                 }
                 return $result;
@@ -135,14 +135,14 @@ class userDataHandler {
                     //to register institution with image
                     if ($data['action'] == 'registerInstitution') {
                         if (empty($checkIns)) {
-                            $query = 'INSERT INTO institutions (institute,subjects,description,contact,email,address,image,status,is_featured)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data['email'] . '","' . $data["address"] . '","' . $fileName . '","' . $data["status"] . '","' . $data['is_featured'] . '")';
+                           echo $query = 'INSERT INTO institutions (institute,subjects,description,contact,email,address,latitude,longitude,image,status,is_featured)values("' . $data["institute"] . '","' . $data["subjects"] . '","' . $data["description"] . '","' . $data["contact"] . '","' . $data['email'] . '","' . $data["address"] . '","' . $data["latitude"] . '","' . $data["longitude"] . '","' . $fileName . '","' . $data["status"] . '","' . $data['is_featured'] . '")';
                             $result = queryRunner::doInsert($query);
                         } else {
                             return 2;
                         }
                     } else {
                         //to update institution with image
-                        $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",image= "' . $fileName . '",status= "' . $data["status"] . ',email="' . $data['email'] . '",is_featured = "' . $data['is_featured'] . '" WHERE id="' . $data['editInstituteId'] . '"';
+                       echo $query = 'UPDATE institutions SET institute= "' . $data["institute"] . '",subjects= "' . $data["subjects"] . '",description="' . $data["description"] . '" ,contact= "' . $data["contact"] . '",address= "' . $data["address"] . '",latitude="' . $data["latitude"] . '",longitude="' . $data["longitude"] . '",image= "' . $fileName . '",status= "' . $data["status"] . ',email="' . $data['email'] . '",is_featured = "' . $data['is_featured'] . '" WHERE id="' . $data['editInstituteId'] . '"';
                         $result = queryRunner::doUpdate($query);
                     }
                     return $result;

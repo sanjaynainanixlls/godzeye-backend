@@ -1,4 +1,7 @@
 <?php 
+if(!isset($_SESSION))
+    session_start();
+include 'includeSession.php';
 include dirname(dirname(__FILE__)) . '/config/config.php';
 $instituteData = getInstituteList();
 ?>

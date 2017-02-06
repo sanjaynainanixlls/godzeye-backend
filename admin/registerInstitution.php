@@ -1,11 +1,14 @@
 <?php
-
+if(!isset($_SESSION))
+    session_start();
+include 'includeSession.php';
 include dirname(dirname(__FILE__)) . '/admin/config/config.php';
 $postParams = Functions::getPostParams();
 $userDataHandlerObj = new userDataHandler();
 if ($postParams['action'] == 'editInstitution') {
     $id = $postParams['editId'];
     $data = $userDataHandlerObj->getInstituteDetails($id);
+    
 }
 ?>
 <!DOCTYPE html>
@@ -60,7 +63,6 @@ if ($postParams['action'] == 'editInstitution') {
 
                     <div class="row">
                         <div class="col-lg-6">
-                            
                             <form role="form" action="action/action.php" method="post" enctype="multipart/form-data">
                                 <?php if($postParams['action'] != 'editInstitution'){?>
                                     <input type="hidden" name="action" value='registerInstitution'>
@@ -103,7 +105,19 @@ if ($postParams['action'] == 'editInstitution') {
                                     <input type="tel"  class="form-control" name="address" value="<?php if (isset($data[0]['address'])) echo $data[0]['address'];
                                 else echo ''; ?>" required="required">
                                 </div>
-
+                                
+                                <div class="form-group">
+                                    <label>Latitude</label>
+                                    <input type="text"  class="form-control" name="latitude" value="<?php if (isset($data[0]['latitude'])) echo $data[0]['latitude'];
+                                else echo ''; ?>">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Longitude</label>
+                                    <input type="text"  class="form-control" name="longitude" value="<?php if (isset($data[0]['longitude'])) echo $data[0]['longitude'];
+                                else echo ''; ?>">
+                                </div>
+                                    
                                 <div class="form-group">
                                     <label>Image</label>
                                     <?php if(isset($data[0]['image'])){

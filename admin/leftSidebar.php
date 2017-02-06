@@ -1,7 +1,7 @@
 <?php 
-if (!isset($_SESSION)) {
+if(!isset($_SESSION))
     session_start();
-}
+include 'includeSession.php';
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
