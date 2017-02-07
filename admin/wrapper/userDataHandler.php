@@ -373,6 +373,14 @@ class userDataHandler {
         }
         return false;
     }
+    
+    public function getUserComments(){
+        $sql = "SELECT * from contact_details ORDER BY added_date DESC";
+        $result = queryRunner::doSelect($sql);
+        if(!empty($result))
+            return $result;
+        return FALSE;
+    }
 
 }
 
