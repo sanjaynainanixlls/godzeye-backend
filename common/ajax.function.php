@@ -23,4 +23,12 @@ if((!empty($postParams['selectedInst'])) && (!empty($postParams['selectedMonth']
     $result = $userDataHandlerObj->getAttendance($postParams['selectedInst'],$postParams['selectedMonth'],$postParams['regNo']);
     echo json_encode($result);
 }
+if(!empty($postParams['action']) && ($postParams['action']) == 'contact-form'){
+    $userDataHandlerObj = new userDataHandler();
+    $result = $userDataHandlerObj->feedContactDetailsData($postParams);
+    if($result){
+        $msg = array('message'=>'Thankyou...');
+        echo json_encode($msg);
+    }
+}
     

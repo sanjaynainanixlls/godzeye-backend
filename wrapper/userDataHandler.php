@@ -369,6 +369,18 @@ class userDataHandler {
         }
         return false;
     }
+    
+    public function feedContactDetailsData($postParams){
+        $user = $postParams['username'];
+        $email = $postParams['email'];
+        $mobile = $postParams['mobile'];
+        $message = $postParams['message'];
+        $sql = "INSERT INTO contact_details SET username='".$user."',email='".$email."',mobile='".$mobile."',message='".$message."'";
+        $result = queryRunner::doInsert($sql);
+        if($result)
+            return true;
+        return false;
+    }
 }
 
 ?>
