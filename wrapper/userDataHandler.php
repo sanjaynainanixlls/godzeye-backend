@@ -375,7 +375,7 @@ class userDataHandler {
         $email = $postParams['email'];
         $mobile = $postParams['mobile'];
         $message = $postParams['message'];
-        $sql = "INSERT INTO contact_details SET username='".$user."',email='".$email."',mobile='".$mobile."',message='".$message."'";
+        $sql = "INSERT INTO contact_details SET username='".$user."',email='".$email."',mobile='".$mobile."',query='".$message."',added_date=now()";
         $result = queryRunner::doInsert($sql);
         if($result)
             return true;

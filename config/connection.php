@@ -22,10 +22,10 @@ class connection{
                 //$db = config::getDatabase();
                 //$user = config::getUser();
                 //$pass = config::getPassword();
-                $host = "182.50.133.90";
+                $host = "127.0.0.1";
                 $db = 'godzeye';//"admito_test";
-                $user = "godzeye-database";
-                $pass = "sanjay#123";
+                $user = "root";
+                $pass = "";
 		$this->_connection = new mysqli($host,$user,$pass,$db);
                 mysqli_set_charset($this->_connection, 'utf8');
 		if(mysqli_connect_error())

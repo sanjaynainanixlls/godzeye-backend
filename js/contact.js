@@ -1,5 +1,5 @@
 jQuery('#submit_form').click(function () {
-    var username = $('#sername').val();
+    var username = $('#username').val();
     var email = $('#email').val();
     var mobile = $('#mobile').val();
     var message = $('#message').val();
