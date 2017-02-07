@@ -55,6 +55,9 @@ include 'includeSession.php';
                 <li>
                     <a href="uploadAttendance.php"><i class="fa fa-fw fa-plus"></i>Upload Attendance</a>
                 </li>
+                <li>
+                    <a href="user_contact.php"><i class="fa fa-fw fa-plus"></i>User Contact</a>
+                </li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->
