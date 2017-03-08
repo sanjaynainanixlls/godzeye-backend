@@ -39,10 +39,9 @@
                         <div class="col-xs-8 col-sm-10">
                             <div class="action-bar">
                                 <ul class="social-block">
-                                    <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
-                                    <li><a href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
+                                    <li><a href="https://www.facebook.com/godzeye.in" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/godzeyeinfo" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/godzeye.in/" target="_blank"><i class="fa fa-instagram"></i></a></li>
                                 </ul>
 
                                 <span class="search-box-toggle no-select">

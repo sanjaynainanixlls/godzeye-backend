@@ -157,7 +157,7 @@ $institute = getInstituteList();
                                 <div class="col-md-4 col-sm-6">
                                     <div class="single-course grid-course">
                                         <div class="course-thumbnail">
-                                            <a href="course.html" class="cover-info">
+                                            <a href="#" class="cover-info">
                                                 <div class="text">
                                                     <h4><?php echo $values['institute']; ?></h4>
                                                     <p><?php echo $values['description']; ?></p>
@@ -168,9 +168,7 @@ $institute = getInstituteList();
 
                                         <div class="course-details">
                                             <h3 class="title">
-                                                <a href="course.html">
                                                     <?php echo $values['institute']; ?>
-                                                </a>
                                             </h3>
 
                                             <ul class="course-meta">

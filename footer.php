@@ -5,12 +5,9 @@
             <img src="img/Logo_1485715651310.png" alt="footer brand" class="footer-brand" width="100px" />
 
             <ul class="social-block">
-                <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
-                <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
-                <li><a href="https://www.facebook.com/"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://twitter.com/godzeyeinfo" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/godzeye.in" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://www.instagram.com/godzeye.in/" target="_blank"><i class="fa fa-instagram"></i></a></li>
             </ul>
 
             <div class="main-area">

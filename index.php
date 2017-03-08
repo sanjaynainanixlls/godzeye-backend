@@ -88,32 +88,32 @@ $institute = getInstituteList();
 						<div class="col-xs-6 col-md-3 x-small">
 							<div class="simple-service">
 								<i class="icon icon-book-open"></i>
-								<h4 class="title">New Program</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+								<h4 class="title">INSTITUTES</h4>
+								<p>Discover highly rated wide range of institutes near you.</p>
 							</div>
 						</div>
 
 						<div class="col-xs-6 col-md-3 x-small">
 							<div class="simple-service">
 								<i class="icon icon-gears"></i>
-								<h4 class="title">New Program</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+								<h4 class="title">HOME TUTORS</h4>
+								<p>Effortlessly…..Now get Best Home Tutors at your door-step.</p>
 							</div>
 						</div>
 
 						<div class="col-xs-6 col-md-3 x-small">
 							<div class="simple-service">
 								<i class="icon icon-calendar"></i>
-								<h4 class="title">New Program</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+								<h4 class="title">STUDENTS</h4>
+								<p>Sort-out any queries regarding your subjects in a flash.</p>
 							</div>
 						</div>
 
 						<div class="col-xs-6 col-md-3 x-small">
 							<div class="simple-service">
 								<i class="icon icon-flag"></i>
-								<h4 class="title">New Program</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+								<h4 class="title">PARENTS</h4>
+								<p>Stay updated about your child’s performance and presence in a single click.</p>
 							</div>
 						</div>
 					</div>
@@ -121,15 +121,9 @@ $institute = getInstituteList();
 					<div class="services-description">
 						<div class="row">
 							<div class="col-md-6">
-								<p class="highlighted-start">Nastibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.</p>
+								<p class="highlighted-start">We at Godzeye religiously believe in the proverb 'Necessity is the Mother of Invention', which drove us to  visualize and create an extensive platform to radically transform the tutorial world. Our team has "been there" "Done that" and encountered the various challenges faced by students and parents starting from choosing the institute, enrollment and monitoring the performance. These crisis motivated us to develop "Godzeye", thus putting an end to all possible and recurrent difficulties faced during the entire process of assisted learning.</p>
 
-								<p>Sed aliquam ultrices mauris. Integer ante arcu. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla.</p>
-
-								<ul class="list-services">
-									<li>Vestibulum purus quam</li>
-									<li>Cras ultricies mi eu</li>
-									<li>Nullam accumsan lorem</li>
-								</ul>
+								
 							</div>
 
 							<div class="col-md-6 col-lg-offset-1 col-lg-5">
@@ -176,9 +170,9 @@ $institute = getInstituteList();
 
                                                 <div class="course-details">
                                                     <h3 class="title">
-                                                        <a href="course.html">
+                                                        
                                                             <?php echo $values['institute']; ?>
-                                                        </a>
+                                                        
                                                     </h3>
 
                                                     <ul class="course-meta">
